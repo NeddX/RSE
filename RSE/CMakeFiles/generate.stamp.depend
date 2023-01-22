@@ -1,0 +1,6 @@
+# CMake generation dependency list for this directory.
+D:/Program Files/CMake/share/cmake-3.24/Modules/FindOpenGL.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/FindPackageMessage.cmake
+D:/Users/Nedd/source/repos/NeddX/RSE/CMakeFiles/cmake.verify_globs
+D:/Users/Nedd/source/repos/NeddX/RSE/RSE/CMakeLists.txt

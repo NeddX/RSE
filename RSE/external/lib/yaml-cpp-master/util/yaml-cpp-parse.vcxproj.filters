@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\util\parse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\util\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A33D08BA-3696-36D1-BE1B-7144EDBAC4BB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
