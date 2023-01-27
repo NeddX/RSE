@@ -3,7 +3,7 @@
 #include "Core.h"
 #include "include/Texture2D.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	std::unordered_map<size_t, std::shared_ptr<IResource>> Resources::m_Resources;
 
@@ -31,7 +31,7 @@ namespace RSE
 		else
 		{
 			fs.close();
-			throw RException(std::format("File '{}' supplied to Load() does not exist.", file).c_str());
+			throw RException(fmt::format("File '{}' supplied to Load() does not exist.", file).c_str());
 			return std::shared_ptr<Texture2D>();
 		}
 	}

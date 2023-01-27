@@ -3,7 +3,7 @@
 
 #include <cmath>
 
-namespace RSE
+namespace Advres::RSE
 {
 	class Mathf
 	{

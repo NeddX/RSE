@@ -16,6 +16,7 @@
 #include <type_traits>
 #include <cstring>
 #include <mutex>
+#include <cstdio>
 
 // STL Containers
 #include <string>
@@ -31,6 +32,12 @@
 #else
 #include <unistd.h>
 #endif
+
+// Library Specific
+#include <yaml-cpp/yaml.h>
+#include <fmt/core.h>
+#include <SDL.h>
+#include <SDL_image.h>
 
 // Project Specific
 #include "../src/Util/xstdf.h"

@@ -2,7 +2,7 @@
 #include "../include/Core.h"
 #include "include/SpriteSheetAnimation.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	Sprite::Sprite(Texture2D* texture, Transform transform) : texture(texture), transform(transform)
 	{
@@ -30,7 +30,7 @@ namespace RSE
 
 	void Sprite::Init()
 	{
-		actorTransform = entity->GetComponent<TransformComponent>();
+		actorTransform = parent->GetComponent<TransformComponent>();
 		m_SrcRect = { 0, 0, texture->GetWidth(), texture->GetHeight() };
 		m_CurrentSrcRect = m_SrcRect;
 

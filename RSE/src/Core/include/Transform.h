@@ -1,12 +1,11 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-#include <yaml-cpp/yaml.h>
-#include <format>
+#include <sdafx.h>
 
 #include "Vector2.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	class Transform
 	{
@@ -53,7 +52,8 @@ namespace RSE
 		}
 		inline std::string ToString() const
 		{
-			return std::format("pos: {} sale: {} rot: {}", position, scale, std::to_string(rotation));
+			return std::string();
+			//return std::format("pos: {} sale: {} rot: {}", position, scale, std::to_string(rotation));
 		}
 		template<typename T>
 		inline typename std::enable_if<std::is_same<T, int>::value ||
@@ -67,13 +67,28 @@ namespace RSE
 
 namespace std
 {
-	template <> struct formatter<RSE::Transform>
+	/*template <> struct formatter<Advres::RSE::Transform> // C++ 20 thing, we don't need this for now.
 	{
 		template <typename ParseContext>
 		constexpr auto parse(ParseContext& ctx) { return ctx.begin(); }
 
 		template <typename FormatContext>
-		auto format(const RSE::Transform& trans, FormatContext& ctx)
+		auto format(const Advres::RSE::Transform& trans, FormatContext& ctx)
+		{
+			return format_to(ctx.out(), "[pos: {}, scale: {}, rot: {}]", trans.position, trans.scale, trans.rotation);
+		}
+	};*/
+}
+
+namespace fmt
+{
+	template <> struct formatter<Advres::RSE::Transform>
+	{
+		template <typename ParseContext>
+		constexpr auto parse(ParseContext& ctx) { return ctx.begin(); }
+
+		template <typename FormatContext>
+		auto format(const Advres::RSE::Transform& trans, FormatContext& ctx)
 		{
 			return format_to(ctx.out(), "[pos: {}, scale: {}, rot: {}]", trans.position, trans.scale, trans.rotation);
 		}

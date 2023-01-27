@@ -6,7 +6,7 @@
 #include "Vector2.h"
 #include "Texture2D.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	class Map
 	{

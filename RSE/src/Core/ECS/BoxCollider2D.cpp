@@ -1,8 +1,7 @@
 #include "include/BoxCollider2D.h"
-
 #include "../../Core/include/Collision.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	BoxCollider2D::BoxCollider2D(const std::string& tag, Transform transform, Vector2 colliderExtent) : 
 		m_Tag(tag), transform(transform), colliderExtent(colliderExtent)
@@ -13,6 +12,7 @@ namespace RSE
 		OnExit = nullptr;
 		m_IsColliding = false;
 		trigger = false;
+		colour = { 255, 200, 0, 255 };
 	}
 
 	BoxCollider2D::~BoxCollider2D()
@@ -22,14 +22,13 @@ namespace RSE
 
 	void BoxCollider2D::Block()
 	{
-		// block the owner entity by setting its transform velocity to negative 1
+		// block the owner parent by setting its transform velocity to negative 1
 		m_ActorTransform->velocity *= -1;
 	}
 
 	void BoxCollider2D::Init()
 	{
-		if (!this->entity->HasComponent<TransformComponent>()) m_ActorTransform = this->entity->AddComponent<TransformComponent>();
-		else m_ActorTransform = this->entity->GetComponent<TransformComponent>();
+		m_ActorTransform = this->parent->GetComponent<TransformComponent>();
 
 		RSECore::colliders.push_back(this);
 	}
@@ -42,21 +41,21 @@ namespace RSE
 		colliderRect.h = (int) colliderExtent.y * (int) transform.scale.y * (int) m_ActorTransform->scale.y;
 
 		// Ghetto collision detection
-		for (const auto& c : RSECore::colliders)
+		/*for (const auto& c : RSECore::colliders)
 		{
-			if (c->entity != this->entity)
+			if (c->parent != this->parent)
 			{
 				if (Collision::AABB(this, c))
 				{
 					if (!this->m_IsColliding)
 					{
-						if (this->OnEnter) this->CallBehaviourCallback(this->OnEnter, ComponentCollideResult2D { c->entity, c });
+						if (this->OnEnter) this->CallBehaviourCallback(this->OnEnter, ComponentCollideResult2D { c->parent, c });
 						this->m_IsColliding = true;
 					}
 
 					if (!c->m_IsColliding)
 					{
-						if (c->OnEnter) c->CallBehaviourCallback(c->OnEnter, ComponentCollideResult2D { this->entity, this });
+						if (c->OnEnter) c->CallBehaviourCallback(c->OnEnter, ComponentCollideResult2D { this->parent, this });
 						c->m_IsColliding = true;
 					}
 
@@ -70,26 +69,25 @@ namespace RSE
 					// DIFFERENT collider!
 					if (this->m_IsColliding)
 					{
-						if (this->OnExit) this->CallBehaviourCallback(this->OnExit, ComponentCollideResult2D { c->entity, c });
+						if (this->OnExit) this->CallBehaviourCallback(this->OnExit, ComponentCollideResult2D { c->parent, c });
 						this->m_IsColliding = false;
 					}
 
 					if (c->m_IsColliding)
 					{
-						if (c->OnExit) c->CallBehaviourCallback(c->OnExit, ComponentCollideResult2D { this->entity, this });
+						if (c->OnExit) c->CallBehaviourCallback(c->OnExit, ComponentCollideResult2D { this->parent, this });
 						c->m_IsColliding = false;
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 	void BoxCollider2D::Render(float deltaTime)
 	{
-		// Draw the debug outline of the collider
-		if (true) SDL_SetRenderDrawColor(RSECore::sdlRenderer, 0, 255, 0, 255);
-		else SDL_SetRenderDrawColor(RSECore::sdlRenderer, 255, 0, 0, 255);
-		//SDL_RenderDrawRect(RSECore::sdlRenderer, &colliderRect);
+#ifdef _DEBUG
+		RSECore::DrawRect(colliderRect, colour.r, colour.g, colour.b, colour.a);
+#endif
 	}
 
 	std::string BoxCollider2D::GetTag() const

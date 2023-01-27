@@ -2,14 +2,10 @@
 #define VECTOR2_H
 
 #include <sdafx.h>
-#include <iostream>
-#include <string>
-#include <type_traits>
-#include <yaml-cpp/yaml.h>
 
 #include "../../Math/include/Mathf.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	class Vector2
 	{
@@ -21,29 +17,10 @@ namespace RSE
 		{
 
 		}
-		Vector2(int x, int y) : x((float)x), y((float)y)
+		Vector2(int x, int y) : x((float) x), y((float) y)
 		{
 
 		}
-		Vector2(std::initializer_list<float> list) 
-		{
-			auto it = list.begin();
-			x = *it;
-			y = *(++it);
-		}
-		Vector2(std::initializer_list<int> list)
-		{
-			auto it = list.begin();
-			x = (float) *it;
-			y = (float) *(++it);
-		}
-
-		/*
-		Vector2(const Vector2& other) : x(other.x), y(other.y)
-		{
-			std::cout << "Copied!" << std::endl;
-		}
-		*/
 
 	public:
 		inline Vector2 operator+(const Vector2& other)
@@ -54,6 +31,13 @@ namespace RSE
 			return vec;
 		}
 		inline Vector2 operator+(const int num)
+		{
+			Vector2 vec;
+			vec.x = x + num;
+			vec.y = y + num;
+			return vec;
+		}
+		inline Vector2 operator+(const float num)
 		{
 			Vector2 vec;
 			vec.x = x + num;
@@ -74,6 +58,13 @@ namespace RSE
 			vec.y = y - num;
 			return vec;
 		}
+		inline Vector2 operator-(const float num)
+		{
+			Vector2 vec;
+			vec.x = x - num;
+			vec.y = y - num;
+			return vec;
+		}
 		inline Vector2 operator*(const Vector2& other)
 		{
 			Vector2 vec;
@@ -88,6 +79,13 @@ namespace RSE
 			vec.y = y * num;
 			return vec;
 		}
+		inline Vector2 operator*(const float num)
+		{
+			Vector2 vec;
+			vec.x = x * num;
+			vec.y = y * num;
+			return vec;
+		}
 		inline Vector2 operator/(const Vector2& other)
 		{
 			Vector2 vec;
@@ -96,6 +94,13 @@ namespace RSE
 			return vec;
 		}
 		inline Vector2 operator/(const int num)
+		{
+			Vector2 vec;
+			vec.x = x / num;
+			vec.y = y / num;
+			return vec;
+		}
+		inline Vector2 operator/(const float num)
 		{
 			Vector2 vec;
 			vec.x = x / num;
@@ -153,6 +158,12 @@ namespace RSE
 			y += num;
 			return *this;
 		}
+		inline Vector2& operator+=(const float num)
+		{
+			x += num;
+			y += num;
+			return *this;
+		}
 		inline Vector2& operator-=(const Vector2& other)
 		{
 			x -= other.x;
@@ -171,7 +182,19 @@ namespace RSE
 			y -= num;
 			return *this;
 		}
-		inline Vector2& operator/=(int num)
+		inline Vector2& operator-=(const float num)
+		{
+			x -= num;
+			y -= num;
+			return *this;
+		}
+		inline Vector2& operator/=(const int num)
+		{
+			x /= num;
+			y /= num;
+			return *this;
+		}
+		inline Vector2& operator/=(const float num)
 		{
 			x /= num;
 			y /= num;
@@ -205,43 +228,53 @@ namespace RSE
 			this->x = 0;
 			this->y = 0;
 		}
-		inline float DistanceTo(const Vector2& other) const
+
+	public:
+		static inline float DistanceTo(const Vector2& vecA, const Vector2& vecB)
 		{
-			float dx = Mathf::Abs(other.x - x);
-			float dy = Mathf::Abs(other.y - y);
+			float dx = Mathf::Abs(vecB.x - vecA.x);
+			float dy = Mathf::Abs(vecB.y - vecA.y);
 			return Mathf::Sqrt(dx * dx + dy * dy);
-			return Mathf::Sqrt((other.x - x) * (other.x - x) + (other.y - y) * (other.y));
 		}
-		inline float DistanceToApprox(const Vector2& other) const
+		static inline float DistanceToApprox(const Vector2& other)
 		{
 			// Calculate using inverse square root which is supposed to be faster?
 			// what the fuck is an inverse square root? i dont know
 		}
-		inline Vector2 Normalize(Vector2 other = { 0, 0 }) const
+		static inline Vector2 Normalize(const Vector2& vecA, const Vector2& vecB = { 0, 0 })
 		{
-			float dist = other.DistanceTo(*this);
-			return Vector2(x / dist, y / dist);
+			float dist = DistanceTo(vecA, vecB);
+			return Vector2(vecA.x / dist, vecB.y / dist);
 		}
-		inline Vector2& Abs()
+		static inline Vector2 Abs(const Vector2& vec)
 		{
-			x = Mathf::Abs(x);
-			x = Mathf::Abs(y);
-			return *this;
+			Vector2 vecB;
+			vecB.x = Mathf::Abs(vec.x);
+			vecB.y = Mathf::Abs(vec.y);
+			return vecB;
 		}
-		inline Vector2& Lerp(const Vector2& other, float weight)
+		static inline Vector2 Lerp(const Vector2& vecA, const Vector2& vecB, float weight)
 		{
-			x = x + (other.x - x) * weight;
-			y = y + (other.y - y) * weight;
-			return *this;
+			Vector2 vec;
+			vec.x = vecA.x + (vecB.x - vecA.x) * weight;
+			vec.y = vecA.y + (vecB.y - vecA.y) * weight;
+			return vec;
 		}
-		inline Vector2& Clamp(const Vector2& highEnd)
+		static inline Vector2 Clamp(const Vector2& vec, const Vector2& highEnd)
 		{
-			Vector2 newVec = { Mathf::Clamp(x, 0.0f, highEnd.x), Mathf::Clamp(y, 0.0f, highEnd.y) };
+			Vector2 newVec = { Mathf::Clamp(vec.x, 0.0f, highEnd.x), Mathf::Clamp(vec.y, 0.0f, highEnd.y) };
 			return newVec;
 		}
-		inline Vector2& Clamp(const Vector2& lowEnd, const Vector2& highEnd)
+		static inline Vector2 Clamp(const Vector2& vec, const Vector2& lowEnd, const Vector2& highEnd)
 		{
-			Vector2 newVec = { Mathf::Clamp(x, lowEnd.x, highEnd.x), Mathf::Clamp(y, lowEnd.y, highEnd.y) };
+			Vector2 newVec = { Mathf::Clamp(vec.x, lowEnd.x, highEnd.x), Mathf::Clamp(vec.y, lowEnd.y, highEnd.y) };
+			return newVec;
+		}
+		static inline Vector2 Ceil(const Vector2& vec)
+		{
+			Vector2 newVec;
+			newVec.x = Mathf::Ceil(vec.x);
+			newVec.y = Mathf::Ceil(vec.y);
 			return newVec;
 		}
 	};
@@ -250,21 +283,36 @@ namespace RSE
 namespace std
 {
 	template <>
-	struct hash<RSE::Vector2>
+	struct hash<Advres::RSE::Vector2>
 	{
 		// Implement hasing function for Vector2 so that I can use it in STL containers
-		size_t operator()(const RSE::Vector2& k) const
+		size_t operator()(const Advres::RSE::Vector2& k) const
 		{
 			return hash<float>()(k.x) ^ hash<float>()(k.y);
 		}
 	};
-	template <> struct formatter<RSE::Vector2>
+	/*template <> struct formatter<Advres::RSE::Vector2> // C++ 20 thing, we don't need this for now.
 	{ 
 		template <typename ParseContext>
 		constexpr auto parse(ParseContext& ctx) { return ctx.begin(); }
 
 		template <typename FormatContext>
-		auto format(const RSE::Vector2& vec, FormatContext& ctx)
+		auto format(const Advres::RSE::Vector2& vec, FormatContext& ctx)
+		{
+			return format_to(ctx.out(), "({}, {})", vec.x, vec.y);
+		}
+	};*/
+}
+
+namespace fmt
+{
+	template<> struct formatter<Advres::RSE::Vector2>
+	{
+		template <typename ParseContext>
+		constexpr auto parse(ParseContext& ctx) { return ctx.begin(); }
+
+		template <typename FormatContext>
+		auto format(const Advres::RSE::Vector2& vec, FormatContext& ctx)
 		{
 			return format_to(ctx.out(), "({}, {})", vec.x, vec.y);
 		}

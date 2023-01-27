@@ -3,7 +3,7 @@
 
 #include <RSE.h>
 
-using namespace RSE;
+using namespace Advres::RSE;
 
 class Projectile : public Behaviour
 {
@@ -14,7 +14,7 @@ public:
 public:
 	void Init() override
 	{
-		transform = this->entity->GetComponent<TransformComponent>();
+		transform = this->parent->GetComponent<TransformComponent>();
 	}
 	void Update(float deltaTime) override
 	{

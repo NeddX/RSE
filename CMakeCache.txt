@@ -248,11 +248,61 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Value Computed by CMake
+FMT_BINARY_DIR:STATIC=D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/fmt
+
+//Generate the cuda-test target.
+FMT_CUDA_TEST:BOOL=OFF
+
+//Debug library postfix.
+FMT_DEBUG_POSTFIX:STRING=d
+
+//Generate the doc target.
+FMT_DOC:BOOL=OFF
+
+//Generate the fuzz target.
+FMT_FUZZ:BOOL=OFF
+
+//Installation directory for include files, a relative path that
+// will be joined with C:/Program Files (x86)/RSE or an absolute
+// path.
+FMT_INC_DIR:STRING=include
+
+//Generate the install target.
+FMT_INSTALL:BOOL=OFF
+
+//Value Computed by CMake
+FMT_IS_TOP_LEVEL:STATIC=OFF
+
+//Build a module instead of a traditional library.
+FMT_MODULE:BOOL=OFF
+
+//Include core requiring OS (Windows/Posix) 
+FMT_OS:BOOL=ON
+
+//Enable extra warnings and expensive tests.
+FMT_PEDANTIC:BOOL=OFF
+
+//Value Computed by CMake
+FMT_SOURCE_DIR:STATIC=D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/fmt
+
+//Expose headers with marking them as system.
+FMT_SYSTEM_HEADERS:BOOL=OFF
+
+//Generate the test target.
+FMT_TEST:BOOL=OFF
+
+//Halt the compilation with an error on compiler warnings.
+FMT_WERROR:BOOL=OFF
+
 //OpenGL library for win32
 OPENGL_gl_LIBRARY:STRING=opengl32
 
 //GLU library for win32
 OPENGL_glu_LIBRARY:STRING=glu32
+
+//Dependencies for the target
+RCLRW_LIB_DEPENDS:STATIC=general;RSE;
 
 //Value Computed by CMake
 RSE_BINARY_DIR:STATIC=D:/Users/Nedd/source/repos/NeddX/RSE
@@ -261,7 +311,7 @@ RSE_BINARY_DIR:STATIC=D:/Users/Nedd/source/repos/NeddX/RSE
 RSE_IS_TOP_LEVEL:STATIC=ON
 
 //Dependencies for the target
-RSE_LIB_DEPENDS:STATIC=general;opengl32;general;glu32;general;D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/SDL2/lib/x64/SDL2.lib;general;D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/SDL2/lib/x64/SDL2main.lib;general;D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/SDL2_image/lib/x64/SDL2_image.lib;general;D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/glew/lib/Release/x64/glew32s.lib;general;yaml-cpp;
+RSE_LIB_DEPENDS:STATIC=general;opengl32;general;glu32;general;D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/SDL2/lib/x64/SDL2.lib;general;D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/SDL2/lib/x64/SDL2main.lib;general;D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/SDL2_image/lib/x64/SDL2_image.lib;general;D:/Users/Nedd/source/repos/NeddX/RSE/RSE/external/lib/glew/lib/Release/x64/glew32s.lib;general;yaml-cpp;general;fmt;
 
 //Value Computed by CMake
 RSE_SOURCE_DIR:STATIC=D:/Users/Nedd/source/repos/NeddX/RSE
@@ -413,7 +463,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //noop for ranlib

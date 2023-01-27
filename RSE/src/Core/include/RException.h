@@ -1,14 +1,12 @@
 #ifndef REXCEPTION_H
 #define REXCEPTION_H
 
-#include <chrono>
-#include <string>
-#include <format>
+#include <sdafx.h>
 
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable: 4996)
 
-namespace RSE
+namespace Advres::RSE
 {
 	enum class RExceptionType
 	{
@@ -28,7 +26,7 @@ namespace RSE
 			auto now = std::chrono::system_clock::now();
 			auto timeNow = std::chrono::system_clock::to_time_t(now);
 			std::string dateStr = std::ctime(&timeNow);
-			m_ErrorMessage = std::format("[DATE] An Exception Occured: {}", message);
+			m_ErrorMessage = fmt::format("[DATE] An Exception Occured: {}", message);
 		}
 		const char* Message() const
 		{

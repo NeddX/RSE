@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-namespace RSE
+namespace Advres::RSE
 {
 	int lvl1[20][25] =
 	{

@@ -1,9 +1,9 @@
 #ifndef BOX_COLLIDER_2D_H
 #define BOX_COLLIDER_2D_H
 
+#include <sdafx.h>
 #include <SDL.h>
 #include <string>
-#include <yaml-cpp/yaml.h>
 #include <algorithm>
 
 #include "ECS.h"
@@ -12,7 +12,7 @@
 #include "../../include/Transform.h"
 #include "../../include/Serializer.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	// Forward declerations
 	class Behaviour;
@@ -34,6 +34,7 @@ namespace RSE
 		Vector2 colliderExtent;
 		Transform transform;
 		bool trigger;
+		RGBA colour;
 
 	protected:
 		bool m_IsColliding;

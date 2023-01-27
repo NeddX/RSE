@@ -6,7 +6,7 @@
 #include "../../include/Transform.h"
 #include "../../../Math/include/Mathf.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	class TransformComponent : public Component
 	{
@@ -21,7 +21,7 @@ namespace RSE
 		TransformComponent(Transform transform = Transform()) : 
 			position(transform.position), scale(transform.scale), rotation(transform.rotation)
 		{
-			if (this->scale.Equals(Vector2())) this->scale = { 1, 1 };
+			if (this->scale == Vector2()) this->scale = { 1, 1 };
 			velocity = { 0, 0 };
 		}
 

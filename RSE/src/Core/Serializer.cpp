@@ -3,7 +3,7 @@
 #include "include/ResourceHandler.h"
 #include "include/Texture2D.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	void Serializer::Serialize(const Vector2& vec, YAML::Emitter& out)
 	{
@@ -41,14 +41,14 @@ namespace RSE
 		out << YAML::EndMap;
 	}
 
-	void Serializer::Serialize(const Entity* entity, YAML::Emitter& out)
+	void Serializer::Serialize(const Entity* parent, YAML::Emitter& out)
 	{
 		out << YAML::BeginMap;
-		out << YAML::Key << "tag" << YAML::Value << entity->tag;
-		out << YAML::Key << "render" << YAML::Value << entity->render;
-		out << YAML::Key << "group" << YAML::Value << entity->m_Group;
+		out << YAML::Key << "tag" << YAML::Value << parent->tag;
+		out << YAML::Key << "render" << YAML::Value << parent->render;
+		out << YAML::Key << "group" << YAML::Value << parent->m_Group;
 		out << YAML::Key << "Components" << YAML::Value << YAML::BeginSeq;
-		for (auto const& c : entity->m_Components) c->Serialize(out);
+		for (auto const& c : parent->m_Components) c->Serialize(out);
 		out << YAML::EndSeq;
 		out << YAML::EndMap;
 	}
@@ -111,7 +111,7 @@ namespace RSE
 	void Serializer::Deserialize(const YAML::Node& node, Sprite* sprite)
 	{
 		auto& root = node["SpriteComponent"];
-		sprite->actorTransform = sprite->entity->GetComponent<TransformComponent>();
+		sprite->actorTransform = sprite->parent->GetComponent<TransformComponent>();
 		Deserialize(root["transform"], sprite->transform);
 		size_t id = root["texture"]["TextureResource"]["ResourceID"].as<size_t>();
 		sprite->texture = Resources::GetResource<Texture2D>(id).get();
@@ -124,16 +124,16 @@ namespace RSE
 	{
 		auto& root = node["BoxCollider2D"];
 		collider->m_Tag = root["m_Tag"].as<std::string>();
-		collider->m_ActorTransform = collider->entity->GetComponent<TransformComponent>();
+		collider->m_ActorTransform = collider->parent->GetComponent<TransformComponent>();
 		Deserialize(root["colliderRect"], collider->colliderRect);
 		Deserialize(root["colliderExtent"], collider->colliderExtent);
 		Deserialize(root["transform"], collider->transform);
 		collider->trigger = root["trigger"].as<bool>();
 	}
 
-	void Serializer::Deserialize(const YAML::Node& node, TileMapComponent* tilemap)
+	void Serializer::Deserialize(const YAML::Node& node, TilemapComponent* tilemap)
 	{
-		auto& root = node["TileMapComponent"];
+		auto& root = node["TilemapComponent"];
 		size_t id = root["m_Texture"]["TextureResource"]["ResourceID"].as<size_t>();
 		tilemap->m_Texture = Resources::GetResource<Texture2D>(id).get();
 		Deserialize(root["m_GridSize"], tilemap->m_GridSize);
@@ -152,16 +152,16 @@ namespace RSE
 		}
 	}
 
-	void Serializer::Deserialize(const YAML::Node& node, Entity* entity)
+	void Serializer::Deserialize(const YAML::Node& node, Entity* parent)
 	{
-		entity->tag = node["tag"].as<std::string>();
-		entity->m_Group = node["group"].as<size_t>();
-		entity->render = node["render"].as<bool>();
+		parent->tag = node["tag"].as<std::string>();
+		parent->m_Group = node["group"].as<size_t>();
+		parent->render = node["render"].as<bool>();
 
-		if (entity->m_Group != -1)
+		/*if (parent->m_Group != -1)
 		{
-			entity->AddToGroup(entity->m_Group);
-		}
+			parent->AddToGroup(parent->m_Group);
+		}*/
 
 		// Do not initialize deserialized objects!
 		YAML::Node componentsNode = node["Components"];
@@ -174,33 +174,33 @@ namespace RSE
 				if (typeName == "TransformComponent")
 				{
 					TransformComponent* trans = new TransformComponent();
-					trans->entity = entity;
+					trans->parent = parent;
 					Deserialize(currentNode["position"], trans->position);
 					Deserialize(currentNode["scale"], trans->scale);
 					trans->rotation = currentNode["rotation"].as<float>();
 					Deserialize(currentNode["velocity"], trans->velocity);
-					entity->AddComponent(trans, false);
+					parent->AddComponent(trans, false);
 				}
 				else if (typeName == "SpriteComponent")
 				{
 					Sprite* sprite = new Sprite(nullptr, Transform());
-					sprite->entity = entity;
+					sprite->parent = parent;
 					Deserialize(c, sprite);
-					entity->AddComponent(sprite, false);
+					parent->AddComponent(sprite, false);
 				}
 				else if (typeName == "BoxCollider2D")
 				{
 					BoxCollider2D* collider = new BoxCollider2D("", Transform());
-					collider->entity = entity;
+					collider->parent = parent;
 					Deserialize(c, collider);
-					entity->AddComponent(collider, false);
+					parent->AddComponent(collider, false);
 				}
-				else if (typeName == "TileMapComponent")
+				else if (typeName == "TilemapComponent")
 				{
-					TileMapComponent* tilemap = new TileMapComponent(nullptr, Vector2(), Vector2());
-					tilemap->entity = entity;
+					TilemapComponent* tilemap = new TilemapComponent(nullptr, Vector2(), Vector2());
+					tilemap->parent = parent;
 					Deserialize(c, tilemap);
-					entity->AddComponent(tilemap, false);
+					parent->AddComponent(tilemap, false);
 				}
 			}
 		}
@@ -222,8 +222,8 @@ namespace RSE
 			YAML::Node actorsNode = node["Actors"];
 			for (const auto& e : actorsNode)
 			{
-				std::shared_ptr<Entity> entity = actorMgr->AddEntity();
-				Deserialize(e, entity);
+				std::shared_ptr<Entity> parent = actorMgr->AddEntity();
+				Deserialize(e, parent);
 			}
 			delete str;
 			delete decStr;
@@ -239,8 +239,8 @@ namespace RSE
 			YAML::Node actorsNode = node["Actors"];
 			for (const auto& e : actorsNode)
 			{
-				Entity* entity = actorMgr->AddEntity();
-				Deserialize(e, entity);
+				Entity* parent = actorMgr->AddEntity();
+				Deserialize(e, parent);
 			}
 		}
 	}

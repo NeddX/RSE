@@ -1,18 +1,20 @@
 #include "include/Core.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	SDL_Window* RSECore::sdlWindow = nullptr;
 	SDL_Renderer* RSECore::sdlRenderer = nullptr;
 	SDL_Event RSECore::sdlEvent;
-	SDL_GLContext RSECore::glContext;
+	SDL_GLContext RSECore::GLContext;
 	std::vector<BoxCollider2D*> RSECore::colliders;
 	int RSECore::m_ScreenWidth = 0;
 	int RSECore::m_ScreenHeight = 0;
 	std::shared_ptr<EntityManager> RSECore::entityManager;
-	std::unique_ptr<EntityManager> RSECore::uiManager = std::make_unique<EntityManager>();
+	std::unique_ptr<EntityManager> RSECore::UIManager = std::make_unique<EntityManager>();
 	std::chrono::high_resolution_clock::time_point RSECore::m_StartTp;
-	const Camera2DComponent* RSECore::m_Camera;
+	bool RSECore::disableCamera = false;
+	std::vector<Rect> RSECore::m_DebugRects;
+	const Camera2DComponent* CameraModule::m_MainCamera = nullptr;
 
 	RSECore::RSECore()
 	{
@@ -42,7 +44,6 @@ namespace RSE
 		m_FrameDelay = (m_TargetFps > 0) ? 1000 / m_TargetFps : 0;
 		m_WindowTitle = windowTitle;
 		m_StartTp = std::chrono::steady_clock::now();
-		m_Camera = nullptr;
 		
 		//Use OpenGL 3.1 core
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -80,8 +81,8 @@ namespace RSE
 			
 			if (sdlWindow)
 			{
-				glContext = SDL_GL_CreateContext(sdlWindow);
-				SDL_GL_MakeCurrent(sdlWindow, glContext);
+				GLContext = SDL_GL_CreateContext(sdlWindow);
+				SDL_GL_MakeCurrent(sdlWindow, GLContext);
 				glewInit();
 				printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
 				printf("SDL Window created\nCreated OpenGL context from SDL_Window\nGLEW Initialized\n");
@@ -142,12 +143,12 @@ namespace RSE
 
 	bool RSECore::IsInView(Rect rect) noexcept
 	{
-		if (!m_Camera) return true;
+		if (!camera->Active()) return true;
 		return
-			rect.x + rect.w >= m_Camera->m_Viewport.x &&
-			m_Camera->m_Viewport.x + m_Camera->m_Viewport.w >= rect.x &&
-			rect.y + rect.h >= m_Camera->m_Viewport.y &&
-			m_Camera->m_Viewport.y + m_Camera->m_Viewport.h >= rect.y;
+			rect.x + rect.w >= camera->m_MainCamera->m_Viewport.x &&
+			camera->m_MainCamera->m_Viewport.x + camera->m_MainCamera->m_Viewport.w >= rect.x &&
+			rect.y + rect.h >= camera->m_MainCamera->m_Viewport.y &&
+			camera->m_MainCamera->m_Viewport.y + camera->m_MainCamera->m_Viewport.h >= rect.y;
 	}
 
 	void RSECore::EngineThread()
@@ -169,9 +170,23 @@ namespace RSE
 
 			// Rendering
 			SDL_RenderClear(sdlRenderer);
+
+			// Call Render
+			//(this->m_RenderMethod)(deltaTime);
 			Render(deltaTime);
+
+			// doesnt matter
 			entityManager->Render(deltaTime);
-			uiManager->Render(deltaTime);
+			//UIManager->Render(deltaTime);
+#ifdef _DEBUG
+			for (const auto& r : m_DebugRects)
+			{
+				SDL_SetRenderDrawColor(sdlRenderer, 161, 52, 235, 0);
+				SDL_Rect sr = { r.x, r.y, r.w, r.h };
+				SDL_RenderDrawRect(sdlRenderer, &sr);
+			}
+			if (!m_DebugRects.empty()) m_DebugRects.clear();
+#endif
 			SDL_SetRenderDrawColor(sdlRenderer, 100, 100, 100, 255);
 			SDL_RenderPresent(sdlRenderer);
 			
@@ -179,7 +194,9 @@ namespace RSE
 			entityManager->Update(deltaTime);
 
 			// Call the Update function
+			//(this->m_UpdateMethod)(deltaTime);
 			Update(deltaTime);
+			
 			m_FrameCount++;
 
 			// Calculate the framerate
@@ -229,5 +246,44 @@ namespace RSE
 				Input::mouse.wheel.y = 0;
 				break;
 		}
+	}
+
+	SDL_Rect CameraModule::GetRectRelativeToCamera(SDL_Rect rect) noexcept
+	{
+		Vector2 mul =
+		{
+			(float) RSECore::GetScreenWidth()  / (float) m_MainCamera->m_Viewport.w,
+			(float) RSECore::GetScreenHeight() / (float) m_MainCamera->m_Viewport.h
+		};
+		// Who will notice that sprites are overlapping with each other by a pixel?
+		rect.w = (int) std::ceil(rect.w * mul.x);
+		rect.h = (int) std::ceil(rect.h * mul.y);
+		rect.x = (int) std::ceil((rect.x - m_MainCamera->m_Viewport.x) * mul.x);
+		rect.y = (int) std::ceil((rect.y - m_MainCamera->m_Viewport.y) * mul.y);
+		return rect;
+	}
+	
+	Vector2 CameraModule::GetVectorRelativeToCamera(Vector2 vec) noexcept
+	{
+		Vector2 mul =
+		{
+			(float) RSECore::GetScreenWidth()  / (float) m_MainCamera->m_Viewport.w,
+			(float) RSECore::GetScreenHeight() / (float) m_MainCamera->m_Viewport.h
+		};
+		vec.x = std::ceil((vec.x - m_MainCamera->m_Viewport.x) * mul.x);
+		vec.y = std::ceil((vec.y - m_MainCamera->m_Viewport.y) * mul.y);
+		return vec;
+	}
+
+	Vector2 CameraModule::GetMousePositionInWorld() noexcept
+	{
+		if (m_MainCamera)
+		{
+			Vector2 mouse = RSECore::GetMousePosition();
+			mouse.x = (mouse.x * m_MainCamera->m_Scale.x) + m_MainCamera->m_Viewport.x;
+			mouse.y = (mouse.y * m_MainCamera->m_Scale.y) + m_MainCamera->m_Viewport.y;
+			return mouse;
+		}
+		return Vector2();
 	}
 }

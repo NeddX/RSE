@@ -13,12 +13,12 @@
 //#include "Core.h"
 #include "Vector2.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	// Forward declerations
 	//class Vector2;
 
-	enum class KeyChar : uint32_t
+	enum class Key : uint32_t
 	{
 		NUM_0		= SDLK_0,
 		NUM_1		= SDLK_1,
@@ -85,12 +85,12 @@ namespace RSE
 
 	struct KeyBind
 	{
-		std::vector<KeyChar> keys;
+		std::vector<Key> keys;
 	};
 
 	struct AxisBind
 	{
-		KeyChar pos, neg;
+		Key pos, neg;
 	};
 
 	class Input
@@ -195,7 +195,7 @@ namespace RSE
 			if (keys[(uint32_t) axisBind.neg]) axis += -1;
 			return axis;
 		}
-		static inline bool IsKeyDown(KeyChar key)
+		static inline bool IsKeyDown(Key key)
 		{
 			return keys[(uint32_t) key];
 		}

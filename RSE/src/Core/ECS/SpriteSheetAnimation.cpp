@@ -2,7 +2,7 @@
 #include "include/Sprite.h"
 #include "../include/Core.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	SpriteSheetAnimation::SpriteSheetAnimation(int spriteSheetIndex, int frames, int duration, AnimPlaybackMode mode) :
 		m_SpriteSheetIndex(spriteSheetIndex), m_Frames(frames), m_Duration(duration), m_PlaybackMode(mode)
@@ -32,7 +32,7 @@ namespace RSE
 
 	void SpriteSheetAnimation::Init()
 	{
-		m_SpriteComponent = this->entity->GetComponent<Sprite>();
+		m_SpriteComponent = this->parent->GetComponent<Sprite>();
 		m_Play = false;
 	}
 

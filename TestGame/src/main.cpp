@@ -22,14 +22,14 @@
 #define HEIGHT	600
 #define FPS		300
 
-using namespace RSE;
+using namespace Advres::RSE;
 
 enum Groups
 {
 	World,
 	Player,
 	Enemy,
-	Colliders,
+	colliders,
 	UI
 };
 
@@ -61,52 +61,50 @@ public:
 		std::cout << "CSInvoke.Str(): " << (char*) import((int*) &str1) << std::endl;*/
 
 		// Configure input
-		Input::AddAction<AxisBind>("moveUp",	  { KeyChar::S, KeyChar::W });
-		Input::AddAction<AxisBind>("moveLeft",    { KeyChar::D, KeyChar::A });
-		Input::AddAction<AxisBind>("changeLayer", { KeyChar::ARROW_UP,KeyChar::ARROW_DOWN });
-		Input::AddAction<KeyBind>("Serialize",    { {KeyChar::E} });
-		Input::AddAction<KeyBind>("Deserialize",  { {KeyChar::R} });
-		Input::AddAction<KeyBind>("spawnActor",   { {KeyChar::Q} });
-		Input::AddAction<KeyBind>("tilePicker",   { {KeyChar::TAB} });
-		Input::AddAction<KeyBind>("toggleGrid",   { {KeyChar::G} });
-		Input::AddAction<AxisBind>("scale",		  { KeyChar::X, KeyChar::Z });
+		Input::AddAction<AxisBind>("moveUp",	  { Key::S, Key::W });
+		Input::AddAction<AxisBind>("moveLeft",    { Key::D, Key::A });
+		Input::AddAction<AxisBind>("changeLayer", { Key::ARROW_UP,Key::ARROW_DOWN });
+		Input::AddAction<KeyBind>("tilePicker",   { {Key::TAB} });
+		Input::AddAction<KeyBind>("toggleGrid",   { {Key::G} });
 
 		textureResources["dunTileset"] = Resources::Load<Texture2D>("Base.rse/Environment/Levels/tileset2.png");
 
-		TileMapComponent* tmap;
+		TilemapComponent* tmap;
 
-		Entity* tile;
+		Entity* tilemap;
 		if (true)
 		{
 			const char path[] = "Base.rse/Environment/Levels/mgr.rym";
 			Serializer::Deserialize(path, entityManager.get());
-			tile = GetEntityByTag("tilemap");
-			tmap = tile->GetComponent<TileMapComponent>();
-			printf("Total tile count: %zu\n", tile->GetComponent<TileMapComponent>()->GetTotalSize());
+			tilemap = GetEntityByTag("tilemap");
+			tmap = tilemap->GetComponent<TilemapComponent>();
+			tilemap->AddComponent<TilemapCollider2D>(1);
+			printf("Total tile count: %zu\n", tmap->GetTotalSize());
 		}
 		else
 		{
-			tile = AddEntity();
-			tile->tag = "tilemap";
-			tmap = tile->AddComponent<TileMapComponent>(textureResources["dunTileset"].get(), Vector2(16, 16), Vector2(32, 32));
-			tile->AddToGroup(Groups::World);
+			tilemap = AddEntity();
+			tilemap->tag = "tilemap";
+			tmap = tilemap->AddComponent<TilemapComponent>(textureResources["dunTileset"].get(), Vector2(16, 16), Vector2(32, 32));
+			tilemap->SetGroup(Groups::World);
 		}
 
 		Entity* tilePicker = AddEntity();
-		tilePicker->SetGroup(Groups::World);
+		tilePicker->tag = "tilePicker";
+		//tilePicker->SetGroup(Groups::World);
 		player = AddEntity();
 		player->SetGroup(Groups::Player);
 		camObj = AddEntity();
 		//enemy = AddEntity();
 
-		//auto furnace = AddEntity();
-		//furnace->tag = "furnace";
-		//furnace->AddComponent<TransformComponent>(Transform(Vector2(500, 350)));
-		//auto fsp = furnace->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
-		//auto spa = furnace->AddComponent<SpriteSheetAnimation>(0, 7, 50, AnimPlaybackMode::PingPong);
-		//spa->Play();
-		//fsp->SetRenderRect({ 0, 80, 16, 16 }, { 0, 0, 32, 32 });
-		//furnace->AddToGroup(Groups::World);
+		auto furnace = AddEntity();
+		furnace->tag = "furnace";
+		furnace->AddComponent<TransformComponent>(Transform(Vector2(500, 350)));
+		auto fsp = furnace->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
+		auto spa = furnace->AddComponent<SpriteSheetAnimation>(0, 7, 50, AnimPlaybackMode::PingPong);
+		spa->Play();
+		fsp->SetRenderRect({ 0, 80, 16, 16 }, { 0, 0, 32, 32 });
+		furnace->SetGroup(Groups::World);
 
 		auto trans = tilePicker->AddComponent<TransformComponent>(Transform());
 		auto sp = tilePicker->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
@@ -120,17 +118,15 @@ public:
 		trans->position.y = (int) trans->position.y - vec.y;
 
 		player->tag = "player";
-		auto ptrans = player->AddComponent<TransformComponent>(Transform(Vector2(WIDTH / 2 - 32, HEIGHT / 2 - 32)));
+		auto ptrans = player->AddComponent<TransformComponent>(Transform(Vector2(600, 350)));
 		auto ps = player->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
-		ps->SetRenderRect({ 304, 112, 16, 16 }, { 0, 0, 32, 32 });
+		ps->SetRenderRect({ 368, 112, 16, 16 }, { 0, 0, 32, 32 });
 		auto sheetanim = player->AddComponent<SpriteSheetAnimation>(0, 5, 200, AnimPlaybackMode::PingPong);
 		//sheetanim->Play();
 
 		// Camera
-		camObj->AddComponent<TransformComponent>(Transform(300, 300));
-		Vector2 cameraSize = Vector2(WIDTH, HEIGHT);
-		camera = camObj->AddComponent<Camera2DComponent>(Transform(Vector2(-(cameraSize.x / 2), -(cameraSize.y / 2))));
-		SetViewportCamera2D(camera);
+		camObj->AddComponent<TransformComponent>(Transform(WIDTH, HEIGHT));
+		camera = camObj->AddComponent<Camera2DComponent>(Transform(Vector2 { -(WIDTH / 2) + 32, -(HEIGHT / 2) + 32 }));
 		camObj->tag = "kamera";
 		
 		// Behaviour code
@@ -146,8 +142,8 @@ public:
 		playerCollider->trigger = true;
 		playerCollider->SetBehaviourObject(controller);
 		playerCollider->OnCollide = &Behaviour::BoxCollider2D_OnCollide;
-		playerCollider->OnEnter = &Behaviour::BoxCollider2D_OnEnter;
-		playerCollider->OnExit = &Behaviour::BoxCollider2D_OnExit;
+		playerCollider->OnEnter =	&Behaviour::BoxCollider2D_OnEnter;
+		playerCollider->OnExit	=	&Behaviour::BoxCollider2D_OnExit;
 
 
 
@@ -162,14 +158,20 @@ public:
 
 	void Update(float deltaTime) override
 	{
-		std::string fmt = std::format("FPS: {} Frames: {} DeltaTime: {}", GetFrameRate(), GetFrameCount(), deltaTime);
-		SetWindowTitle(std::format("FPS: {} Frames: {} Delta: {}", GetFrameRate(), GetFrameCount(), deltaTime).c_str());
+		std::string fmt = fmt::format("FPS: {} Frames: {} DeltaTime: {}", GetFrameRate(), GetFrameCount(), deltaTime);
+		SetWindowTitle(fmt::format("FPS: {} Frames: {} Delta: {}", GetFrameRate(), GetFrameCount(), deltaTime).c_str());
 
 		static TransformComponent* camTrans = camObj->GetComponent<TransformComponent>();
 		static Camera2DComponent* camera = camObj->GetComponent<Camera2DComponent>();
 		static TransformComponent* playerTrans = player->GetComponent<TransformComponent>();
 		static float camSpeed = 4.0f;
-		camTrans->position.Lerp(playerTrans->position, deltaTime * camSpeed);
+		camTrans->position = Vector2::Lerp(camTrans->position, playerTrans->position, deltaTime * camSpeed);
+		if (Input::IsKeyDown(Key::E))
+		{
+			std::cout << "Serialization started." << std::endl;
+			Serializer::SerializeScene("actormgr.rym", entityManager.get());
+			std::cout << "Serialization ended." << std::endl;
+		}
 		//static bool didSerialize = false;
 		//if (Input::IsActionActive("Serialize"))
 		//{

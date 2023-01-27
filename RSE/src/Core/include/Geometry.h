@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 
-namespace RSE
+namespace Advres::RSE
 {
 	// Wrapper around SDL_Rect, why you might ask? Well, why not?
 	struct Rect
@@ -21,9 +21,15 @@ namespace RSE
 		}
 
 	public:
-		inline SDL_Rect SDL()
+		inline SDL_Rect SDL() const
 		{
 			return { x, y, w, h };
+		}
+
+	public:
+		static inline Rect ToRect(SDL_Rect rect)
+		{
+			return { rect.x, rect.y, rect.w, rect.h };
 		}
 
 	public:
@@ -71,10 +77,10 @@ namespace RSE
 namespace std
 {
 	template<>
-	struct hash<RSE::Rect>
+	struct hash<Advres::RSE::Rect>
 	{
 		// Implement hasing function for Rect so that I can use it in STL containers
-		size_t operator()(const RSE::Rect& r) const
+		size_t operator()(const Advres::RSE::Rect& r) const
 		{
 			return hash<int>()(r.x) ^ hash<int>()(r.y) ^ hash<int>()(r.w) ^ hash<int>()(r.h);
 		}

@@ -90,7 +90,7 @@
     <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\include\Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\ECS\include\TileMapComponent.h">
+    <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\ECS\include\TilemapComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\include\Serializer.h">
@@ -100,6 +100,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\ECS\include\Camera2DComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\ECS\include\TilemapCollider2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\include\Geometry.h">

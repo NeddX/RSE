@@ -11,7 +11,7 @@
 #include "../../include/Texture2D.h"
 #include "../../include/Transform.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	// Forward declerations
 	class SpriteSheetAnimation;

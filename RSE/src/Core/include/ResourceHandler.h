@@ -5,7 +5,7 @@
 
 #include "RException.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	// Forward declerations
 	//class Texture2D;
@@ -38,7 +38,7 @@ namespace RSE
 		{
 			auto it = m_Resources.find(id);
 			if (it != m_Resources.end()) return std::static_pointer_cast<T>(it->second);
-			else throw RException(std::format("Hash ID {} was not present in the Resource Pool.", id).c_str());
+			else throw RException(fmt::format("Hash ID {} was not present in the Resource Pool.", id).c_str());
 		}
 		static std::unordered_map<size_t, std::shared_ptr<IResource>>& GetAllResources()
 		{

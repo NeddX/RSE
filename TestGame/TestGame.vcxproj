@@ -86,13 +86,13 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;NCREMENTAL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;NCREMENTAL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>D:/Users/Nedd/source/repos/NeddX/RSE/TestGame/CMakeFiles/TestGame.dir/Debug/cmake_pch.hxx</PrecompiledHeaderFile>
@@ -106,10 +106,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;YAML_CPP_STATIC_DEFINE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -117,7 +117,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\RSE\Debug\RSE.lib;opengl32.lib;glu32.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2main.lib;..\RSE\external\lib\SDL2_image\lib\x64\SDL2_image.lib;..\RSE\external\lib\glew\lib\Release\x64\glew32s.lib;..\RSE\external\lib\yaml-cpp-master\Debug\yaml-cppd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\RSE\Debug\RSE.lib;opengl32.lib;glu32.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2main.lib;..\RSE\external\lib\SDL2_image\lib\x64\SDL2_image.lib;..\RSE\external\lib\glew\lib\Release\x64\glew32s.lib;..\RSE\external\lib\yaml-cpp-master\Debug\yaml-cppd.lib;..\RSE\external\lib\fmt\Debug\fmtd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -132,12 +132,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;NCREMENTAL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;NCREMENTAL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>Full</Optimization>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>D:/Users/Nedd/source/repos/NeddX/RSE/TestGame/CMakeFiles/TestGame.dir/Release/cmake_pch.hxx</PrecompiledHeaderFile>
@@ -151,10 +151,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;YAML_CPP_STATIC_DEFINE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -162,7 +162,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\RSE\Release\RSE.lib;opengl32.lib;glu32.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2main.lib;..\RSE\external\lib\SDL2_image\lib\x64\SDL2_image.lib;..\RSE\external\lib\glew\lib\Release\x64\glew32s.lib;..\RSE\external\lib\yaml-cpp-master\Release\yaml-cpp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\RSE\Release\RSE.lib;opengl32.lib;glu32.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2main.lib;..\RSE\external\lib\SDL2_image\lib\x64\SDL2_image.lib;..\RSE\external\lib\glew\lib\Release\x64\glew32s.lib;..\RSE\external\lib\yaml-cpp-master\Release\yaml-cpp.lib;..\RSE\external\lib\fmt\Release\fmt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -177,12 +177,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;NCREMENTAL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;NCREMENTAL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>MinSpace</Optimization>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>D:/Users/Nedd/source/repos/NeddX/RSE/TestGame/CMakeFiles/TestGame.dir/MinSizeRel/cmake_pch.hxx</PrecompiledHeaderFile>
@@ -196,10 +196,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;YAML_CPP_STATIC_DEFINE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -207,7 +207,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\RSE\MinSizeRel\RSE.lib;opengl32.lib;glu32.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2main.lib;..\RSE\external\lib\SDL2_image\lib\x64\SDL2_image.lib;..\RSE\external\lib\glew\lib\Release\x64\glew32s.lib;..\RSE\external\lib\yaml-cpp-master\MinSizeRel\yaml-cpp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\RSE\MinSizeRel\RSE.lib;opengl32.lib;glu32.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2main.lib;..\RSE\external\lib\SDL2_image\lib\x64\SDL2_image.lib;..\RSE\external\lib\glew\lib\Release\x64\glew32s.lib;..\RSE\external\lib\yaml-cpp-master\MinSizeRel\yaml-cpp.lib;..\RSE\external\lib\fmt\MinSizeRel\fmt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -222,12 +222,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;NCREMENTAL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;NCREMENTAL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>D:/Users/Nedd/source/repos/NeddX/RSE/TestGame/CMakeFiles/TestGame.dir/RelWithDebInfo/cmake_pch.hxx</PrecompiledHeaderFile>
@@ -241,10 +241,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;YAML_CPP_STATIC_DEFINE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\RSE\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\SDL2_image\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\boost;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\glew\include;D:\Users\Nedd\source\repos\NeddX\RSE\RSE\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -252,7 +252,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\RSE\RelWithDebInfo\RSE.lib;opengl32.lib;glu32.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2main.lib;..\RSE\external\lib\SDL2_image\lib\x64\SDL2_image.lib;..\RSE\external\lib\glew\lib\Release\x64\glew32s.lib;..\RSE\external\lib\yaml-cpp-master\RelWithDebInfo\yaml-cpp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\RSE\RelWithDebInfo\RSE.lib;opengl32.lib;glu32.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2.lib;..\RSE\external\lib\SDL2\lib\x64\SDL2main.lib;..\RSE\external\lib\SDL2_image\lib\x64\SDL2_image.lib;..\RSE\external\lib\glew\lib\Release\x64\glew32s.lib;..\RSE\external\lib\yaml-cpp-master\RelWithDebInfo\yaml-cpp.lib;..\RSE\external\lib\fmt\RelWithDebInfo\fmt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -372,6 +372,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\RSE.vcxproj">
       <Project>{2A34DB07-33E8-3FD4-94D7-B9974F9003F9}</Project>
       <Name>RSE</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\fmt.vcxproj">
+      <Project>{FDF148F4-EF46-327B-99AD-8B8043BCC990}</Project>
+      <Name>fmt</Name>
     </ProjectReference>
     <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\yaml-cpp.vcxproj">
       <Project>{68277DA8-741C-33DF-BE5C-083820D13033}</Project>

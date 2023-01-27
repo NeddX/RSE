@@ -1,10 +1,9 @@
 #include "include/ECS.h"
 
-namespace RSE
+namespace Advres::RSE
 {
-	void RSE::Entity::AddToGroup(Group group)
+	void Entity::SetGroup(Group group)
 	{
-		m_GroupBitSet[group] = true;
-		m_Manager.AddToGroup(this, group);
+		m_Manager.SetGroup(this, group);
 	}
 }

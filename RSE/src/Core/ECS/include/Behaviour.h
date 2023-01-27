@@ -4,7 +4,7 @@
 #include "ECS.h"
 #include "../../include/Collision.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	class Behaviour : public Component
 	{

@@ -4,7 +4,7 @@
 #include <sdafx.h>
 #include "ECS.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	// Forward declerations
 	class Sprite;

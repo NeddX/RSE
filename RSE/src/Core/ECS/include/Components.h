@@ -6,8 +6,9 @@
 #include "Sprite.h"
 #include "Behaviour.h"
 #include "BoxCollider2D.h"
-#include "TileMapComponent.h"
+#include "TilemapComponent.h"
 #include "SpriteSheetAnimation.h"
 #include "Camera2DComponent.h"
+#include "TilemapCollider2D.h"
 
 #endif // COMPONENETS_H

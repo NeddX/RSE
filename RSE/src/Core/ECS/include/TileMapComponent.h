@@ -1,5 +1,5 @@
-#ifndef TILE_MAP_COMPONENT_H
-#define TILE_MAP_COMPONENT_H
+#ifndef TILEMAP_COMPONENT_H
+#define TILEMAP_COMPONENT_H
 
 #include <sdafx.h>
 
@@ -8,11 +8,15 @@
 #include "../../include/Vector2.h"
 #include "../../ECS/include/Components.h"
 
-namespace RSE
+namespace Advres::RSE
 {
-	class TileMapComponent : public Component
+	// Forward declerations
+	class TilemapCollider2D;
+
+	class TilemapComponent : public Component
 	{
 		friend class Serializer;
+		friend class TilemapCollider2D;
 
 	private:
 		Texture2D* m_Texture;
@@ -21,7 +25,7 @@ namespace RSE
 		Vector2 m_TileSize;
 
 	public:
-		TileMapComponent(Texture2D* tileset, Vector2 gridSize, Vector2 tileSize) :
+		TilemapComponent(Texture2D* tileset, Vector2 gridSize, Vector2 tileSize) :
 			m_Texture(tileset), m_GridSize(gridSize), m_TileSize(tileSize)
 		{
 
@@ -58,7 +62,7 @@ namespace RSE
 		void Serialize(YAML::Emitter& out) const override
 		{
 			out << YAML::BeginMap;
-			out << YAML::Key << "TileMapComponent" << YAML::Value << YAML::BeginMap;
+			out << YAML::Key << "TilemapComponent" << YAML::Value << YAML::BeginMap;
 			out << YAML::Key << "m_Texture" << YAML::Value;
 			Serializer::Serialize(Resources::GetResource<Texture2D>(m_Texture->GetID()).get(), out);
 			out << YAML::Key << "m_GridSize" << YAML::Value;
@@ -106,4 +110,4 @@ namespace RSE
 	};
 }
 
-#endif // TILE_MAP_COMPONENT_H
+#endif // TILEMAP_COMPONENT_H

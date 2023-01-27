@@ -1,6 +1,6 @@
 #include "include/TransformComponent.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 
 }

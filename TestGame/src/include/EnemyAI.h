@@ -4,7 +4,7 @@
 #include <RSE.h>
 #include <memory>
 
-using namespace RSE;
+using namespace Advres::RSE;
 
 class EnemyAI : public Behaviour
 {
@@ -28,7 +28,7 @@ public:
 	{
 		player = RSECore::GetEntityByTag("player");
 		playerTransform = player->GetComponent<TransformComponent>();
-		transform = this->entity->GetComponent<TransformComponent>();
+		transform = this->parent->GetComponent<TransformComponent>();
 		start = transform->position;
 		//debugRect = RSECore::AddEntity();
 		//debugRect->AddComponent<TransformComponent>();

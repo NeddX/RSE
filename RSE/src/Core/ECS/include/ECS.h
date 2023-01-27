@@ -2,11 +2,10 @@
 #define ECS_H
 
 #include <sdafx.h>
-#include <yaml-cpp/yaml.h>
 
 #include "../../include/Serializer.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	// Forward declerations
 	class Entity;
@@ -41,7 +40,7 @@ namespace RSE
 		friend class Entity;
 
 	public:
-		Entity* entity;
+		Entity* parent;
 		bool render = true;
 		bool active = true;
 
@@ -122,19 +121,11 @@ namespace RSE
 		{
 			return m_GroupBitSet[group];
 		}
-		void AddToGroup(Group group);
-		inline void RemoveGroup(Group group)
-		{
-			m_GroupBitSet[group] = false;
-		}
 		inline Group GetGroup()
 		{
 			return m_Group;
 		}
-		inline void SetGroup(Group newGroup)
-		{
-			m_Group = newGroup;
-		}
+		void SetGroup(Group group);
 
 	public:
 		template<typename T>
@@ -146,7 +137,7 @@ namespace RSE
 		T* AddComponent(TArgs&&... args)
 		{
 			T* c = new T(std::forward<TArgs>(args)...);
-			c->entity = this;
+			c->parent = this;
 			m_Components.push_back(c);
 
 			m_ComponentList[GetComponentTypeID<T>()] = c;
@@ -158,7 +149,7 @@ namespace RSE
 		template<typename T>
 		T* AddComponent(T* c, bool init = true)
 		{
-			c->entity = this;
+			c->parent = this;
 			m_Components.push_back(c);
 			
 			m_ComponentList[GetComponentTypeID<T>()] = c;
@@ -213,29 +204,35 @@ namespace RSE
 		}
 
 	public:
-		Entity* AddEntity(const std::string& entityTag = "entity")
+		Entity* AddEntity(const std::string& entityTag = "parent")
 		{
 			std::string tag = entityTag;
-			if (tag == "entity") tag += std::to_string(m_Entities.size());
+			if (tag == "parent") tag += std::to_string(m_Entities.size());
 			std::shared_ptr<Entity> e = std::make_shared<Entity>(*this);
 			e->tag = tag;	
-			e->AddToGroup(0);
+			AddToGroup(e.get(), 0);
 			m_Entities.push_back(e);
 			return e.get();
 		}
-		void AddToGroup(Entity* entity, Group group)
+		void AddToGroup(Entity* parent, Group group)
 		{
-			m_Groups[group].push_back(entity);
-			entity->SetGroup(group);
+			m_Groups[group].push_back(parent);
+			parent->m_Group = group;
+		}
+		void SetGroup(Entity* parent, Group group)
+		{
+			auto& vec = m_Groups[parent->m_Group];
+			vec.erase(std::remove(vec.begin(), vec.end(), parent), vec.end());
+			AddToGroup(parent, group);
 		}
 		std::vector<Entity*>& GetGroup(Group group)
 		{
 			return m_Groups[group];
 		}
-		void DisposeEntity(Entity* entity)	
+		void DisposeEntity(Entity* parent)	
 		{
 			auto it = std::find_if(m_Entities.begin(), m_Entities.end(),
-				[&](std::shared_ptr<Entity> e) { return e.get() == entity; });
+				[&](std::shared_ptr<Entity> e) { return e.get() == parent; });
 
 			if (it != m_Entities.end())
 			{

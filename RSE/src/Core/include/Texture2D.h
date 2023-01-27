@@ -7,12 +7,12 @@
 #include "Geometry.h"
 #include "ResourceHandler.h"
 
-namespace RSE
+namespace Advres::RSE
 {
 	// Forward declerations
 	class RSECore;
 	class Sprite;
-	class TileMapComponent;
+	class TilemapComponent;
 
 	// Wrapper around SDL_Texture
 	class Texture2D : public IResource
@@ -20,7 +20,7 @@ namespace RSE
 		friend class Resources;
 		friend class RSECore;
 		friend class Sprite;
-		friend class TileMapComponent;
+		friend class TilemapComponent;
 
 	private:
 		SDL_Texture* m_SdlTex;

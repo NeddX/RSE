@@ -4,7 +4,7 @@
 #include <RSE.h>
 #include <iostream>
 
-using namespace RSE;
+using namespace Advres::RSE;
 
 class Wall : public Behaviour
 {

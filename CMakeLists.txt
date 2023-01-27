@@ -11,5 +11,6 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Ox")
 # Include sub-projects.
 add_subdirectory ("RSE")
 add_subdirectory ("TestGame")
+add_subdirectory ("RCLRW")
 
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT <project_name>)
