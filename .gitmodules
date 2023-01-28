@@ -1,0 +1,17 @@
+[submodule "external/lib/SDL_image"]
+	path = external/lib/SDL_image
+	url = https://github.com/libsdl-org/SDL_image.git
+	branch = SDL2
+[submodule "external/lib/SDL"]
+	path = external/lib/SDL
+	url = https://github.com/libsdl-org/SDL.git
+	branch = SDL2
+[submodule "external/lib/glew"]
+	path = external/lib/glew
+	url = https://github.com/edoren/glew.git
+[submodule "external/lib/fmt"]
+	path = external/lib/fmt
+	url = https://github.com/fmtlib/fmt.git
+[submodule "external/lib/yaml-cpp"]
+	path = external/lib/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git
