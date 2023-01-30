@@ -52,12 +52,18 @@ namespace Advres::RSE
 				for (const auto& c : RSECore::colliders)
 				{
 					SDL_Rect r = tc.SDL();
-					Vector2& parent_velocity = c->parent->GetComponent<TransformComponent>()->velocity;
-					Vector2 origin = { c->colliderRect.x, c->colliderRect.y };
+					Vector2 parent_velocity = c->parent->GetComponent<TransformComponent>()->velocity;
+					Vector2& parent_pos = c->parent->GetComponent<TransformComponent>()->position;
+					Vector2 origin = { c->colliderRect.x + c->colliderRect.w + 1, c->colliderRect.y };
 					Vector2 cn_point;
 					Vector2 cn_normal;
 					float cn_fraction = 0.0f;
-					//RSECore::DrawDebugLine(std::make_pair(origin, origin * deltaTime));
+					Vector2 offset = { (cn_normal.x < 0) ? -16 : 0, (cn_normal.y < 0) ? -16 : 0 };
+					//if (Collision::SweptAABB(c->colliderRect, tc, parent_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
+					//{
+					//	fmt::println("HIT!");
+					//	//parent_velocity = { 0, 0 };
+					//}
 					/*if (Collision::RayVsRect(origin, parent_velocity * deltaTime, tc.SDL(), cn_point, cn_normal, cn_fraction))
 					{
 						fmt::println("hit!");
@@ -109,6 +115,8 @@ namespace Advres::RSE
 			{
 				SDL_Rect sr = r.SDL();
 				RSECore::DrawRect(sr);
+				//Vector2 ds = { sr.x * 2, sr.y };
+				//RSECore::DrawLine({ sr.x, sr.y }, ds);
 			}
 #endif
 		}

@@ -67,13 +67,13 @@ namespace Advres::RSE
 		int m_TargetFps;
 		int m_FrameDelay;
 		uint32_t m_FrameStart;
-		std::chrono::system_clock::time_point m_Tp1, m_Tp2;
 		bool m_Running;
 		const char* m_WindowTitle;
 		void (*m_RenderMethod)(float);
 		void (*m_UpdateMethod)(float);
 
 	private:
+		static std::chrono::system_clock::time_point m_Tp1, m_Tp2;
 		static std::chrono::high_resolution_clock::time_point m_StartTp;
 		static int m_ScreenWidth;
 		static int m_ScreenHeight; 
@@ -125,9 +125,11 @@ namespace Advres::RSE
 		}
 		static inline void DrawDebugLine(std::pair<Vector2, Vector2> line)
 		{
+			line.first = CameraModule::GetVectorRelativeToCamera(line.first);
+			line.second = CameraModule::GetVectorRelativeToCamera(line.second);
 			m_DebugLines.push_back(line);
 		}
-		inline float GetDeltaTime()
+		static inline float GetDeltaTime()
 		{
 			m_Tp2 = std::chrono::system_clock::now();
 			std::chrono::duration<float> elapsedTime = m_Tp2 - m_Tp1;
@@ -172,9 +174,9 @@ namespace Advres::RSE
 			SDL_RenderCopyEx(sdlRenderer, texture->m_SdlTex, srcR, destR, angle, centrePoint, flip);
 			SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_NONE);
 		}
-		static inline void DrawRect(const SDL_Rect rect, uint8_t r = 0, uint8_t g = 255, uint8_t b = 0, uint8_t a = 255)
+		static inline void DrawRect(const Rect rect, uint8_t r = 0, uint8_t g = 255, uint8_t b = 0, uint8_t a = 255)
 		{
-			SDL_Rect dest_cp = rect;
+			SDL_Rect dest_cp = rect.SDL();
 			SDL_SetRenderDrawColor(sdlRenderer, r, g, b, a);
 			if (camera->Active() && !disableCamera)
 			{

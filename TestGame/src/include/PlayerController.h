@@ -38,6 +38,7 @@ private:
 	TransformComponent* dummyTrans;
 	Vector2 rayOrigin;
 	bool rayToggeled = false;
+	Rect test = { 300, 100, 32, 32 };
 
 public:
 	void HandleInput()
@@ -79,6 +80,9 @@ public:
 	Vector2 lastMousePos;
 	void Update(float deltaTime) override
 	{
+		static Rect player_collider = parent->GetComponent<BoxCollider2D>()->colliderRect;
+		static Vector2 player_velocity = parent->GetComponent<TransformComponent>()->velocity;
+
 		//std::cout << "some cool stuff idk" << std::endl;
 		HandleInput();
 		transform->velocity.x = speed * input.x * deltaTime * 10;
@@ -91,6 +95,14 @@ public:
 
 		// scrap the rest for now
 		//return;
+
+		Vector2 cn_point;
+		Vector2 cn_normal;
+		float cn_fraction;
+		if (Collision::SweptAABB(player_collider, test, player_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
+		{
+			fmt::println("HIT!");
+		}
 
 		auto now = std::chrono::steady_clock::now();
 		float elapsed = (float) std::chrono::duration_cast<std::chrono::milliseconds>(now - sizeTp).count();
@@ -197,6 +209,7 @@ public:
 
 	void Render(float deltaTime) override
 	{
+		RSECore::DrawRect(test);
 		//SDL_RenderDrawPoint(RSECore::sdlRenderer, norm.x, norm.y);
 		//map->Render();
 		if (tilePicker)

@@ -22,10 +22,11 @@ namespace Advres::RSE
 		{ 
 			SDL_Surface* tmp_surf = IMG_Load(file);
 			SDL_Texture* sdl_tex = SDL_CreateTextureFromSurface(RSECore::sdlRenderer, tmp_surf);
-			size_t id = std::hash<std::string>{}(file);
+			size_t id = xstdf::crypto::FNV1aHash(file);
 			std::shared_ptr<Texture2D> texture = std::make_shared<Texture2D>(sdl_tex, tmp_surf->w, tmp_surf->h, id);
 			m_Resources[id] = std::static_pointer_cast<IResource>(texture);
 			fs.close();
+			fmt::println("[ResourceHandler] >> File: '{}' ID: {}", file, id);
 			return texture;
 		}
 		else

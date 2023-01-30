@@ -69,9 +69,23 @@ namespace Advres::RSE
 
 			return true;
 		}
-		static inline float SweptAABB(const Rect& b1, const Rect& b2, Vector2& normals)
+		static inline bool SweptAABB(const Rect& b1, const Rect& b2, Vector2& velocity, Vector2& contactPoint, Vector2& contactNormal, float& contactFraction, float& elapsedTime)
 		{
-			return 1;
+			if (velocity == 0) 
+				return false;
+
+			Rect expanded_rect = { b2.x - (b1.w / 2), b2.y - (b1.h / 2), b1.w + b2.w, b1.h + b2.h };
+			RSECore::DrawDebugRect(expanded_rect);
+
+			Vector2 ray_origin = { b1.x + b1.w / 2, b1.y + b1.h / 2 };
+			RSECore::DrawDebugRect({ ray_origin.x, ray_origin.y, 10, 10 });
+			if (RayVsRect(ray_origin, velocity * elapsedTime, expanded_rect, contactPoint, contactNormal, contactFraction))
+			{
+				if (contactFraction <= 1.0f)
+					return true;
+			}
+
+			return false;
 		}
 		static Vector2 GetCollisionNormal(const SDL_Rect& rectA, const SDL_Rect& rectB)
 		{

@@ -3,11 +3,10 @@
 
 #include <sdafx.h>
 
-namespace xstd
+namespace xstdf
 {
-	class File
+	struct file
 	{
-	public:
 		static char* EncodeStrToBHS8(const char* str)
 		{
 			size_t size = strlen(str);
@@ -39,6 +38,22 @@ namespace xstd
 				std::cerr << "Bad file '" << file << "'." << std::endl;
 				return 0;
 			}
+		}
+	};
+
+	struct crypto
+	{
+		static uint64_t FNV1aHash(const std::string& str)
+		{
+			static const uint64_t FNV_offset_basis = 14695981039346656037ull;
+			static const uint64_t FNV_prime = 1099511628211ull;
+			uint64_t hash = FNV_offset_basis;
+			for (char c : str)
+			{
+				hash ^= c;
+				hash *= FNV_prime;
+			}
+			return hash;
 		}
 	};
 }

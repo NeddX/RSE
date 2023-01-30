@@ -11,6 +11,7 @@ namespace Advres::RSE
 	int RSECore::m_ScreenHeight = 0;
 	std::shared_ptr<EntityManager> RSECore::entityManager;
 	std::unique_ptr<EntityManager> RSECore::UIManager = std::make_unique<EntityManager>();
+	std::chrono::system_clock::time_point RSECore::m_Tp1, RSECore::m_Tp2;
 	std::chrono::high_resolution_clock::time_point RSECore::m_StartTp;
 	bool RSECore::disableCamera = false;
 	std::vector<Rect> RSECore::m_DebugRects;

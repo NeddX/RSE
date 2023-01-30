@@ -117,7 +117,7 @@ public:
 		trans->position.y = (int) trans->position.y - vec.y;
 
 		player->tag = "player";
-		auto p_trans = player->AddComponent<TransformComponent>(Transform(Vector2(600, 350)));
+		auto p_trans = player->AddComponent<TransformComponent>(Transform(Vector2(600, 200)));
 		auto ps = player->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
 		ps->SetRenderRect({ 368, 112, 16, 16 }, { 0, 0, 32, 32 });
 		auto sheetanim = player->AddComponent<SpriteSheetAnimation>(0, 5, 200, AnimPlaybackMode::PingPong);
@@ -143,8 +143,6 @@ public:
 		player_collider->OnCollide = &Behaviour::BoxCollider2D_OnCollide;
 		player_collider->OnEnter =	&Behaviour::BoxCollider2D_OnEnter;
 		player_collider->OnExit	=	&Behaviour::BoxCollider2D_OnExit;
-
-
 
 		//enemy->tag = "Cultist";
 		//enemy->AddComponent<TransformComponent>(Transform(Vector2(100, 200)));

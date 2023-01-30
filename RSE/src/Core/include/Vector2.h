@@ -206,6 +206,14 @@ namespace Advres::RSE
 			y /= other.y;
 			return *this;
 		}
+		inline bool operator==(int num) const
+		{
+			return x == num && y == num;
+		}
+		inline bool operator==(float num) const
+		{
+			return x == num && y == num;
+		}
 		inline bool operator==(const Vector2& other) const
 		{
 			return x == other.x && y == other.y;

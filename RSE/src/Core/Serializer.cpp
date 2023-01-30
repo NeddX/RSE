@@ -208,7 +208,7 @@ namespace Advres::RSE
 
 	void Serializer::Deserialize(const char* file, EntityManager* actorMgr)
 	{
-		size_t size = xstd::File::FileSize(file);
+		size_t size = xstdf::file::FileSize(file);
 		std::ifstream fs(file);
 		/*if (fs.is_open())
 		{
@@ -216,7 +216,7 @@ namespace Advres::RSE
 			memset(str, 0, size + 1);
 			fs.read(str, size);
 			fs.close();
-			char* decStr = xstd::File::DecodeBHS8ToStr(str);
+			char* decStr = xstdf::File::DecodeBHS8ToStr(str);
 			YAML::Node node = YAML::Load(decStr);
 
 			YAML::Node actors_node = node["Actors"];
