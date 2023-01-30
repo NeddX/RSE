@@ -14,7 +14,7 @@ namespace Advres::RSE
 	std::chrono::high_resolution_clock::time_point RSECore::m_StartTp;
 	bool RSECore::disableCamera = false;
 	std::vector<Rect> RSECore::m_DebugRects;
-	static std::vector<std::pair<Vector2, Vector2>> m_DebugLines;
+	std::vector<std::pair<Vector2, Vector2>> RSECore::m_DebugLines;
 	const Camera2DComponent* CameraModule::m_MainCamera = nullptr;
 
 	RSECore::RSECore()
@@ -44,7 +44,7 @@ namespace Advres::RSE
 		m_TargetFps = fpsLimit;
 		m_FrameDelay = (m_TargetFps > 0) ? 1000 / m_TargetFps : 0;
 		m_WindowTitle = windowTitle;
-		m_StartTp = std::chrono::steady_clock::now();
+		m_StartTp = std::chrono::high_resolution_clock::now();
 		
 		//Use OpenGL 3.1 core
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);

@@ -63,9 +63,9 @@ namespace Advres::RSE
 
 			// Calculate the normal
 			if (t_x_near > t_y_near) // Normal is on the X axis
-				contactNormal.x = (distance.x < 0) ? -1.0f : 1.0f;
+				contactNormal.x = (distance.x < 0) ? 1.0f : -1.0f;
 			else // Or else it is on the Y axis
-				contactNormal.y = (distance.y < 0) ? -1.0f : 1.0f;
+				contactNormal.y = (distance.y < 0) ? 1.0f : -1.0f;
 
 			return true;
 		}

@@ -254,11 +254,13 @@ public:
 			Vector2 mouse = CameraModule::GetMousePositionInWorld();
 			RSECore::DrawLine(rayOrigin, mouse, 255, 0);
 			BoxCollider2D* collider = this->parent->GetComponent<BoxCollider2D>();
-			Vector2 contact_point;
-			Vector2 contact_normal;
+			Vector2 cn_point;
+			Vector2 cn_normal;
 			float fraction;
-			if (Collision::RayVsRect(rayOrigin, mouse, collider->colliderRect, contact_point, contact_normal, fraction))
+			if (Collision::RayVsRect(rayOrigin, mouse, collider->colliderRect, cn_point, cn_normal, fraction))
 			{
+				Vector2 offset = { (cn_normal.x < 0) ? -16 : 0, (cn_normal.y < 0) ? -16 : 0 };
+				RSECore::DrawRect({ (int) cn_point.x + (int) offset.x, (int) cn_point.y + (int) offset.y, 16, 16}, 255, 0, 0);
 				collider->colour = { 255, 0, 0, 255 };
 			}
 			else collider->colour = { 255, 200, 0, 255 };

@@ -57,7 +57,7 @@ namespace Advres::RSE
 					Vector2 cn_point;
 					Vector2 cn_normal;
 					float cn_fraction = 0.0f;
-					RSECore::DrawDebugLine(std::make_pair(origin, origin * deltaTime));
+					//RSECore::DrawDebugLine(std::make_pair(origin, origin * deltaTime));
 					/*if (Collision::RayVsRect(origin, parent_velocity * deltaTime, tc.SDL(), cn_point, cn_normal, cn_fraction))
 					{
 						fmt::println("hit!");
