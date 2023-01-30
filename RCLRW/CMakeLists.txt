@@ -1,5 +1,3 @@
-set(CMAKE_CXX_STANDARD 17)
-
 add_library(RCLRW SHARED 
 	"src/include/RCLRW.h"
 	"src/RCLRW.cpp"

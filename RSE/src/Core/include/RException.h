@@ -24,8 +24,8 @@ namespace Advres::RSE
 		{
 			m_ErrorCode = -1;
 			auto now = std::chrono::system_clock::now();
-			auto timeNow = std::chrono::system_clock::to_time_t(now);
-			std::string dateStr = std::ctime(&timeNow);
+			auto time_now = std::chrono::system_clock::to_time_t(now);
+			std::string date_str = std::ctime(&time_now);
 			m_ErrorMessage = fmt::format("[DATE] An Exception Occured: {}", message);
 		}
 		const char* Message() const

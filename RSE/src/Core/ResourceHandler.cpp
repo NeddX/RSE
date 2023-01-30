@@ -20,10 +20,10 @@ namespace Advres::RSE
 		std::ifstream fs(file);
 		if (fs.is_open())
 		{ 
-			SDL_Surface* tmpSurf = IMG_Load(file);
-			SDL_Texture* sdlTex = SDL_CreateTextureFromSurface(RSECore::sdlRenderer, tmpSurf);
+			SDL_Surface* tmp_surf = IMG_Load(file);
+			SDL_Texture* sdl_tex = SDL_CreateTextureFromSurface(RSECore::sdlRenderer, tmp_surf);
 			size_t id = std::hash<std::string>{}(file);
-			std::shared_ptr<Texture2D> texture = std::make_shared<Texture2D>(sdlTex, tmpSurf->w, tmpSurf->h, id);
+			std::shared_ptr<Texture2D> texture = std::make_shared<Texture2D>(sdl_tex, tmp_surf->w, tmp_surf->h, id);
 			m_Resources[id] = std::static_pointer_cast<IResource>(texture);
 			fs.close();
 			return texture;

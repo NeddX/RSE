@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D2112331-E56C-32AC-B926-FD4457E07E41}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>SDL2main</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Users\Nedd\source\repos\NeddX\RSE\SDL\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SDL2main.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SDL2maind</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Users\Nedd\source\repos\NeddX\RSE\SDL\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SDL2main.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SDL2main</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Users\Nedd\source\repos\NeddX\RSE\SDL\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">SDL2main.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">SDL2main</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Users\Nedd\source\repos\NeddX\RSE\SDL\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">SDL2main.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">SDL2main</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-debug;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SDL_BUILD_MAJOR_VERSION=2;SDL_BUILD_MINOR_VERSION=27;SDL_BUILD_MICRO_VERSION=0;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;SDL_BUILD_MAJOR_VERSION=2;SDL_BUILD_MINOR_VERSION=27;SDL_BUILD_MICRO_VERSION=0;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-debug;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-debug;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-release;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SDL_BUILD_MAJOR_VERSION=2;SDL_BUILD_MINOR_VERSION=27;SDL_BUILD_MICRO_VERSION=0;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SDL_BUILD_MAJOR_VERSION=2;SDL_BUILD_MINOR_VERSION=27;SDL_BUILD_MICRO_VERSION=0;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-release;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-release;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-minsizerel;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SDL_BUILD_MAJOR_VERSION=2;SDL_BUILD_MINOR_VERSION=27;SDL_BUILD_MICRO_VERSION=0;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SDL_BUILD_MAJOR_VERSION=2;SDL_BUILD_MINOR_VERSION=27;SDL_BUILD_MICRO_VERSION=0;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-minsizerel;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-minsizerel;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-relwithdebinfo;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SDL_BUILD_MAJOR_VERSION=2;SDL_BUILD_MINOR_VERSION=27;SDL_BUILD_MICRO_VERSION=0;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SDL_BUILD_MAJOR_VERSION=2;SDL_BUILD_MINOR_VERSION=27;SDL_BUILD_MICRO_VERSION=0;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-relwithdebinfo;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include-config-relwithdebinfo;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/Users/Nedd/source/repos/NeddX/RSE -BD:/Users/Nedd/source/repos/NeddX/RSE --check-stamp-file D:/Users/Nedd/source/repos/NeddX/RSE/SDL/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeConfigurableFile.in;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeDependentOption.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakePushCheckState.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCSourceRuns.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCXXCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCXXSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFile.c.in;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckLanguage.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckLibraryExists.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckStructHasMember.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckSymbolExists.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindGit.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPkgConfig.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckSourceRuns.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\CMakeFiles\cmake.verify_globs;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\SDL_config.h.intermediate;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\SDL2.spec.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\CheckCPUArchitecture.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\macros.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlchecks.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlfind.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlplatform.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake_uninstall.cmake.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\include\SDL_config.h.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\include\SDL_revision.h.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\sdl2-config.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\sdl2.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Users\Nedd\source\repos\NeddX\RSE\SDL\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/Users/Nedd/source/repos/NeddX/RSE -BD:/Users/Nedd/source/repos/NeddX/RSE --check-stamp-file D:/Users/Nedd/source/repos/NeddX/RSE/SDL/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeConfigurableFile.in;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeDependentOption.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakePushCheckState.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCSourceRuns.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCXXCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCXXSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFile.c.in;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckLanguage.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckLibraryExists.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckStructHasMember.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckSymbolExists.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindGit.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPkgConfig.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckSourceRuns.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\CMakeFiles\cmake.verify_globs;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\SDL_config.h.intermediate;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\SDL2.spec.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\CheckCPUArchitecture.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\macros.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlchecks.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlfind.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlplatform.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake_uninstall.cmake.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\include\SDL_config.h.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\include\SDL_revision.h.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\sdl2-config.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\sdl2.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Users\Nedd\source\repos\NeddX\RSE\SDL\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/Users/Nedd/source/repos/NeddX/RSE -BD:/Users/Nedd/source/repos/NeddX/RSE --check-stamp-file D:/Users/Nedd/source/repos/NeddX/RSE/SDL/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeConfigurableFile.in;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeDependentOption.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakePushCheckState.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCSourceRuns.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCXXCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCXXSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFile.c.in;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckLanguage.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckLibraryExists.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckStructHasMember.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckSymbolExists.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindGit.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPkgConfig.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckSourceRuns.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\CMakeFiles\cmake.verify_globs;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\SDL_config.h.intermediate;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\SDL2.spec.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\CheckCPUArchitecture.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\macros.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlchecks.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlfind.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlplatform.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake_uninstall.cmake.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\include\SDL_config.h.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\include\SDL_revision.h.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\sdl2-config.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\sdl2.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Users\Nedd\source\repos\NeddX\RSE\SDL\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/Users/Nedd/source/repos/NeddX/RSE -BD:/Users/Nedd/source/repos/NeddX/RSE --check-stamp-file D:/Users/Nedd/source/repos/NeddX/RSE/SDL/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeConfigurableFile.in;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeDependentOption.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CMakePushCheckState.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCSourceRuns.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCXXCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckCXXSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFile.c.in;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFile.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckIncludeFiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckLanguage.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckLibraryExists.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckStructHasMember.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\CheckSymbolExists.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindGit.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\FindPkgConfig.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\GNUInstallDirs.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckCompilerFlag.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckFlagCommonConfig.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckSourceCompiles.cmake;D:\Program Files\CMake\share\cmake-3.24\Modules\Internal\CheckSourceRuns.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\CMakeFiles\cmake.verify_globs;D:\Users\Nedd\source\repos\NeddX\RSE\SDL\SDL_config.h.intermediate;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\SDL2.spec.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\CheckCPUArchitecture.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\macros.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlchecks.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlfind.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake\sdlplatform.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\cmake_uninstall.cmake.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\include\SDL_config.h.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\include\SDL_revision.h.cmake;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\sdl2-config.in;D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\sdl2.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Users\Nedd\source\repos\NeddX\RSE\SDL\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\Users\Nedd\source\repos\NeddX\RSE\external\lib\SDL\src\main\windows\SDL_windows_main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\ZERO_CHECK.vcxproj">
+      <Project>{A3CE503E-5C55-37EA-A4A7-260F004496EE}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\SDL\sdl_headers_copy.vcxproj">
+      <Project>{8D6C82E3-9687-3B38-9A0E-E8B5636EBB9F}</Project>
+      <Name>sdl_headers_copy</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

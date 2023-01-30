@@ -36,26 +36,38 @@ namespace Advres::RSE
 			SDL_Rect rectB = { (int) ac2Pos->x, (int) ac2Pos->y, (int) col2->colliderRect.w, (int) col2->colliderRect.h };
 			return AABB(&rectA, &rectB);
 		}
-		static inline bool RayVsRect(const Vector2& rayOrigin, const Vector2& rayDest, const Rect& rect)
+		// TODO: Take Vecs as Consts!
+		static inline bool RayVsRect(Vector2& rayOrigin, Vector2& rayDest, const Rect& rect,
+			Vector2& contactPoint, Vector2& contactNormal, float& contactFraction)
 		{
-			Vector2 dir = { rayDest.x - rayOrigin.x, rayDest.y - rayOrigin.y };
+			Vector2 distance = rayDest - rayOrigin;
+			
+			float t_x_near = (rect.x - rayOrigin.x) / distance.x;
+			float t_x_far = ((rect.x + rect.w) - rayOrigin.x) / distance.x;
+			float t_y_near = (rect.y - rayOrigin.y) / distance.y;
+			float t_y_far = ((rect.y + rect.h) - rayOrigin.y) / distance.y;
 
-			// Compute the minimum and maximum values for each axis
-			float t_x_min = (rect.x - rayOrigin.x) / dir.x;
-			float t_x_max = (rect.x + rect.w - rayOrigin.x) / dir.x;
-			if (t_x_min > t_x_max) std::swap(t_x_min, t_x_max);
+			if (t_x_near > t_x_far) std::swap(t_x_near, t_x_far);
+			if (t_y_near > t_y_far) std::swap(t_y_near, t_y_far);
 
-			float t_y_min = (rect.y - rayOrigin.y) / dir.y;
-			float t_y_max = (rect.y + rect.h - rayOrigin.y) / dir.y;
-			if (t_y_min > t_y_max) std::swap(t_y_min, t_y_max);
+			// Check if the line intersects
+			if (t_y_near > t_x_far || t_x_near > t_y_far || t_x_near > 1.0f || t_y_near > 1.0f) return false;
 
-			// Check if the ray intersects the AABB
-			if ((t_x_min > t_y_max) || (t_y_min > t_x_max)) return false;
+			float t_near = std::max(t_x_near, t_y_near);
+			float t_far = std::min(t_x_far, t_y_far);
+			
+			// If the collision is happening on the opposite side of the rectangle
+			if (t_far < 0) return false;
 
-			if (t_y_min > t_x_min) t_x_min = t_y_min;
-			if (t_y_max < t_x_max) t_x_max = t_y_max;
+			contactPoint = rayOrigin + (distance * t_near);
 
-			return (t_x_min < 1) && (t_x_max > 0);
+			// Calculate the normal
+			if (t_x_near > t_y_near) // Normal is on the X axis
+				contactNormal.x = (distance.x < 0) ? -1.0f : 1.0f;
+			else // Or else it is on the Y axis
+				contactNormal.y = (distance.y < 0) ? -1.0f : 1.0f;
+
+			return true;
 		}
 		static inline float SweptAABB(const Rect& b1, const Rect& b2, Vector2& normals)
 		{

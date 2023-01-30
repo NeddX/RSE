@@ -1,14 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include <SDL.h>
-#include <unordered_map>
-#include <string>
-#include <cstdint>
-#include <type_traits>
-#include <initializer_list>
-#include <variant>
-#include <algorithm>
+#include <sdafx.h>
 
 //#include "Core.h"
 #include "Vector2.h"
@@ -83,6 +76,12 @@ namespace Advres::RSE
 		Vector2 wheel;
 	};
 
+
+	struct IBind
+	{
+
+	};
+
 	struct KeyBind
 	{
 		std::vector<Key> keys;
@@ -96,7 +95,9 @@ namespace Advres::RSE
 	class Input
 	{
 	private:
-		static std::unordered_map<std::string, std::variant<KeyBind, AxisBind>> m_Actions;
+		// variant
+		//static std::unordered_map<std::string, std::variant<KeyBind, AxisBind>> m_Actions;
+		static std::unordered_map<std::string, void*> m_Actions;
 	
 	public:
 		static std::unordered_map<uint32_t, bool> keys;
@@ -161,18 +162,19 @@ namespace Advres::RSE
 		template <typename T>
 		static inline void AddAction(const std::string& actionName, T bindType)
 		{
-			m_Actions[actionName] = bindType;
-		}
-		static inline std::unordered_map<std::string, std::variant<KeyBind, AxisBind>>* GetAllActions()
-		{
-			return &m_Actions;
+			auto h_copy = new T(bindType);
+			m_Actions[actionName] = h_copy;
+			//m_Actions[actionName] = (void*) &bindType;
 		}
 		static inline bool IsActionActive(const std::string& actionName) 
 		{
 			const auto it = m_Actions.find(actionName);
 			if (it == m_Actions.end()) return false;
 
-			return std::visit([](const auto& bindType) 
+			KeyBind* kb = (KeyBind*) it->second;
+			for (const auto& k : kb->keys) if (keys.at((uint32_t) k)) return true;
+			return false;
+			/*return std::visit([](const auto& bindType) 
 				{
 					if constexpr (std::is_same_v<std::decay_t<decltype(bindType)>, KeyBind>) 
 					{
@@ -182,17 +184,17 @@ namespace Advres::RSE
 					{
 						return false;
 					}
-				}, it->second);
+				}, it->second);*/
 		}
 		static inline float GetActionAxis(const std::string& actionName) 
 		{
 			auto it = m_Actions.find(actionName);
 			if (it == m_Actions.end()) return 0;
 
-			AxisBind axisBind = std::get<AxisBind>(it->second);
+			AxisBind* ab = (AxisBind*) it->second;
 			float axis = 0;
-			if (keys[(uint32_t) axisBind.pos]) axis += 1;
-			if (keys[(uint32_t) axisBind.neg]) axis += -1;
+			if (keys[(uint32_t) ab->pos]) axis += 1;
+			if (keys[(uint32_t) ab->neg]) axis += -1;
 			return axis;
 		}
 		static inline bool IsKeyDown(Key key)

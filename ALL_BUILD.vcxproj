@@ -173,35 +173,51 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RCLRW\RCLRW.vcxproj">
-      <Project>{22FE13C7-03D4-3846-934C-371C7F0CCD53}</Project>
-      <Name>RCLRW</Name>
-    </ProjectReference>
     <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\RSE.vcxproj">
       <Project>{2A34DB07-33E8-3FD4-94D7-B9974F9003F9}</Project>
       <Name>RSE</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\SDL\SDL2.vcxproj">
+      <Project>{8151BCA3-FCA9-35EA-9534-49874854C9A4}</Project>
+      <Name>SDL2</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\SDL\SDL2-static.vcxproj">
+      <Project>{BBBB2BA7-9A91-31F8-BE08-00CD4353E158}</Project>
+      <Name>SDL2-static</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\SDL_image\SDL2_image.vcxproj">
+      <Project>{38A0A4A0-55E2-3998-AF83-64C789E70463}</Project>
+      <Name>SDL2_image</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\SDL\SDL2_test.vcxproj">
+      <Project>{2E9357D6-52C4-390A-AEF8-E5EA2F9E07B3}</Project>
+      <Name>SDL2_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\SDL\SDL2main.vcxproj">
+      <Project>{D2112331-E56C-32AC-B926-FD4457E07E41}</Project>
+      <Name>SDL2main</Name>
     </ProjectReference>
     <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\TestGame\TestGame.vcxproj">
       <Project>{E2B74ADD-875C-3658-9806-B54E1A7C70DF}</Project>
       <Name>TestGame</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\fmt\fmt.vcxproj">
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\fmt\fmt.vcxproj">
       <Project>{FDF148F4-EF46-327B-99AD-8B8043BCC990}</Project>
       <Name>fmt</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\yaml-cpp.vcxproj">
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\yaml-cpp\yaml-cpp.vcxproj">
       <Project>{68277DA8-741C-33DF-BE5C-083820D13033}</Project>
       <Name>yaml-cpp</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\util\yaml-cpp-parse.vcxproj">
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\yaml-cpp\util\yaml-cpp-parse.vcxproj">
       <Project>{D2B16A77-6504-32F6-86AF-B2CA62E4EE1F}</Project>
       <Name>yaml-cpp-parse</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\util\yaml-cpp-read.vcxproj">
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\yaml-cpp\util\yaml-cpp-read.vcxproj">
       <Project>{FA4BE5F4-28D8-332B-98D1-7A03DD05527F}</Project>
       <Name>yaml-cpp-read</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\external\lib\yaml-cpp-master\util\yaml-cpp-sandbox.vcxproj">
+    <ProjectReference Include="D:\Users\Nedd\source\repos\NeddX\RSE\yaml-cpp\util\yaml-cpp-sandbox.vcxproj">
       <Project>{CDB03A35-104E-3F80-898E-D313F4D9E8C5}</Project>
       <Name>yaml-cpp-sandbox</Name>
     </ProjectReference>

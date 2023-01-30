@@ -23,15 +23,15 @@ namespace Advres::RSE
 
 	inline ComponentID NewComponentTypeID() noexcept
 	{
-		static ComponentID lastID = 0;
-		return lastID++;
+		static ComponentID last_id = 0;
+		return last_id++;
 	}
 
 	template<typename T>
 	inline ComponentID GetComponentTypeID() noexcept
 	{
-		static ComponentID typeID = NewComponentTypeID();
-		return typeID;
+		static ComponentID type_id = NewComponentTypeID();
+		return type_id;
 	}
 
 	class Component
@@ -47,7 +47,7 @@ namespace Advres::RSE
 	public:
 		virtual ~Component()
 		{
-			std::cout << "Component destroyed!" << std::endl;
+			fmt::println("Component Destroyed!");
 		}
 
 	public:
@@ -93,7 +93,7 @@ namespace Advres::RSE
 		~Entity()
 		{
 			for (auto& c : m_Components) delete c;
-			std::cout << "Entity destroyed!" << std::endl;
+			fmt::println("Entity Destroyed!");
 		}
 
 	public:

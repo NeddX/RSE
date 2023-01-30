@@ -262,20 +262,20 @@ namespace Advres::RSE
 		}
 		static inline Vector2 Clamp(const Vector2& vec, const Vector2& highEnd)
 		{
-			Vector2 newVec = { Mathf::Clamp(vec.x, 0.0f, highEnd.x), Mathf::Clamp(vec.y, 0.0f, highEnd.y) };
-			return newVec;
+			Vector2 new_vec = { Mathf::Clamp(vec.x, 0.0f, highEnd.x), Mathf::Clamp(vec.y, 0.0f, highEnd.y) };
+			return new_vec;
 		}
 		static inline Vector2 Clamp(const Vector2& vec, const Vector2& lowEnd, const Vector2& highEnd)
 		{
-			Vector2 newVec = { Mathf::Clamp(vec.x, lowEnd.x, highEnd.x), Mathf::Clamp(vec.y, lowEnd.y, highEnd.y) };
-			return newVec;
+			Vector2 new_vec = { Mathf::Clamp(vec.x, lowEnd.x, highEnd.x), Mathf::Clamp(vec.y, lowEnd.y, highEnd.y) };
+			return new_vec;
 		}
 		static inline Vector2 Ceil(const Vector2& vec)
 		{
-			Vector2 newVec;
-			newVec.x = Mathf::Ceil(vec.x);
-			newVec.y = Mathf::Ceil(vec.y);
-			return newVec;
+			Vector2 new_vec;
+			new_vec.x = Mathf::Ceil(vec.x);
+			new_vec.y = Mathf::Ceil(vec.y);
+			return new_vec;
 		}
 	};
 }

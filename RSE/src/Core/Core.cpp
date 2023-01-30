@@ -5,7 +5,7 @@ namespace Advres::RSE
 	SDL_Window* RSECore::sdlWindow = nullptr;
 	SDL_Renderer* RSECore::sdlRenderer = nullptr;
 	SDL_Event RSECore::sdlEvent;
-	SDL_GLContext RSECore::GLContext;
+	SDL_GLContext RSECore::glContext;
 	std::vector<BoxCollider2D*> RSECore::colliders;
 	int RSECore::m_ScreenWidth = 0;
 	int RSECore::m_ScreenHeight = 0;
@@ -14,6 +14,7 @@ namespace Advres::RSE
 	std::chrono::high_resolution_clock::time_point RSECore::m_StartTp;
 	bool RSECore::disableCamera = false;
 	std::vector<Rect> RSECore::m_DebugRects;
+	static std::vector<std::pair<Vector2, Vector2>> m_DebugLines;
 	const Camera2DComponent* CameraModule::m_MainCamera = nullptr;
 
 	RSECore::RSECore()
@@ -29,7 +30,7 @@ namespace Advres::RSE
 		SDL_DestroyRenderer(sdlRenderer);
 		SDL_Quit();
 
-		std::cout << "RSE Disposed." << std::endl;
+		fmt::println("RSE Disposed.");
 	}
 
 	RSEStatus RSECore::Init(const char* windowTitle, int width, int height, 
@@ -81,14 +82,16 @@ namespace Advres::RSE
 			
 			if (sdlWindow)
 			{
-				GLContext = SDL_GL_CreateContext(sdlWindow);
-				SDL_GL_MakeCurrent(sdlWindow, GLContext);
-				glewInit();
-				printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
-				printf("SDL Window created\nCreated OpenGL context from SDL_Window\nGLEW Initialized\n");
+				glContext = SDL_GL_CreateContext(sdlWindow);
+				SDL_GL_MakeCurrent(sdlWindow, glContext);
+				//glewInit();
+				//auto glVersion = glGetString(GL_VERSION);
+				//fmt::println("OpenGL Version: {}", glVersion);
+				fmt::println("SDL Window created\nSuccessfully created OpenGL context from SDL_Window");
+				fmt::println("GLEW Initialized");
 				sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
 				
-				if (sdlRenderer) printf("SDL Renderer initialized\n");
+				if (sdlRenderer) fmt::println("SDL Renderer initialized");
 				else return RSEStatus::RSE_SDL_RENDERER_INIT_FAILURE;
 			}
 			else return RSEStatus::RSE_SDL_WINDOW_INIT_FAILURE;
@@ -97,7 +100,7 @@ namespace Advres::RSE
 
 		// Set window title
 		// WIN32 EXCL
-		if (m_WindowTitle) SetConsoleTitle(m_WindowTitle);
+		//if (m_WindowTitle) SetConsoleTitle(m_WindowTitle);
 
 		// Disable C++'s stream synchronisation with standard C streams
 		// to increase IO speed (presumably)
@@ -160,10 +163,10 @@ namespace Advres::RSE
 			m_Tp2 = std::chrono::system_clock::now();
 			std::chrono::duration<float> elapsedTime = m_Tp2 - m_Tp1;
 			m_Tp1 = m_Tp2;
-			float deltaTime = elapsedTime.count();
+			float delta_time = elapsedTime.count();
 
 			// Limit frame rate
-			if (m_FrameDelay > deltaTime && m_TargetFps > 0) SDL_Delay(m_FrameDelay - (unsigned int) deltaTime);
+			if (m_FrameDelay > delta_time && m_TargetFps > 0) SDL_Delay(m_FrameDelay - (unsigned int) delta_time);
 
 			// Handle events
 			EventHandler();
@@ -172,12 +175,12 @@ namespace Advres::RSE
 			SDL_RenderClear(sdlRenderer);
 
 			// Call Render
-			//(this->m_RenderMethod)(deltaTime);
-			Render(deltaTime);
+			//(this->m_RenderMethod)(delta_time);
+			Render(delta_time);
 
 			// doesnt matter
-			entityManager->Render(deltaTime);
-			//UIManager->Render(deltaTime);
+			entityManager->Render(delta_time);
+			//UIManager->Render(delta_time);
 #ifdef _DEBUG
 			for (const auto& r : m_DebugRects)
 			{
@@ -186,21 +189,27 @@ namespace Advres::RSE
 				SDL_RenderDrawRect(sdlRenderer, &sr);
 			}
 			if (!m_DebugRects.empty()) m_DebugRects.clear();
+			for (const auto& l : m_DebugLines)
+			{
+				SDL_SetRenderDrawColor(sdlRenderer, 161, 52, 235, 0);
+				SDL_RenderDrawLine(sdlRenderer, l.first.x, l.first.y, l.second.x, l.second.y);
+			}
+			if (!m_DebugLines.empty()) m_DebugLines.clear();
 #endif
 			SDL_SetRenderDrawColor(sdlRenderer, 100, 100, 100, 255);
 			SDL_RenderPresent(sdlRenderer);
 			
 			// Update scenes
-			entityManager->Update(deltaTime);
+			entityManager->Update(delta_time);
 
 			// Call the Update function
-			//(this->m_UpdateMethod)(deltaTime);
-			Update(deltaTime);
+			//(this->m_UpdateMethod)(delta_time);
+			Update(delta_time);
 			
 			m_FrameCount++;
 
 			// Calculate the framerate
-			m_Fps = (int)(1.0f / deltaTime);
+			m_Fps = (int)(1.0f / delta_time);
 		}
 	}
 

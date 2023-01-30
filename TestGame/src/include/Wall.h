@@ -10,7 +10,7 @@ class Wall : public Behaviour
 {
 	void BoxCollider2D_OnEnter(const ComponentCollideResult2D result) override
 	{
-		std::cout << "Entered!" << std::endl;
+		fmt::println("Entered!");
 	}
 };
 

@@ -1,0 +1,41 @@
+# CMake generation dependency list for this directory.
+D:/Program Files/CMake/share/cmake-3.24/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CMakeConfigurableFile.in
+D:/Program Files/CMake/share/cmake-3.24/Modules/CMakeDependentOption.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CMakeParseArguments.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CMakePushCheckState.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckCCompilerFlag.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckCSourceRuns.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckCXXCompilerFlag.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckCXXSourceCompiles.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckIncludeFile.c.in
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckIncludeFile.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckIncludeFiles.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckLanguage.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckLibraryExists.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckStructHasMember.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/CheckSymbolExists.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/FindGit.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/FindPackageMessage.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/FindPkgConfig.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/GNUInstallDirs.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/Internal/CheckCompilerFlag.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/Internal/CheckFlagCommonConfig.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake
+D:/Program Files/CMake/share/cmake-3.24/Modules/Internal/CheckSourceRuns.cmake
+D:/Users/Nedd/source/repos/NeddX/RSE/CMakeFiles/cmake.verify_globs
+D:/Users/Nedd/source/repos/NeddX/RSE/SDL/SDL_config.h.intermediate
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/CMakeLists.txt
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/SDL2.spec.in
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/cmake/CheckCPUArchitecture.cmake
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/cmake/macros.cmake
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/cmake/sdlchecks.cmake
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/cmake/sdlfind.cmake
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/cmake/sdlplatform.cmake
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/cmake_uninstall.cmake.in
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/include/SDL_config.h.cmake
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/include/SDL_revision.h.cmake
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/sdl2-config.in
+D:/Users/Nedd/source/repos/NeddX/RSE/external/lib/SDL/sdl2.pc.in

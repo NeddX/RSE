@@ -1,5 +1,4 @@
 #include <iostream>
-#include <format>
 #include <memory>
 #include <RSE.h>
 #include <fstream>
@@ -64,7 +63,7 @@ public:
 		Input::AddAction<AxisBind>("moveUp",	  { Key::S, Key::W });
 		Input::AddAction<AxisBind>("moveLeft",    { Key::D, Key::A });
 		Input::AddAction<AxisBind>("changeLayer", { Key::ARROW_UP,Key::ARROW_DOWN });
-		Input::AddAction<KeyBind>("tilePicker",   { {Key::TAB} });
+		Input::AddAction<KeyBind>("tile_picker",   { {Key::TAB} });
 		Input::AddAction<KeyBind>("toggleGrid",   { {Key::G} });
 
 		textureResources["dunTileset"] = Resources::Load<Texture2D>("Base.rse/Environment/Levels/tileset2.png");
@@ -89,9 +88,9 @@ public:
 			tilemap->SetGroup(Groups::World);
 		}
 
-		Entity* tilePicker = AddEntity();
-		tilePicker->tag = "tilePicker";
-		//tilePicker->SetGroup(Groups::World);
+		Entity* tile_picker = AddEntity();
+		tile_picker->tag = "tile_picker";
+		//tile_picker->SetGroup(Groups::World);
 		player = AddEntity();
 		player->SetGroup(Groups::Player);
 		camObj = AddEntity();
@@ -106,9 +105,9 @@ public:
 		fsp->SetRenderRect({ 0, 80, 16, 16 }, { 0, 0, 32, 32 });
 		furnace->SetGroup(Groups::World);
 
-		auto trans = tilePicker->AddComponent<TransformComponent>(Transform());
-		auto sp = tilePicker->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
-		tilePicker->render = false;
+		auto trans = tile_picker->AddComponent<TransformComponent>(Transform());
+		auto sp = tile_picker->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
+		tile_picker->render = false;
 		trans->scale = { 2, 2 };
 		trans->position = Vector2(WIDTH / 2 - (textureResources["dunTileset"]->GetWidth() * trans->scale.x / 2), HEIGHT / 2 - (textureResources["dunTileset"]->GetHeight() * trans->scale.y / 2));
 		Vector2 vec;
@@ -118,7 +117,7 @@ public:
 		trans->position.y = (int) trans->position.y - vec.y;
 
 		player->tag = "player";
-		auto ptrans = player->AddComponent<TransformComponent>(Transform(Vector2(600, 350)));
+		auto p_trans = player->AddComponent<TransformComponent>(Transform(Vector2(600, 350)));
 		auto ps = player->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
 		ps->SetRenderRect({ 368, 112, 16, 16 }, { 0, 0, 32, 32 });
 		auto sheetanim = player->AddComponent<SpriteSheetAnimation>(0, 5, 200, AnimPlaybackMode::PingPong);
@@ -133,17 +132,17 @@ public:
 		controller = player->AddComponent<PlayerController>();
 		controller->camera = camera;
 		controller->tilemap = tmap;
-		controller->tileset = tilePicker;
+		controller->tileset = tile_picker;
 		controller->gridSize = tmap->GetGridSize().x * trans->scale.x;
 		controller->textureResources = &textureResources;
 
 		// Collider
-		auto playerCollider = player->AddComponent<BoxCollider2D>("player", Transform(), Vector2(32, 32));
-		playerCollider->trigger = true;
-		playerCollider->SetBehaviourObject(controller);
-		playerCollider->OnCollide = &Behaviour::BoxCollider2D_OnCollide;
-		playerCollider->OnEnter =	&Behaviour::BoxCollider2D_OnEnter;
-		playerCollider->OnExit	=	&Behaviour::BoxCollider2D_OnExit;
+		auto player_collider = player->AddComponent<BoxCollider2D>("player", Transform(), Vector2(32, 32));
+		player_collider->trigger = true;
+		player_collider->SetBehaviourObject(controller);
+		player_collider->OnCollide = &Behaviour::BoxCollider2D_OnCollide;
+		player_collider->OnEnter =	&Behaviour::BoxCollider2D_OnEnter;
+		player_collider->OnExit	=	&Behaviour::BoxCollider2D_OnExit;
 
 
 
@@ -161,16 +160,16 @@ public:
 		std::string fmt = fmt::format("FPS: {} Frames: {} DeltaTime: {}", GetFrameRate(), GetFrameCount(), deltaTime);
 		SetWindowTitle(fmt::format("FPS: {} Frames: {} Delta: {}", GetFrameRate(), GetFrameCount(), deltaTime).c_str());
 
-		static TransformComponent* camTrans = camObj->GetComponent<TransformComponent>();
+		static TransformComponent* cam_trans = camObj->GetComponent<TransformComponent>();
 		static Camera2DComponent* camera = camObj->GetComponent<Camera2DComponent>();
-		static TransformComponent* playerTrans = player->GetComponent<TransformComponent>();
-		static float camSpeed = 4.0f;
-		camTrans->position = Vector2::Lerp(camTrans->position, playerTrans->position, deltaTime * camSpeed);
+		static TransformComponent* player_trans = player->GetComponent<TransformComponent>();
+		static float cam_speed = 4.0f;
+		cam_trans->position = Vector2::Lerp(cam_trans->position, player_trans->position, deltaTime * cam_speed);
 		if (Input::IsKeyDown(Key::E))
 		{
-			std::cout << "Serialization started." << std::endl;
+			fmt::println("Serialization started.");
 			Serializer::SerializeScene("actormgr.rym", entityManager.get());
-			std::cout << "Serialization ended." << std::endl;
+			fmt::println("Serialization ended.");
 		}
 		//static bool didSerialize = false;
 		//if (Input::IsActionActive("Serialize"))
@@ -202,10 +201,10 @@ int main(int argc, char* argv[])
 	Test* test = new Test();
 	try
 	{
-		RSEStatus statusCode = test->Init("RSE - Framework", WIDTH, HEIGHT, FPS);
+		RSEStatus statusCode = test->Init("RSE - Framework", WIDTH, HEIGHT, FPS, 400, 400);
 		if (statusCode != RSEStatus::RSE_OK)
 		{
-			std::cout << "ERROR: Something went wrong! Status Code: " << (int) statusCode << std::endl;
+			fmt::println("ERROR: Something went wrong! Status Code: {}", (int) statusCode);
 		}
 		delete test;
 	}
@@ -214,7 +213,7 @@ int main(int argc, char* argv[])
 		// WIN32 EXCL
 		//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		//SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
-		std::cout << ex.Message() << std::endl;
+		fmt::println("{}", ex.Message());
 		return ex.ErrorCode();
 		//etConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	}

@@ -39,7 +39,7 @@ namespace Advres::RSE
 					});
 				if (found != m_TileColliders.end())
 				{
-					std::cout << "duplicate!\n";
+					fmt::println("Duplicate!");
 					continue;
 				}
 				m_TileColliders.emplace_back((int) t.first.x, (int) t.first.y, (int) m_TileSize.x, (int) m_TileSize.y);
@@ -52,7 +52,17 @@ namespace Advres::RSE
 				for (const auto& c : RSECore::colliders)
 				{
 					SDL_Rect r = tc.SDL();
-					if (Collision::AABB(&r, &c->colliderRect))
+					Vector2& parent_velocity = c->parent->GetComponent<TransformComponent>()->velocity;
+					Vector2 origin = { c->colliderRect.x, c->colliderRect.y };
+					Vector2 cn_point;
+					Vector2 cn_normal;
+					float cn_fraction = 0.0f;
+					RSECore::DrawDebugLine(std::make_pair(origin, origin * deltaTime));
+					/*if (Collision::RayVsRect(origin, parent_velocity * deltaTime, tc.SDL(), cn_point, cn_normal, cn_fraction))
+					{
+						fmt::println("hit!");
+					}*/
+					/*if (Collision::AABB(&r, &c->colliderRect))
 					{
 						auto t = c->parent->GetComponent<TransformComponent>();
 						Vector2& pos = t->position;
@@ -88,7 +98,7 @@ namespace Advres::RSE
 								//t->velocity.y = -0.01f;
 							}
 						}
-					}
+					}*/
 				}
 			}
 		}

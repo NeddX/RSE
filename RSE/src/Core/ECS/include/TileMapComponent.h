@@ -51,9 +51,9 @@ namespace Advres::RSE
 		}
 		size_t GetTotalSize()
 		{
-			size_t totalSize = m_Tiles.size();
-			for (const auto& e : m_Tiles) totalSize += e.second.size();
-			return totalSize;
+			size_t total_size = m_Tiles.size();
+			for (const auto& e : m_Tiles) total_size += e.second.size();
+			return total_size;
 		}
 		void RemoveTile(Vector2 worldPos, int layer = 0)
 		{
@@ -71,14 +71,14 @@ namespace Advres::RSE
 			Serializer::Serialize(m_TileSize, out);
 			out << YAML::Key << "m_Tiles" << YAML::Value;
 			out << YAML::BeginMap;
-			for (const auto& [outerKey, innerMap] : m_Tiles) 
+			for (const auto& [outer_key, inner_map] : m_Tiles) 
 			{
-				out << YAML::Key << outerKey << YAML::Value;
+				out << YAML::Key << outer_key << YAML::Value;
 				out << YAML::BeginSeq;
-				for (const auto& [innerKey, innerValue] : innerMap) 
+				for (const auto& [inner_key, inner_value] : inner_map) 
 				{
-					Serializer::Serialize(innerKey, out);
-					Serializer::Serialize(innerValue, out);
+					Serializer::Serialize(inner_key, out);
+					Serializer::Serialize(inner_value, out);
 				}
 				out << YAML::EndSeq;
 			}
@@ -101,9 +101,9 @@ namespace Advres::RSE
 			{
 				for (const auto& t : value)
 				{
-					SDL_Rect srcRect =  { (int) t.second.x,(int) t.second.y, (int) m_GridSize.x, (int) m_GridSize.y };
-					SDL_Rect destRect = { (int) t.first.x, (int) t.first.y,  (int) m_TileSize.x, (int) m_TileSize.y };
-					if (RSECore::IsInView(destRect)) RSECore::DrawTexture(m_Texture, &srcRect, &destRect);
+					SDL_Rect src_rect =  { (int) t.second.x,(int) t.second.y, (int) m_GridSize.x, (int) m_GridSize.y };
+					SDL_Rect dest_rect = { (int) t.first.x, (int) t.first.y,  (int) m_TileSize.x, (int) m_TileSize.y };
+					if (RSECore::IsInView(dest_rect)) RSECore::DrawTexture(m_Texture, &src_rect, &dest_rect);
 				}
 			}
 		}

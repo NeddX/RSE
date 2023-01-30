@@ -10,12 +10,6 @@
     <ClCompile Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\ResourceHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\RException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\ECS\ECS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,9 +49,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\include\RException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\include\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Users\Nedd\source\repos\NeddX\RSE\RSE\src\Core\ECS\include\ECS.h">

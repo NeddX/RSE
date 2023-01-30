@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Users\Nedd\source\repos\NeddX\RSE\CMakeFiles\2fff12e7089e4b36773a462cd0485f08\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{74D2979B-9648-343C-8EBC-FAF8CD198049}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

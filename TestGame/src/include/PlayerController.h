@@ -99,13 +99,13 @@ public:
 		{
 			tileLayer += axis;
 			sizeTp = now;
-			std::cout << "Layer: " << tileLayer << std::endl;
+			fmt::println("Layer: {}", tileLayer);
 		}
 		if (Input::mouse.wheel.y != 0 && elapsed >= 30)
 		{
-			Vector2 newScale = camera->GetScale() + (0.05f * Input::mouse.wheel.y);
-			newScale = Vector2::Clamp(newScale, { 0.3f, 0.3f }, { 1.3f, 1.3f });
-			camera->SetScale(newScale);
+			Vector2 new_scale = camera->GetScale() + (0.05f * Input::mouse.wheel.y);
+			new_scale = Vector2::Clamp(new_scale, { 0.3f, 0.3f }, { 1.3f, 1.3f });
+			camera->SetScale(new_scale);
 		}
 		if (Input::mouse.button == MouseBtn::LMB && elapsed >= 30)
 		{
@@ -130,9 +130,9 @@ public:
 				else
 				{
 					Vector2 mouse = RSECore::GetMousePosition();
-					Vector2 pRelative2T = mouse - tileset->GetComponent<TransformComponent>()->position;
-					Vector2 snapped = pRelative2T % gridSize;
-					snapped = pRelative2T - snapped;
+					Vector2 pos_relative_to_trans = mouse - tileset->GetComponent<TransformComponent>()->position;
+					Vector2 snapped = pos_relative_to_trans % gridSize;
+					snapped = pos_relative_to_trans - snapped;
 					currentTileID = snapped / 2;
 				}
 			}
@@ -203,9 +203,9 @@ public:
 		{
 			auto trans = tileset->GetComponent<TransformComponent>();
 			auto sp = parent->GetComponent<Sprite>()->texture;
-			SDL_Rect srcR = { 0, 0, sp->GetWidth(), sp->GetHeight() };
-			SDL_Rect destR = { trans->position.x, trans->position.y, sp->GetWidth() * tileset->GetComponent<TransformComponent>()->scale.x, sp->GetHeight() * tileset->GetComponent<TransformComponent>()->scale.y };
-			RSECore::DrawTextureOnScreen(sp, &srcR, &destR);
+			SDL_Rect src_r = { 0, 0, sp->GetWidth(), sp->GetHeight() };
+			SDL_Rect dest_r = { trans->position.x, trans->position.y, sp->GetWidth() * tileset->GetComponent<TransformComponent>()->scale.x, sp->GetHeight() * tileset->GetComponent<TransformComponent>()->scale.y };
+			RSECore::DrawTextureOnScreen(sp, &src_r, &dest_r);
 			int width = tileset->GetComponent<Sprite>()->texture->GetWidth() * tileset->GetComponent<TransformComponent>()->scale.x;
 			int height = tileset->GetComponent<Sprite>()->texture->GetHeight() * tileset->GetComponent<TransformComponent>()->scale.y;
 			int columns = width / gridSize;
@@ -254,7 +254,10 @@ public:
 			Vector2 mouse = CameraModule::GetMousePositionInWorld();
 			RSECore::DrawLine(rayOrigin, mouse, 255, 0);
 			BoxCollider2D* collider = this->parent->GetComponent<BoxCollider2D>();
-			if (Collision::RayVsRect(rayOrigin, mouse, collider->colliderRect))
+			Vector2 contact_point;
+			Vector2 contact_normal;
+			float fraction;
+			if (Collision::RayVsRect(rayOrigin, mouse, collider->colliderRect, contact_point, contact_normal, fraction))
 			{
 				collider->colour = { 255, 0, 0, 255 };
 			}

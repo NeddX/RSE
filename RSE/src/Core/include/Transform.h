@@ -60,7 +60,7 @@ namespace Advres::RSE
 			std::is_same<T, float>::value, std::string>::type
 			ToString() const
 		{
-			return std::format("pos: {} sale: {} rot: {}", position, scale, std::to_string((int) rotation));
+			return fmt::format("pos: {} sale: {} rot: {}", position, scale, std::to_string((int) rotation));
 		}
 	};
 }

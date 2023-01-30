@@ -15,6 +15,10 @@ namespace Advres::RSE
 		{
 
 		}
+		Rect(float x, float y, int w, int h) : x((int)x), y((int)y), w((int)w), h((int)h)
+		{
+
+		}
 		Rect(SDL_Rect rect) : x(rect.x), y(rect.y), w(rect.w), h(rect.h)
 		{
 

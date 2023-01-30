@@ -164,38 +164,38 @@ namespace Advres::RSE
 		}*/
 
 		// Do not initialize deserialized objects!
-		YAML::Node componentsNode = node["Components"];
-		for (const auto& c : componentsNode)
+		YAML::Node components_node = node["Components"];
+		for (const auto& c : components_node)
 		{
 			for (const auto& pair : c)
 			{
-				auto& currentNode = pair.second;
-				std::string	typeName = pair.first.as<std::string>();
-				if (typeName == "TransformComponent")
+				auto& current_node = pair.second;
+				std::string	type_name = pair.first.as<std::string>();
+				if (type_name == "TransformComponent")
 				{
 					TransformComponent* trans = new TransformComponent();
 					trans->parent = parent;
-					Deserialize(currentNode["position"], trans->position);
-					Deserialize(currentNode["scale"], trans->scale);
-					trans->rotation = currentNode["rotation"].as<float>();
-					Deserialize(currentNode["velocity"], trans->velocity);
+					Deserialize(current_node["position"], trans->position);
+					Deserialize(current_node["scale"], trans->scale);
+					trans->rotation = current_node["rotation"].as<float>();
+					Deserialize(current_node["velocity"], trans->velocity);
 					parent->AddComponent(trans, false);
 				}
-				else if (typeName == "SpriteComponent")
+				else if (type_name == "SpriteComponent")
 				{
 					Sprite* sprite = new Sprite(nullptr, Transform());
 					sprite->parent = parent;
 					Deserialize(c, sprite);
 					parent->AddComponent(sprite, false);
 				}
-				else if (typeName == "BoxCollider2D")
+				else if (type_name == "BoxCollider2D")
 				{
 					BoxCollider2D* collider = new BoxCollider2D("", Transform());
 					collider->parent = parent;
 					Deserialize(c, collider);
 					parent->AddComponent(collider, false);
 				}
-				else if (typeName == "TilemapComponent")
+				else if (type_name == "TilemapComponent")
 				{
 					TilemapComponent* tilemap = new TilemapComponent(nullptr, Vector2(), Vector2());
 					tilemap->parent = parent;
@@ -219,8 +219,8 @@ namespace Advres::RSE
 			char* decStr = xstd::File::DecodeBHS8ToStr(str);
 			YAML::Node node = YAML::Load(decStr);
 
-			YAML::Node actorsNode = node["Actors"];
-			for (const auto& e : actorsNode)
+			YAML::Node actors_node = node["Actors"];
+			for (const auto& e : actors_node)
 			{
 				std::shared_ptr<Entity> parent = actorMgr->AddEntity();
 				Deserialize(e, parent);
@@ -236,8 +236,8 @@ namespace Advres::RSE
 			std::stringstream ss(out.c_str());
 			YAML::Node node = YAML::Load(ss);
 
-			YAML::Node actorsNode = node["Actors"];
-			for (const auto& e : actorsNode)
+			YAML::Node actors_node = node["Actors"];
+			for (const auto& e : actors_node)
 			{
 				Entity* parent = actorMgr->AddEntity();
 				Deserialize(e, parent);

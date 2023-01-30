@@ -1,20 +1,11 @@
 ﻿#ifndef CORE_H
 #define CORE_H
 
-// STL
 #include <sdafx.h>
-#include <fcntl.h>
-#include <corecrt_io.h>
-#include <SDL.h>
-#include <GL/glew.h>
-#include <GL/glu.h>
-#include <SDL_opengl.h>
-#include <SDL_image.h>
 
 #include "RException.h"
 #include "Vector2.h"
 #include "Texture2D.h"
-#include "Map.h"
 #include "Input.h"
 #include "Transform.h"
 #include "Geometry.h"
@@ -87,12 +78,13 @@ namespace Advres::RSE
 		static int m_ScreenWidth;
 		static int m_ScreenHeight; 
 		static std::vector<Rect> m_DebugRects;
+		static std::vector<std::pair<Vector2, Vector2>> m_DebugLines;
 
 	public:
 		static SDL_Window* sdlWindow;
 		static SDL_Renderer* sdlRenderer;
 		static SDL_Event sdlEvent;
-		static SDL_GLContext GLContext;
+		static SDL_GLContext glContext;
 		static std::vector<BoxCollider2D*> colliders;
 		static std::shared_ptr<EntityManager> entityManager;
 		static std::unique_ptr<EntityManager> UIManager;
@@ -129,7 +121,11 @@ namespace Advres::RSE
 		}
 		static inline void DrawDebugRect(Rect rect)
 		{
-			m_DebugRects.push_back(rect);
+			m_DebugRects.push_back(CameraModule::GetRectRelativeToCamera(rect.SDL()));
+		}
+		static inline void DrawDebugLine(std::pair<Vector2, Vector2> line)
+		{
+			m_DebugLines.push_back(line);
 		}
 		inline float GetDeltaTime()
 		{
@@ -139,9 +135,9 @@ namespace Advres::RSE
 			return elapsedTime.count();
 		}
 		static bool IsInView(Rect rect)	noexcept;
-		constexpr	static	inline	int							GetScreenWidth()										noexcept	{ return m_ScreenWidth; }
-		constexpr	static	inline	int							GetScreenHeight()										noexcept	{ return m_ScreenHeight; }
-		constexpr	static	inline	uint64_t					GetMillisecondsPassed()									noexcept	{ return (uint64_t) std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - m_StartTp).count(); }
+					static	inline	int							GetScreenWidth()										noexcept	{ return m_ScreenWidth; }
+					static	inline	int							GetScreenHeight()										noexcept	{ return m_ScreenHeight; }
+					static	inline	uint64_t					GetMillisecondsPassed()									noexcept	{ return (uint64_t) std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - m_StartTp).count(); }
 					static	inline	Entity*						GetEntityByTag(const std::string& tag)					noexcept	{ return entityManager->GetEntityByTag(tag); }
 					static	inline	Entity*						AddEntity()												noexcept	{ return entityManager->AddEntity(); }
 					static	inline	void						DisposeEntity(Entity* parent)							noexcept	{ entityManager->DisposeEntity(parent); }
@@ -156,15 +152,15 @@ namespace Advres::RSE
 		static inline void DrawTexture(const Texture2D* texture, SDL_Rect* const srcR, SDL_Rect* const destR, int opacity = 255,
 			float angle = 0.0f, SDL_Point* centrePoint = nullptr, SDL_RendererFlip flip = SDL_FLIP_NONE)
 		{
-			SDL_Rect* destRX = (SDL_Rect*) destR;
+			SDL_Rect* dest_rx = (SDL_Rect*) destR;
 			if (camera->Active() && !disableCamera)
 			{
 				// TODO: Improve
-				*destRX = camera->GetRectRelativeToCamera(*destRX);
+				*dest_rx = camera->GetRectRelativeToCamera(*dest_rx);
 			}
 			SDL_SetTextureAlphaMod(texture->m_SdlTex, opacity);
 			SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_BLEND);
-			SDL_RenderCopyEx(sdlRenderer, texture->m_SdlTex, srcR, destRX, angle, centrePoint, flip);
+			SDL_RenderCopyEx(sdlRenderer, texture->m_SdlTex, srcR, dest_rx, angle, centrePoint, flip);
 			SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_NONE);
 		}
 		static inline void DrawTextureOnScreen(const Texture2D* texture, SDL_Rect* const srcR, SDL_Rect* const destR, int opacity = 255,
@@ -178,14 +174,14 @@ namespace Advres::RSE
 		}
 		static inline void DrawRect(const SDL_Rect rect, uint8_t r = 0, uint8_t g = 255, uint8_t b = 0, uint8_t a = 255)
 		{
-			SDL_Rect destCp = rect;
+			SDL_Rect dest_cp = rect;
 			SDL_SetRenderDrawColor(sdlRenderer, r, g, b, a);
 			if (camera->Active() && !disableCamera)
 			{
 				// TODO: Improve
-				destCp = camera->GetRectRelativeToCamera(destCp);
+				dest_cp = camera->GetRectRelativeToCamera(dest_cp);
 			}
-			SDL_RenderDrawRect(sdlRenderer, &destCp);
+			SDL_RenderDrawRect(sdlRenderer, &dest_cp);
 		}
 		static inline void DrawLine(Vector2 src, Vector2 dest, uint8_t r = 0, uint8_t g = 255, uint8_t b = 0, uint8_t a = 255)
 		{
