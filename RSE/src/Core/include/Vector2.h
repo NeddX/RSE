@@ -7,17 +7,301 @@
 
 namespace Advres::RSE
 {
-	class Vector2
+	class Vector2f
 	{
 	public:
 		float x, y;
 
 	public:
-		Vector2(float x = 0, float y = 0) : x(x), y(y)
+		Vector2f(float x = 0, float y = 0) : x(x), y(y)
 		{
 
 		}
-		Vector2(int x, int y) : x((float) x), y((float) y)
+		Vector2f(int x, int y) : x((float) x), y((float) y)
+		{
+
+		}
+
+	public:
+		inline Vector2f operator+(const Vector2f& other)
+		{
+			Vector2f vec;
+			vec.x = x + other.x;
+			vec.y = y + other.y;
+			return vec;
+		}
+		inline Vector2f operator+(const int num)
+		{
+			Vector2f vec;
+			vec.x = x + num;
+			vec.y = y + num;
+			return vec;
+		}
+		inline Vector2f operator+(const float num)
+		{
+			Vector2f vec;
+			vec.x = x + num;
+			vec.y = y + num;
+			return vec;
+		}
+		inline Vector2f operator-(const Vector2f& other)
+		{
+			Vector2f vec;
+			vec.x = x - other.x;
+			vec.y = y - other.y;
+			return vec;
+		}
+		inline Vector2f operator-(const int num)
+		{
+			Vector2f vec;
+			vec.x = x - num;
+			vec.y = y - num;
+			return vec;
+		}
+		inline Vector2f operator-(const float num)
+		{
+			Vector2f vec;
+			vec.x = x - num;
+			vec.y = y - num;
+			return vec;
+		}
+		inline Vector2f operator*(const Vector2f& other)
+		{
+			Vector2f vec;
+			vec.x = x * other.x;
+			vec.y = y * other.y;
+			return vec;
+		}
+		inline Vector2f operator*(const int num)
+		{
+			Vector2f vec;
+			vec.x = x * num;
+			vec.y = y * num;
+			return vec;
+		}
+		inline Vector2f operator*(const float num)
+		{
+			Vector2f vec;
+			vec.x = x * num;
+			vec.y = y * num;
+			return vec;
+		}
+		inline Vector2f operator/(const Vector2f& other)
+		{
+			Vector2f vec;
+			vec.x = x / other.x;
+			vec.y = y / other.y;
+			return vec;
+		}
+		inline Vector2f operator/(const int num)
+		{
+			Vector2f vec;
+			vec.x = x / num;
+			vec.y = y / num;
+			return vec;
+		}
+		inline Vector2f operator/(const float num)
+		{
+			Vector2f vec;
+			vec.x = x / num;
+			vec.y = y / num;
+			return vec;
+		}
+		inline Vector2f operator%(const Vector2f& other)
+		{
+			Vector2f vec;
+			if (x != 0 && other.x != 0) vec.x = (float) ((int)x % (int) other.x);
+			else vec.x = 0;
+			if (y != 0 && other.y != 0) vec.y = (float) ((int)y % (int) other.y);
+			else vec.y = 0;
+			return vec;
+		}
+		inline Vector2f operator%(const int num)
+		{
+			if (num == 0) return Vector2f();
+			Vector2f vec;
+			if (x != 0) vec.x = (float) ((int) x % num);
+			else vec.x = 0;
+			if (y != 0) vec.y = (float) ((int) y % num);
+			else vec.y = 0;
+			return vec;
+		}
+		inline Vector2f& operator++()
+		{
+			x++; y++;
+			return *this;
+		}
+		inline Vector2f& operator++(int)
+		{
+			x++; y++;
+			return *this;
+		}
+		inline Vector2f& operator--()
+		{
+			x--; y--;
+			return *this;
+		}
+		inline Vector2f& operator--(int)
+		{
+			x--; y--;
+			return *this;
+		}
+		inline Vector2f& operator+=(const Vector2f& other)
+		{
+			x += other.x;
+			y += other.y;
+			return *this;
+		}
+		inline Vector2f& operator+=(const int num)
+		{
+			x += num;
+			y += num;
+			return *this;
+		}
+		inline Vector2f& operator+=(const float num)
+		{
+			x += num;
+			y += num;
+			return *this;
+		}
+		inline Vector2f& operator-=(const Vector2f& other)
+		{
+			x -= other.x;
+			y -= other.y;
+			return *this;
+		}
+		inline Vector2f& operator*=(const Vector2f& other)
+		{
+			x *= other.x;
+			y *= other.y;
+			return *this;
+		}
+		inline Vector2f& operator-=(const int num)
+		{
+			x -= num;
+			y -= num;
+			return *this;
+		}
+		inline Vector2f& operator-=(const float num)
+		{
+			x -= num;
+			y -= num;
+			return *this;
+		}
+		inline Vector2f& operator/=(const int num)
+		{
+			x /= num;
+			y /= num;
+			return *this;
+		}
+		inline Vector2f& operator/=(const float num)
+		{
+			x /= num;
+			y /= num;
+			return *this;
+		}
+		inline Vector2f& operator/=(const Vector2f& other)
+		{
+			x /= other.x;
+			y /= other.y;
+			return *this;
+		}
+		inline bool operator==(int num) const
+		{
+			return x == num && y == num;
+		}
+		inline bool operator==(float num) const
+		{
+			return x == num && y == num;
+		}
+		inline bool operator==(const Vector2f& other) const
+		{
+			return x == other.x && y == other.y;
+		}
+		friend std::ostream& operator<<(std::ostream& stream, const Vector2f& vec)
+		{
+			stream << "(" << vec.x << ", " << vec.y << ")";
+			return stream;
+		}
+		inline std::string ToString() const
+		{
+			return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
+		}
+		inline bool Equals(const Vector2f& vec) const
+		{
+			return vec.x == x && vec.y == y;
+		}
+		inline void Zero()
+		{
+			this->x = 0;
+			this->y = 0;
+		}
+
+	public:
+		static inline float DistanceTo(const Vector2f& vecA, const Vector2f& vecB)
+		{
+			float dx = Mathf::Abs(vecB.x - vecA.x);
+			float dy = Mathf::Abs(vecB.y - vecA.y);
+			return Mathf::Sqrt(dx * dx + dy * dy);
+		}
+		static inline float DistanceToApprox(const Vector2f& other)
+		{
+			// Calculate using inverse square root which is supposed to be faster?
+			// what the fuck is an inverse square root? i dont know
+		}
+		static inline Vector2f Normalize(const Vector2f& vecA, const Vector2f& vecB = { 0, 0 })
+		{
+			float dist = DistanceTo(vecA, vecB);
+			return Vector2f(vecA.x / dist, vecB.y / dist);
+		}
+		static inline Vector2f Abs(const Vector2f& vec)
+		{
+			Vector2f vecB;
+			vecB.x = Mathf::Abs(vec.x);
+			vecB.y = Mathf::Abs(vec.y);
+			return vecB;
+		}
+		static inline Vector2f Lerp(const Vector2f& vecA, const Vector2f& vecB, float weight)
+		{
+			Vector2f vec;
+			vec.x = vecA.x + (vecB.x - vecA.x) * weight;
+			vec.y = vecA.y + (vecB.y - vecA.y) * weight;
+			return vec;
+		}
+		static inline Vector2f Clamp(const Vector2f& vec, const Vector2f& highEnd)
+		{
+			Vector2f new_vec = { Mathf::Clamp(vec.x, 0.0f, highEnd.x), Mathf::Clamp(vec.y, 0.0f, highEnd.y) };
+			return new_vec;
+		}
+		static inline Vector2f Clamp(const Vector2f& vec, const Vector2f& lowEnd, const Vector2f& highEnd)
+		{
+			Vector2f new_vec = { Mathf::Clamp(vec.x, lowEnd.x, highEnd.x), Mathf::Clamp(vec.y, lowEnd.y, highEnd.y) };
+			return new_vec;
+		}
+		static inline Vector2f Ceil(const Vector2f& vec)
+		{
+			Vector2f new_vec;
+			new_vec.x = Mathf::Ceil(vec.x);
+			new_vec.y = Mathf::Ceil(vec.y);
+			return new_vec;
+		}
+	};
+
+	class Vector2
+	{
+	public:
+		int x, y;
+
+	public:
+		Vector2(int x = 0, int y = 0) : x(x), y(y)
+		{
+
+		}
+		Vector2(float x, float y) : x((int)x), y((int)y)
+		{
+
+		}
+		Vector2(Vector2f vectorf) : x((int)vectorf.x), y((int)vectorf.y)
 		{
 
 		}
@@ -110,9 +394,9 @@ namespace Advres::RSE
 		inline Vector2 operator%(const Vector2& other)
 		{
 			Vector2 vec;
-			if (x != 0 && other.x != 0) vec.x = (float) ((int)x % (int) other.x);
+			if (x != 0 && other.x != 0) vec.x = (float)((int)x % (int)other.x);
 			else vec.x = 0;
-			if (y != 0 && other.y != 0) vec.y = (float) ((int)y % (int) other.y);
+			if (y != 0 && other.y != 0) vec.y = (float)((int)y % (int)other.y);
 			else vec.y = 0;
 			return vec;
 		}
@@ -120,9 +404,9 @@ namespace Advres::RSE
 		{
 			if (num == 0) return Vector2();
 			Vector2 vec;
-			if (x != 0) vec.x = (float) ((int) x % num);
+			if (x != 0) vec.x = (float)((int)x % num);
 			else vec.x = 0;
-			if (y != 0) vec.y = (float) ((int) y % num);
+			if (y != 0) vec.y = (float)((int)y % num);
 			else vec.y = 0;
 			return vec;
 		}
@@ -146,7 +430,7 @@ namespace Advres::RSE
 			x--; y--;
 			return *this;
 		}
-		inline Vector2& operator+=(const Vector2& other)
+		inline Vector2& operator+=(const Vector2f& other)
 		{
 			x += other.x;
 			y += other.y;
@@ -270,7 +554,7 @@ namespace Advres::RSE
 		}
 		static inline Vector2 Clamp(const Vector2& vec, const Vector2& highEnd)
 		{
-			Vector2 new_vec = { Mathf::Clamp(vec.x, 0.0f, highEnd.x), Mathf::Clamp(vec.y, 0.0f, highEnd.y) };
+			Vector2 new_vec = { Mathf::Clamp(vec.x, 0, highEnd.x), Mathf::Clamp(vec.y, 0, highEnd.y) };
 			return new_vec;
 		}
 		static inline Vector2 Clamp(const Vector2& vec, const Vector2& lowEnd, const Vector2& highEnd)
@@ -278,7 +562,7 @@ namespace Advres::RSE
 			Vector2 new_vec = { Mathf::Clamp(vec.x, lowEnd.x, highEnd.x), Mathf::Clamp(vec.y, lowEnd.y, highEnd.y) };
 			return new_vec;
 		}
-		static inline Vector2 Ceil(const Vector2& vec)
+		static inline Vector2 Ceil(const Vector2f& vec)
 		{
 			Vector2 new_vec;
 			new_vec.x = Mathf::Ceil(vec.x);
@@ -291,21 +575,31 @@ namespace Advres::RSE
 namespace std
 {
 	template <>
+	struct hash<Advres::RSE::Vector2f>
+	{
+		// Implement hasing function for Vector2f so that I can use it in STL containers
+		size_t operator()(const Advres::RSE::Vector2f& k) const
+		{
+			return hash<float>()(k.x) ^ hash<float>()(k.y);
+		}
+	};
+
+	template <>
 	struct hash<Advres::RSE::Vector2>
 	{
-		// Implement hasing function for Vector2 so that I can use it in STL containers
+		// Implement hasing function for Vector2f so that I can use it in STL containers
 		size_t operator()(const Advres::RSE::Vector2& k) const
 		{
 			return hash<float>()(k.x) ^ hash<float>()(k.y);
 		}
 	};
-	/*template <> struct formatter<Advres::RSE::Vector2> // C++ 20 thing, we don't need this for now.
+	/*template <> struct formatter<Advres::RSE::Vector2f> // C++ 20 thing, we don't need this for now.
 	{ 
 		template <typename ParseContext>
 		constexpr auto parse(ParseContext& ctx) { return ctx.begin(); }
 
 		template <typename FormatContext>
-		auto format(const Advres::RSE::Vector2& vec, FormatContext& ctx)
+		auto format(const Advres::RSE::Vector2f& vec, FormatContext& ctx)
 		{
 			return format_to(ctx.out(), "({}, {})", vec.x, vec.y);
 		}
@@ -314,6 +608,18 @@ namespace std
 
 namespace fmt
 {
+	template<> struct formatter<Advres::RSE::Vector2f>
+	{
+		template <typename ParseContext>
+		constexpr auto parse(ParseContext& ctx) { return ctx.begin(); }
+
+		template <typename FormatContext>
+		auto format(const Advres::RSE::Vector2f& vec, FormatContext& ctx)
+		{
+			return format_to(ctx.out(), "({}, {})", vec.x, vec.y);
+		}
+	}; 
+
 	template<> struct formatter<Advres::RSE::Vector2>
 	{
 		template <typename ParseContext>

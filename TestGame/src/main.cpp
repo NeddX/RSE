@@ -63,7 +63,7 @@ public:
 		Input::AddAction<AxisBind>("moveUp",	  { Key::S, Key::W });
 		Input::AddAction<AxisBind>("moveLeft",    { Key::D, Key::A });
 		Input::AddAction<AxisBind>("changeLayer", { Key::ARROW_UP,Key::ARROW_DOWN });
-		Input::AddAction<KeyBind>("tile_picker",   { {Key::TAB} });
+		Input::AddAction<KeyBind>("tile_picker",  { {Key::TAB} });
 		Input::AddAction<KeyBind>("toggleGrid",   { {Key::G} });
 
 		textureResources["dunTileset"] = Resources::Load<Texture2D>("Base.rse/Environment/Levels/tileset2.png");
@@ -84,7 +84,7 @@ public:
 		{
 			tilemap = AddEntity();
 			tilemap->tag = "tilemap";
-			tmap = tilemap->AddComponent<TilemapComponent>(textureResources["dunTileset"].get(), Vector2(16, 16), Vector2(32, 32));
+			tmap = tilemap->AddComponent<TilemapComponent>(textureResources["dunTileset"].get(), Vector2f(16, 16), Vector2f(32, 32));
 			tilemap->SetGroup(Groups::World);
 		}
 
@@ -98,7 +98,7 @@ public:
 
 		auto furnace = AddEntity();
 		furnace->tag = "furnace";
-		furnace->AddComponent<TransformComponent>(Transform(Vector2(500, 350)));
+		furnace->AddComponent<TransformComponent>(Transform(Vector2f(500, 350)));
 		auto fsp = furnace->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
 		auto spa = furnace->AddComponent<SpriteSheetAnimation>(0, 7, 50, AnimPlaybackMode::PingPong);
 		spa->Play();
@@ -109,15 +109,15 @@ public:
 		auto sp = tile_picker->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
 		tile_picker->render = false;
 		trans->scale = { 2, 2 };
-		trans->position = Vector2(WIDTH / 2 - (textureResources["dunTileset"]->GetWidth() * trans->scale.x / 2), HEIGHT / 2 - (textureResources["dunTileset"]->GetHeight() * trans->scale.y / 2));
-		Vector2 vec;
+		trans->position = Vector2f(WIDTH / 2 - (textureResources["dunTileset"]->GetWidth() * trans->scale.x / 2), HEIGHT / 2 - (textureResources["dunTileset"]->GetHeight() * trans->scale.y / 2));
+		Vector2f vec;
 		vec.x = (int) trans->position.x % gridSize;
 		vec.y = (int) trans->position.y % gridSize;
 		trans->position.x = (int) trans->position.x - vec.x;
 		trans->position.y = (int) trans->position.y - vec.y;
 
 		player->tag = "player";
-		auto p_trans = player->AddComponent<TransformComponent>(Transform(Vector2(600, 200)));
+		auto p_trans = player->AddComponent<TransformComponent>(Transform(Vector2f(600, 200)));
 		auto ps = player->AddComponent<Sprite>(textureResources["dunTileset"].get(), Transform());
 		ps->SetRenderRect({ 368, 112, 16, 16 }, { 0, 0, 32, 32 });
 		auto sheetanim = player->AddComponent<SpriteSheetAnimation>(0, 5, 200, AnimPlaybackMode::PingPong);
@@ -125,7 +125,7 @@ public:
 
 		// Camera
 		camObj->AddComponent<TransformComponent>(Transform(WIDTH, HEIGHT));
-		camera = camObj->AddComponent<Camera2DComponent>(Transform(Vector2 { -(WIDTH / 2) + 32, -(HEIGHT / 2) + 32 }));
+		camera = camObj->AddComponent<Camera2DComponent>(Transform(Vector2f { -(WIDTH / 2) + 32, -(HEIGHT / 2) + 32 }));
 		camObj->tag = "kamera";
 		
 		// Behaviour code
@@ -137,7 +137,7 @@ public:
 		controller->textureResources = &textureResources;
 
 		// Collider
-		auto player_collider = player->AddComponent<BoxCollider2D>("player", Transform(), Vector2(32, 32));
+		auto player_collider = player->AddComponent<BoxCollider2D>("player", Transform(), Vector2f(32, 32));
 		player_collider->trigger = true;
 		player_collider->SetBehaviourObject(controller);
 		player_collider->OnCollide = &Behaviour::BoxCollider2D_OnCollide;
@@ -145,11 +145,11 @@ public:
 		player_collider->OnExit	=	&Behaviour::BoxCollider2D_OnExit;
 
 		//enemy->tag = "Cultist";
-		//enemy->AddComponent<TransformComponent>(Transform(Vector2(100, 200)));
+		//enemy->AddComponent<TransformComponent>(Transform(Vector2f(100, 200)));
 		//auto es = enemy->AddComponent<Sprite>(textureResources["dunTileset"], Transform());
-		//es->SetRenderRect(Vector2(176, 192), Vector2(32, 32), Vector2(64, 64));
+		//es->SetRenderRect(Vector2f(176, 192), Vector2f(32, 32), Vector2f(64, 64));
 		//EnemyAI* enemyController = enemy->AddComponent<EnemyAI>();
-		//auto enemyCollider = enemy->AddComponent<BoxCollider2D>("enemy", Transform(), Vector2(32, 32));
+		//auto enemyCollider = enemy->AddComponent<BoxCollider2D>("enemy", Transform(), Vector2f(32, 32));
 		//enemyCollider->trigger = true;
 	}
 
@@ -162,7 +162,7 @@ public:
 		static Camera2DComponent* camera = camObj->GetComponent<Camera2DComponent>();
 		static TransformComponent* player_trans = player->GetComponent<TransformComponent>();
 		static float cam_speed = 4.0f;
-		cam_trans->position = Vector2::Lerp(cam_trans->position, player_trans->position, deltaTime * cam_speed);
+		cam_trans->position = Vector2f::Lerp(cam_trans->position, player_trans->position, deltaTime * cam_speed);
 		if (Input::IsKeyDown(Key::E))
 		{
 			fmt::println("Serialization started.");

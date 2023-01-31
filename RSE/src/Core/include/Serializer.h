@@ -19,7 +19,7 @@ namespace Advres::RSE
 	class Serializer
 	{
 	public:
-		static void Serialize(const Vector2& vec, YAML::Emitter& out);
+		static void Serialize(const Vector2f& vec, YAML::Emitter& out);
 		static void Serialize(const Transform& trans, YAML::Emitter& out);
 		static void Serialize(const SDL_Rect& rect, YAML::Emitter& out);
 		static void Serialize(const Entity* parent, YAML::Emitter& out);
@@ -27,7 +27,7 @@ namespace Advres::RSE
 		static void SerializeScene(const char* file, const EntityManager* mgr);
 
 	public:
-		static void Deserialize(const YAML::Node& node, Vector2& vec);
+		static void Deserialize(const YAML::Node& node, Vector2f& vec);
 		static void Deserialize(const YAML::Node& node, Transform& trans);
 		static void Deserialize(const YAML::Node& node, SDL_Rect& rect);
 		static void Deserialize(const YAML::Node& node, Texture2D* texture);

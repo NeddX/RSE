@@ -16,12 +16,12 @@ private:
 	TransformComponent* projTransComp;
 	Sprite* sprite;
 	BoxCollider2D* collider;
-	Vector2 start;
-	Vector2 input;
+	Vector2f start;
+	Vector2f input;
 	int speed = 20;
 	std::chrono::steady_clock::time_point sizeTp;
 	float dist = 0.1;
-	Vector2 prevPlayerPos;
+	Vector2f prevPlayerPos;
 
 public:
 	void Init() override
@@ -32,7 +32,7 @@ public:
 		start = transform->position;
 		//debugRect = RSECore::AddEntity();
 		//debugRect->AddComponent<TransformComponent>();
-		//debugRect->AddComponent<BoxCollider2D>("debug", Transform(), Vector2(32, 32))->trigger = true;
+		//debugRect->AddComponent<BoxCollider2D>("debug", Transform(), Vector2f(32, 32))->trigger = true;
 	} 
 
 	void Update(float deltaTime) override
@@ -43,7 +43,7 @@ public:
 		/*dist = 0.5;
 
 		float distance = playerTransform->position.DistanceTo(transform->position);
-		Vector2 lerped = transform->position.Lerp(playerTransform->position, dist);
+		Vector2f lerped = transform->position.Lerp(playerTransform->position, dist);
 
 		if (distance > 40)
 		{

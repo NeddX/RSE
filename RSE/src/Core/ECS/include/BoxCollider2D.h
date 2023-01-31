@@ -31,7 +31,7 @@ namespace Advres::RSE
 	
 	public:
 		SDL_Rect colliderRect;
-		Vector2 colliderExtent;
+		Vector2f colliderExtent;
 		Transform transform;
 		bool trigger;
 		RGBA colour;
@@ -45,7 +45,7 @@ namespace Advres::RSE
 		BehaviourCallbackMethod OnExit;
 
 	public:
-		BoxCollider2D(const std::string& tag, Transform transform = Transform(), Vector2 colliderExtent = {32, 32});
+		BoxCollider2D(const std::string& tag, Transform transform = Transform(), Vector2f colliderExtent = {32, 32});
 		~BoxCollider2D();
 
 	public:

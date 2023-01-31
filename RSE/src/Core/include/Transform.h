@@ -10,8 +10,8 @@ namespace Advres::RSE
 	class Transform
 	{
 	public:
-		Vector2 position;
-		Vector2 scale;
+		Vector2f position;
+		Vector2f scale;
 		float rotation;
 
 	public:
@@ -21,7 +21,7 @@ namespace Advres::RSE
 			scale = { 1, 1 };
 			rotation = 0;
 		}
-		Transform(Vector2 pos, Vector2 scale = { 1, 1 }, float rotation = 0)
+		Transform(Vector2f pos, Vector2f scale = { 1, 1 }, float rotation = 0)
 		{
 			position = pos;
 			this->scale = scale;

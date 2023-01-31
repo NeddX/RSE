@@ -21,9 +21,9 @@ namespace Advres::RSE
         Transform transform;
 
     private:
-        Vector2 m_Size;
-        Vector2 m_Scale;
-        Vector2 m_Bounds;
+        Vector2f m_Size;
+        Vector2f m_Scale;
+        Vector2f m_Bounds;
         TransformComponent* m_ParentTransform;
         Rect m_Viewport = { 0, 0, 0, 0 };
 
@@ -31,10 +31,10 @@ namespace Advres::RSE
         Camera2DComponent(Transform transform = Transform());
 
     public:
-        inline void     SetBounds(Vector2 bounds)   noexcept { m_Bounds = bounds; }
-        inline Vector2  GetBounds()                 noexcept { return m_Bounds; }
-        inline void     SetScale(Vector2 scale)     noexcept { m_Scale = scale; }
-        inline Vector2  GetScale()                  noexcept { return m_Scale; }
+        inline void     SetBounds(Vector2f bounds)   noexcept { m_Bounds = bounds; }
+        inline Vector2f  GetBounds()                 noexcept { return m_Bounds; }
+        inline void     SetScale(Vector2f scale)     noexcept { m_Scale = scale; }
+        inline Vector2f  GetScale()                  noexcept { return m_Scale; }
         inline int      GetWidth()                  noexcept { return m_Viewport.w; }
         inline int      GetHeight()                 noexcept { return m_Viewport.h; }
 

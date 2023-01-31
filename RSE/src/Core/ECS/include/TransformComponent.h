@@ -12,16 +12,16 @@ namespace Advres::RSE
 	{
 
 	public:
-		Vector2 position;
-		Vector2 scale;
+		Vector2f position;
+		Vector2f scale;
 		float rotation;
-		Vector2 velocity;
+		Vector2f velocity;
 
 	public:
 		TransformComponent(Transform transform = Transform()) : 
 			position(transform.position), scale(transform.scale), rotation(transform.rotation)
 		{
-			if (this->scale == Vector2()) this->scale = { 1, 1 };
+			if (this->scale == Vector2f()) this->scale = { 1, 1 };
 			velocity = { 0, 0 };
 		}
 

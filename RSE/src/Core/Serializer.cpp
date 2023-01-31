@@ -5,10 +5,10 @@
 
 namespace Advres::RSE
 {
-	void Serializer::Serialize(const Vector2& vec, YAML::Emitter& out)
+	void Serializer::Serialize(const Vector2f& vec, YAML::Emitter& out)
 	{
 		out << YAML::BeginMap;
-		out << YAML::Key << "Vector2" << YAML::Value;
+		out << YAML::Key << "Vector2f" << YAML::Value;
 		out << YAML::BeginMap;
 		out << YAML::Key << "x" << YAML::Value << vec.x;
 		out << YAML::Key << "y" << YAML::Value << vec.y;
@@ -78,10 +78,10 @@ namespace Advres::RSE
 		fs.close();
 	}
 
-	void Serializer::Deserialize(const YAML::Node& node, Vector2& vec)
+	void Serializer::Deserialize(const YAML::Node& node, Vector2f& vec)
 	{
-		vec.x = node["Vector2"]["x"].as<float>(); 
-		vec.y = node["Vector2"]["y"].as<float>();
+		vec.x = node["Vector2f"]["x"].as<float>(); 
+		vec.y = node["Vector2f"]["y"].as<float>();
 	}
 
 	void Serializer::Deserialize(const YAML::Node& node, Transform& trans)
@@ -143,8 +143,8 @@ namespace Advres::RSE
 		{
 			for (auto it = t.second.begin(); it != t.second.end(); ++it)
 			{
-				Vector2 worldPos;
-				Vector2 tilePos;
+				Vector2f worldPos;
+				Vector2f tilePos;
 				Deserialize(*it, worldPos);
 				Deserialize(*++it, tilePos);
 				tilemap->m_Tiles[t.first.as<int>()][worldPos] = tilePos;
@@ -197,7 +197,7 @@ namespace Advres::RSE
 				}
 				else if (type_name == "TilemapComponent")
 				{
-					TilemapComponent* tilemap = new TilemapComponent(nullptr, Vector2(), Vector2());
+					TilemapComponent* tilemap = new TilemapComponent(nullptr, Vector2f(), Vector2f());
 					tilemap->parent = parent;
 					Deserialize(c, tilemap);
 					parent->AddComponent(tilemap, false);

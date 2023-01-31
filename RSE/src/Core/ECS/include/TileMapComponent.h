@@ -20,34 +20,34 @@ namespace Advres::RSE
 
 	private:
 		Texture2D* m_Texture;
-		std::map<int, std::unordered_map<Vector2, Vector2>> m_Tiles;
-		Vector2 m_GridSize;
-		Vector2 m_TileSize;
+		std::map<int, std::unordered_map<Vector2f, Vector2f>> m_Tiles;
+		Vector2f m_GridSize;
+		Vector2f m_TileSize;
 
 	public:
-		TilemapComponent(Texture2D* tileset, Vector2 gridSize, Vector2 tileSize) :
+		TilemapComponent(Texture2D* tileset, Vector2f gridSize, Vector2f tileSize) :
 			m_Texture(tileset), m_GridSize(gridSize), m_TileSize(tileSize)
 		{
 
 		}
 
 	public:
-		void AddTile(Vector2 worldPos, int tileID, int layer = 0)
+		void AddTile(Vector2f worldPos, int tileID, int layer = 0)
 		{
-			Vector2 vec;
+			Vector2f vec;
 			int columns = m_Texture->GetWidth() / (int) m_GridSize.x;
 			int x = tileID % columns;
 			int y = tileID / columns;
 			vec.x = x * m_GridSize.x;
 			vec.y = y * m_GridSize.y;
-			m_Tiles[layer][Vector2(worldPos.x, worldPos.y)] = vec;
+			m_Tiles[layer][Vector2f(worldPos.x, worldPos.y)] = vec;
 		}
-		void AddTile(Vector2 worldPos, Vector2 tilePos, int layer = 0)
+		void AddTile(Vector2f worldPos, Vector2f tilePos, int layer = 0)
 		{
-			//Vector2 vec;
+			//Vector2f vec;
 			//vec.x = tilePos.x * m_GridSize.x;
 			//vec.y = tilePos.y * m_GridSize.y;
-			m_Tiles[layer][Vector2(worldPos.x, worldPos.y)] = tilePos;
+			m_Tiles[layer][Vector2f(worldPos.x, worldPos.y)] = tilePos;
 		}
 		size_t GetTotalSize()
 		{
@@ -55,7 +55,7 @@ namespace Advres::RSE
 			for (const auto& e : m_Tiles) total_size += e.second.size();
 			return total_size;
 		}
-		void RemoveTile(Vector2 worldPos, int layer = 0)
+		void RemoveTile(Vector2f worldPos, int layer = 0)
 		{
 			m_Tiles[layer].erase(worldPos);
 		}
@@ -90,8 +90,8 @@ namespace Advres::RSE
 
 	public:
 					inline	size_t  GetSize()				noexcept { return m_Tiles.size(); }
-					inline	Vector2 GetGridSize()			noexcept { return m_GridSize; }
-					inline	Vector2 GetTileSize()			noexcept { return m_TileSize; }
+					inline	Vector2f GetGridSize()			noexcept { return m_GridSize; }
+					inline	Vector2f GetTileSize()			noexcept { return m_TileSize; }
 		constexpr	inline	size_t  GetTilesetTextureID()	noexcept { return m_Texture->GetID(); }
 
 	protected:

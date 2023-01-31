@@ -37,10 +37,11 @@ namespace Advres::RSE
 			return AABB(&rectA, &rectB);
 		}
 		// TODO: Take Vecs as Consts!
-		static inline bool RayVsRect(Vector2& rayOrigin, Vector2& rayDest, const Rect& rect,
-			Vector2& contactPoint, Vector2& contactNormal, float& contactFraction)
+		static inline bool RayVsRect(Vector2f& rayOrigin, Vector2f& rayDest, const Rect& rect,
+			Vector2f& contactPoint, Vector2f& contactNormal, float& contactFraction)
 		{
-			Vector2 distance = rayDest - rayOrigin;
+			Vector2f distance = rayDest - rayOrigin;
+			//SDL_RenderDrawLine(RSECore::sdlRenderer, (int)rayOrigin.x, (int)rayOrigin.y, (int)rayDest.x, (int)rayDest.y);
 			
 			float t_x_near = (rect.x - rayOrigin.x) / distance.x;
 			float t_x_far = ((rect.x + rect.w) - rayOrigin.x) / distance.x;
@@ -69,17 +70,20 @@ namespace Advres::RSE
 
 			return true;
 		}
-		static inline bool SweptAABB(const Rect& b1, const Rect& b2, Vector2& velocity, Vector2& contactPoint, Vector2& contactNormal, float& contactFraction, float& elapsedTime)
+		static inline bool SweptAABB(const Rect& b1, const Rect& b2, Vector2f& velocity, Vector2f& contactPoint, Vector2f& contactNormal, float& contactFraction, float& elapsedTime)
 		{
-			if (velocity == 0) 
+			// TODO: Optimize!
+			if (velocity == 0)
+			{
 				return false;
+			}
 
 			Rect expanded_rect = { b2.x - (b1.w / 2), b2.y - (b1.h / 2), b1.w + b2.w, b1.h + b2.h };
-			RSECore::DrawDebugRect(expanded_rect);
-
-			Vector2 ray_origin = { b1.x + b1.w / 2, b1.y + b1.h / 2 };
-			RSECore::DrawDebugRect({ ray_origin.x, ray_origin.y, 10, 10 });
-			if (RayVsRect(ray_origin, velocity * elapsedTime, expanded_rect, contactPoint, contactNormal, contactFraction))
+			//RSECore::DrawDebugRect(expanded_rect);
+			Vector2f ray_origin = { b1.x + b1.w / 2, b1.y + b1.h / 2 };
+			Vector2f ray_dest = velocity * elapsedTime + ray_origin;
+			//RSECore::DrawDebugLine({ ray_origin, ray_dest });
+			if (RayVsRect(ray_origin, ray_dest, expanded_rect, contactPoint, contactNormal, contactFraction))
 			{
 				if (contactFraction <= 1.0f)
 					return true;
@@ -87,13 +91,13 @@ namespace Advres::RSE
 
 			return false;
 		}
-		static Vector2 GetCollisionNormal(const SDL_Rect& rectA, const SDL_Rect& rectB)
+		static Vector2f GetCollisionNormal(const SDL_Rect& rectA, const SDL_Rect& rectB)
 		{
-			Vector2 normal;
-			Vector2 aCentrePoint = { (float)(rectA.x + (rectA.w / 2)), (float)(rectA.y + (rectA.h / 2)) };
-			Vector2 bCentrePoint = { (float)(rectB.x + (rectB.w / 2)), (float)(rectB.y + (rectB.h / 2)) };
-			Vector2 distance = bCentrePoint - aCentrePoint;
-			Vector2 absDistance = Vector2::Abs(distance);
+			Vector2f normal;
+			Vector2f aCentrePoint = { (float)(rectA.x + (rectA.w / 2)), (float)(rectA.y + (rectA.h / 2)) };
+			Vector2f bCentrePoint = { (float)(rectB.x + (rectB.w / 2)), (float)(rectB.y + (rectB.h / 2)) };
+			Vector2f distance = bCentrePoint - aCentrePoint;
+			Vector2f absDistance = Vector2f::Abs(distance);
 			if (absDistance.x > absDistance.y) normal.x = (distance.x > 0) ? 1.0f : -1.0f; 
 			else normal.y = (distance.y > 0) ? 1.0f : -1.0f;
 			return normal;

@@ -14,7 +14,7 @@ namespace Advres::RSE
 	{
 	private:
 		int m_Layer;
-		Vector2 m_TileSize;
+		Vector2f m_TileSize;
 		std::vector<Rect> m_TileColliders;
 		TilemapComponent* m_Tilemap; 
 
@@ -52,13 +52,13 @@ namespace Advres::RSE
 				for (const auto& c : RSECore::colliders)
 				{
 					SDL_Rect r = tc.SDL();
-					Vector2 parent_velocity = c->parent->GetComponent<TransformComponent>()->velocity;
-					Vector2& parent_pos = c->parent->GetComponent<TransformComponent>()->position;
-					Vector2 origin = { c->colliderRect.x + c->colliderRect.w + 1, c->colliderRect.y };
-					Vector2 cn_point;
-					Vector2 cn_normal;
+					Vector2f parent_velocity = c->parent->GetComponent<TransformComponent>()->velocity;
+					Vector2f& parent_pos = c->parent->GetComponent<TransformComponent>()->position;
+					Vector2f origin = { c->colliderRect.x + c->colliderRect.w + 1, c->colliderRect.y };
+					Vector2f cn_point;
+					Vector2f cn_normal;
 					float cn_fraction = 0.0f;
-					Vector2 offset = { (cn_normal.x < 0) ? -16 : 0, (cn_normal.y < 0) ? -16 : 0 };
+					Vector2f offset = { (cn_normal.x < 0) ? -16 : 0, (cn_normal.y < 0) ? -16 : 0 };
 					//if (Collision::SweptAABB(c->colliderRect, tc, parent_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
 					//{
 					//	fmt::println("HIT!");
@@ -71,8 +71,8 @@ namespace Advres::RSE
 					/*if (Collision::AABB(&r, &c->colliderRect))
 					{
 						auto t = c->parent->GetComponent<TransformComponent>();
-						Vector2& pos = t->position;
-						Vector2 norm = Collision::GetCollisionNormal(r, c->colliderRect);
+						Vector2f& pos = t->position;
+						Vector2f norm = Collision::GetCollisionNormal(r, c->colliderRect);
 						if (std::abs(norm.x) > std::abs(norm.y)) // X axis
 						{
 							if (norm.x > 0) // Right
@@ -115,7 +115,7 @@ namespace Advres::RSE
 			{
 				SDL_Rect sr = r.SDL();
 				RSECore::DrawRect(sr);
-				//Vector2 ds = { sr.x * 2, sr.y };
+				//Vector2f ds = { sr.x * 2, sr.y };
 				//RSECore::DrawLine({ sr.x, sr.y }, ds);
 			}
 #endif

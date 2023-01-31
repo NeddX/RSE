@@ -9,7 +9,7 @@
 namespace Advres::RSE
 {
 	// Forward declerations
-	//class Vector2;
+	//class Vector2f;
 
 	enum class Key : uint32_t
 	{
@@ -73,7 +73,7 @@ namespace Advres::RSE
 	struct MouseState
 	{
 		MouseBtn button;
-		Vector2 wheel;
+		Vector2f wheel;
 	};
 
 

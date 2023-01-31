@@ -3,7 +3,7 @@
 
 namespace Advres::RSE
 {
-	BoxCollider2D::BoxCollider2D(const std::string& tag, Transform transform, Vector2 colliderExtent) : 
+	BoxCollider2D::BoxCollider2D(const std::string& tag, Transform transform, Vector2f colliderExtent) : 
 		m_Tag(tag), transform(transform), colliderExtent(colliderExtent)
 	{
 		m_BehaviourObj = nullptr;

@@ -14,7 +14,7 @@ class PlayerController : public Behaviour
 public:
 	bool tilePicker = false;
 	int tileLayer = 0;
-	Vector2 currentTileID = Vector2(0, 0);
+	Vector2f currentTileID = Vector2f(0, 0);
 	TilemapComponent* tilemap;
 	Entity* tileset;
 	std::unordered_map<std::string, std::shared_ptr<Texture2D>>* textureResources;
@@ -27,16 +27,16 @@ private:
 	TransformComponent* projTransComp;
 	Sprite* sprite;
 	BoxCollider2D* collider;
-	Vector2 input;
+	Vector2f input;
 	int speed = 15;
 	std::chrono::steady_clock::time_point sizeTp;
 	Entity* uiImage;
-	Vector2 norm;
+	Vector2f norm;
 	Rect debugRect;
 	bool drawRect = true;
 	Entity* dummy;
 	TransformComponent* dummyTrans;
-	Vector2 rayOrigin;
+	Vector2f rayOrigin;
 	bool rayToggeled = false;
 	Rect test = { 300, 100, 32, 32 };
 
@@ -72,37 +72,26 @@ public:
 			Resources::GetResource<Texture2D>(tilemap->GetTilesetTextureID()).get(),
 			Transform());
 		cp->SetRenderRect({ 0, 0, 16, 16 }, { 0, 0, 32, 32 });
-		//cp->SetRenderRect(Vector2(), Vector2(16, 16), Vector2(32, 32));
+		//cp->SetRenderRect(Vector2f(), Vector2f(16, 16), Vector2f(32, 32));
 
 		std::cout << "Player Behvaiour Script initialized!" << std::endl;
 	}
 
-	Vector2 lastMousePos;
+	Vector2f lastMousePos;
 	void Update(float deltaTime) override
 	{
-		static Rect player_collider = parent->GetComponent<BoxCollider2D>()->colliderRect;
-		static Vector2 player_velocity = parent->GetComponent<TransformComponent>()->velocity;
-
 		//std::cout << "some cool stuff idk" << std::endl;
 		HandleInput();
 		transform->velocity.x = speed * input.x * deltaTime * 10;
 		transform->velocity.y = speed * input.y * deltaTime * 10;
 
-		//Vector2 mouse = RSECore::GetMousePosition();
-		//Vector2 dir = mouse - transform->position;
+		//Vector2f mouse = RSECore::GetMousePosition();
+		//Vector2f dir = mouse - transform->position;
 		//norm = dir.Normalize();
 		//std::cout << "Unit vec dist: " << norm << "       \r";
 
 		// scrap the rest for now
 		//return;
-
-		Vector2 cn_point;
-		Vector2 cn_normal;
-		float cn_fraction;
-		if (Collision::SweptAABB(player_collider, test, player_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
-		{
-			fmt::println("HIT!");
-		}
 
 		auto now = std::chrono::steady_clock::now();
 		float elapsed = (float) std::chrono::duration_cast<std::chrono::milliseconds>(now - sizeTp).count();
@@ -115,8 +104,8 @@ public:
 		}
 		if (Input::mouse.wheel.y != 0 && elapsed >= 30)
 		{
-			Vector2 new_scale = camera->GetScale() + (0.05f * Input::mouse.wheel.y);
-			new_scale = Vector2::Clamp(new_scale, { 0.3f, 0.3f }, { 1.3f, 1.3f });
+			Vector2f new_scale = camera->GetScale() + (0.05f * Input::mouse.wheel.y);
+			new_scale = Vector2f::Clamp(new_scale, { 0.3f, 0.3f }, { 1.3f, 1.3f });
 			camera->SetScale(new_scale);
 		}
 		if (Input::mouse.button == MouseBtn::LMB && elapsed >= 30)
@@ -125,43 +114,43 @@ public:
 			{
 				if (rayToggeled)
 				{
-					Vector2 mouse = CameraModule::GetMousePositionInWorld();
+					Vector2f mouse = CameraModule::GetMousePositionInWorld();
 					rayOrigin = mouse;
 				}
 				else if (!tilePicker)
 				{
-					Vector2 mouse = CameraModule::GetMousePositionInWorld();
-					Vector2 vec;
+					Vector2f mouse = CameraModule::GetMousePositionInWorld();
+					Vector2f vec;
 					vec.x = Mathf::Round((int) mouse.x % gridSize);
 					vec.y = Mathf::Round((int) mouse.y % gridSize);
-					Vector2 snapped;
+					Vector2f snapped;
 					snapped.x = Mathf::Round(mouse.x - vec.x);
 					snapped.y = Mathf::Round(mouse.y - vec.y);
 					tilemap->AddTile(snapped, currentTileID, tileLayer);
 				}
 				else
 				{
-					Vector2 mouse = RSECore::GetMousePosition();
-					Vector2 pos_relative_to_trans = mouse - tileset->GetComponent<TransformComponent>()->position;
-					Vector2 snapped = pos_relative_to_trans % gridSize;
+					Vector2f mouse = RSECore::GetMousePosition();
+					Vector2f pos_relative_to_trans = mouse - tileset->GetComponent<TransformComponent>()->position;
+					Vector2f snapped = pos_relative_to_trans % gridSize;
 					snapped = pos_relative_to_trans - snapped;
 					currentTileID = snapped / 2;
 				}
 			}
 			else
 			{
-				Vector2 mouse = CameraModule::GetMousePositionInWorld();
+				Vector2f mouse = CameraModule::GetMousePositionInWorld();
 				dummyTrans->position = mouse;
 			}
 			sizeTp = now;
 		}
 		if (Input::mouse.button == MouseBtn::RMB && elapsed >= 30 && !tilePicker)
 		{
-			Vector2 mouse = CameraModule::GetMousePositionInWorld();
-			Vector2 vec;
+			Vector2f mouse = CameraModule::GetMousePositionInWorld();
+			Vector2f vec;
 			vec.x = Mathf::Round((int) mouse.x % gridSize);
 			vec.y = Mathf::Round((int) mouse.y % gridSize);
-			Vector2 snapped;
+			Vector2f snapped;
 			snapped.x = Mathf::Round(mouse.x - vec.x);
 			snapped.y = Mathf::Round(mouse.y - vec.y);
 			tilemap->RemoveTile(snapped, tileLayer);
@@ -209,6 +198,23 @@ public:
 
 	void Render(float deltaTime) override
 	{
+		static TransformComponent* player_transform = parent->GetComponent<TransformComponent>();
+		static SDL_Rect& player_collider = parent->GetComponent<BoxCollider2D>()->colliderRect;
+		static Vector2f& player_velocity = parent->GetComponent<TransformComponent>()->velocity;
+
+		// Collision testing
+		Vector2f cn_point;
+		Vector2f cn_normal;
+		float cn_fraction;
+		if (Collision::SweptAABB(player_collider, test, player_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
+		{
+			fmt::println("{}", cn_normal);
+			player_velocity *= -1;
+			//RSECore::DrawDebugRect({ cn_point.x, cn_point.y, 3, 3 });
+			//player_transform->position = cn_point;
+		}
+
+		// Tile drawing stuff
 		RSECore::DrawRect(test);
 		//SDL_RenderDrawPoint(RSECore::sdlRenderer, norm.x, norm.y);
 		//map->Render();
@@ -217,7 +223,7 @@ public:
 			auto trans = tileset->GetComponent<TransformComponent>();
 			auto sp = parent->GetComponent<Sprite>()->texture;
 			SDL_Rect src_r = { 0, 0, sp->GetWidth(), sp->GetHeight() };
-			SDL_Rect dest_r = { trans->position.x, trans->position.y, sp->GetWidth() * tileset->GetComponent<TransformComponent>()->scale.x, sp->GetHeight() * tileset->GetComponent<TransformComponent>()->scale.y };
+			SDL_Rect dest_r = { (int) trans->position.x, (int) trans->position.y, sp->GetWidth() * (int) tileset->GetComponent<TransformComponent>()->scale.x, sp->GetHeight() * (int) tileset->GetComponent<TransformComponent>()->scale.y };
 			RSECore::DrawTextureOnScreen(sp, &src_r, &dest_r);
 			int width = tileset->GetComponent<Sprite>()->texture->GetWidth() * tileset->GetComponent<TransformComponent>()->scale.x;
 			int height = tileset->GetComponent<Sprite>()->texture->GetHeight() * tileset->GetComponent<TransformComponent>()->scale.y;
@@ -264,15 +270,15 @@ public:
 		// Draw Mouse ray
 		if (rayToggeled)
 		{
-			Vector2 mouse = CameraModule::GetMousePositionInWorld();
+			Vector2f mouse = CameraModule::GetMousePositionInWorld();
 			RSECore::DrawLine(rayOrigin, mouse, 255, 0);
 			BoxCollider2D* collider = this->parent->GetComponent<BoxCollider2D>();
-			Vector2 cn_point;
-			Vector2 cn_normal;
+			Vector2f cn_point;
+			Vector2f cn_normal;
 			float fraction;
 			if (Collision::RayVsRect(rayOrigin, mouse, collider->colliderRect, cn_point, cn_normal, fraction))
 			{
-				Vector2 offset = { (cn_normal.x < 0) ? -16 : 0, (cn_normal.y < 0) ? -16 : 0 };
+				Vector2f offset = { (cn_normal.x < 0) ? -16 : 0, (cn_normal.y < 0) ? -16 : 0 };
 				RSECore::DrawRect({ (int) cn_point.x + (int) offset.x, (int) cn_point.y + (int) offset.y, 16, 16}, 255, 0, 0);
 				collider->colour = { 255, 0, 0, 255 };
 			}

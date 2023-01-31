@@ -49,8 +49,8 @@ namespace Advres::RSE
 
 	public:
 		static 			SDL_Rect	GetRectRelativeToCamera(SDL_Rect rect)				noexcept;
-		static 			Vector2		GetVectorRelativeToCamera(Vector2 vec)				noexcept;
-		static			Vector2		GetMousePositionInWorld()							noexcept;
+		static 			Vector2f		GetVectorRelativeToCamera(Vector2f vec)				noexcept;
+		static			Vector2f		GetMousePositionInWorld()							noexcept;
 		static			void		SetActiveCamera(const Camera2DComponent* camera)	noexcept { m_MainCamera = camera; }
 		static inline	bool		Active()											noexcept { return (m_MainCamera) ? true : false; }
 	};
@@ -78,7 +78,7 @@ namespace Advres::RSE
 		static int m_ScreenWidth;
 		static int m_ScreenHeight; 
 		static std::vector<Rect> m_DebugRects;
-		static std::vector<std::pair<Vector2, Vector2>> m_DebugLines;
+		static std::vector<std::pair<Vector2f, Vector2f>> m_DebugLines;
 
 	public:
 		static SDL_Window* sdlWindow;
@@ -112,18 +112,18 @@ namespace Advres::RSE
 
 	// Getters and Setters
 	public:
-		static Vector2 GetMousePosition()
+		static Vector2f GetMousePosition()
 		{
 			int mX, mY;
 			SDL_GetMouseState(&mX, &mY);
-			Vector2 vec = { mX, mY };
+			Vector2f vec = { mX, mY };
 			return vec;
 		}
 		static inline void DrawDebugRect(Rect rect)
 		{
 			m_DebugRects.push_back(CameraModule::GetRectRelativeToCamera(rect.SDL()));
 		}
-		static inline void DrawDebugLine(std::pair<Vector2, Vector2> line)
+		static inline void DrawDebugLine(std::pair<Vector2f, Vector2f> line)
 		{
 			line.first = CameraModule::GetVectorRelativeToCamera(line.first);
 			line.second = CameraModule::GetVectorRelativeToCamera(line.second);
@@ -185,7 +185,7 @@ namespace Advres::RSE
 			}
 			SDL_RenderDrawRect(sdlRenderer, &dest_cp);
 		}
-		static inline void DrawLine(Vector2 src, Vector2 dest, uint8_t r = 0, uint8_t g = 255, uint8_t b = 0, uint8_t a = 255)
+		static inline void DrawLine(Vector2f src, Vector2f dest, uint8_t r = 0, uint8_t g = 255, uint8_t b = 0, uint8_t a = 255)
 		{
 			if (camera->Active() && !disableCamera)
 			{

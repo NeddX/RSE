@@ -15,7 +15,7 @@ namespace Advres::RSE
 	std::chrono::high_resolution_clock::time_point RSECore::m_StartTp;
 	bool RSECore::disableCamera = false;
 	std::vector<Rect> RSECore::m_DebugRects;
-	std::vector<std::pair<Vector2, Vector2>> RSECore::m_DebugLines;
+	std::vector<std::pair<Vector2f, Vector2f>> RSECore::m_DebugLines;
 	const Camera2DComponent* CameraModule::m_MainCamera = nullptr;
 
 	RSECore::RSECore()
@@ -260,7 +260,7 @@ namespace Advres::RSE
 
 	SDL_Rect CameraModule::GetRectRelativeToCamera(SDL_Rect rect) noexcept
 	{
-		Vector2 mul =
+		Vector2f mul =
 		{
 			(float) RSECore::GetScreenWidth()  / (float) m_MainCamera->m_Viewport.w,
 			(float) RSECore::GetScreenHeight() / (float) m_MainCamera->m_Viewport.h
@@ -273,9 +273,9 @@ namespace Advres::RSE
 		return rect;
 	}
 	
-	Vector2 CameraModule::GetVectorRelativeToCamera(Vector2 vec) noexcept
+	Vector2f CameraModule::GetVectorRelativeToCamera(Vector2f vec) noexcept
 	{
-		Vector2 mul =
+		Vector2f mul =
 		{
 			(float) RSECore::GetScreenWidth()  / (float) m_MainCamera->m_Viewport.w,
 			(float) RSECore::GetScreenHeight() / (float) m_MainCamera->m_Viewport.h
@@ -285,15 +285,15 @@ namespace Advres::RSE
 		return vec;
 	}
 
-	Vector2 CameraModule::GetMousePositionInWorld() noexcept
+	Vector2f CameraModule::GetMousePositionInWorld() noexcept
 	{
 		if (m_MainCamera)
 		{
-			Vector2 mouse = RSECore::GetMousePosition();
+			Vector2f mouse = RSECore::GetMousePosition();
 			mouse.x = (mouse.x * m_MainCamera->m_Scale.x) + m_MainCamera->m_Viewport.x;
 			mouse.y = (mouse.y * m_MainCamera->m_Scale.y) + m_MainCamera->m_Viewport.y;
 			return mouse;
 		}
-		return Vector2();
+		return Vector2f();
 	}
 }

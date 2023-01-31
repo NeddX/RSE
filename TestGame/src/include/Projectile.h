@@ -8,7 +8,7 @@ using namespace Advres::RSE;
 class Projectile : public Behaviour
 {
 public:
-	Vector2 velocity;
+	Vector2f velocity;
 	TransformComponent* transform;
 
 public:
