@@ -40,6 +40,14 @@ bld/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
+*.vcxproj
+*.vcxproj.filters
+*.sln
+
+# AJJSDzzzzz
+*.cmake
+CMakeCache.txt
+CMakeFiles/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
