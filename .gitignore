@@ -43,6 +43,7 @@ Generated\ Files/
 *.vcxproj
 *.vcxproj.filters
 *.sln
+.vscode/
 
 # AJJSDzzzzz
 *.cmake
