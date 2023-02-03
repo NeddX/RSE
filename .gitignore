@@ -44,6 +44,13 @@ Generated\ Files/
 *.vcxproj.filters
 *.sln
 .vscode/
+yaml-cpp/
+SDL_image/
+SDL/
+linux-build/
+build/
+CMakeFiles/
+fmt/
 
 # AJJSDzzzzz
 *.cmake

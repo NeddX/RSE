@@ -208,10 +208,11 @@ public:
 		float cn_fraction;
 		if (Collision::SweptAABB(player_collider, test, player_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
 		{
-			fmt::println("{}", cn_normal);
-			player_velocity *= -1;
-			//RSECore::DrawDebugRect({ cn_point.x, cn_point.y, 3, 3 });
-			//player_transform->position = cn_point;
+			// Get the dot product of the velocity and the normal
+			float dot = player_velocity.x * cn_normal.x + player_velocity.y * cn_normal.y;
+			// Subtract the projection of the velocity onto the normal from the velocity to get the new velocity
+			player_velocity -= 2.0f * dot;
+			player_velocity *= cn_normal;
 		}
 
 		// Tile drawing stuff

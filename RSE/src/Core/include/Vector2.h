@@ -240,9 +240,9 @@ namespace Advres::RSE
 	public:
 		static inline float DistanceTo(const Vector2f& vecA, const Vector2f& vecB)
 		{
-			float dx = Mathf::Abs(vecB.x - vecA.x);
-			float dy = Mathf::Abs(vecB.y - vecA.y);
-			return Mathf::Sqrt(dx * dx + dy * dy);
+			float dx = std::abs(vecB.x - vecA.x);
+			float dy = std::abs(vecB.y - vecA.y);
+			return std::sqrt(dx * dx + dy * dy);
 		}
 		static inline float DistanceToApprox(const Vector2f& other)
 		{
@@ -257,8 +257,8 @@ namespace Advres::RSE
 		static inline Vector2f Abs(const Vector2f& vec)
 		{
 			Vector2f vecB;
-			vecB.x = Mathf::Abs(vec.x);
-			vecB.y = Mathf::Abs(vec.y);
+			vecB.x = std::abs(vec.x);
+			vecB.y = std::abs(vec.y);
 			return vecB;
 		}
 		static inline Vector2f Lerp(const Vector2f& vecA, const Vector2f& vecB, float weight)
