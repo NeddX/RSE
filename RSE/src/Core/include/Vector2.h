@@ -248,6 +248,7 @@ namespace Advres::RSE
 		{
 			// Calculate using inverse square root which is supposed to be faster?
 			// what the fuck is an inverse square root? i dont know
+			return 0.0f;
 		}
 		static inline Vector2f Normalize(const Vector2f& vecA, const Vector2f& vecB = { 0, 0 })
 		{
@@ -532,6 +533,7 @@ namespace Advres::RSE
 		{
 			// Calculate using inverse square root which is supposed to be faster?
 			// what the fuck is an inverse square root? i dont know
+			return 0.0f;
 		}
 		static inline Vector2 Normalize(const Vector2& vecA, const Vector2& vecB = { 0, 0 })
 		{

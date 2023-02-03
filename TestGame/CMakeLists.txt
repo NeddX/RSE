@@ -5,7 +5,6 @@
 # Add source to this project's executable.
 add_executable (TestGame 
 	"src/main.cpp" 
-	"src/PlayerController.cpp"
 	"src/include/EnemyAI.h"
 	"src/include/PlayerController.h"
 	"src/include/Projectile.h"
