@@ -15,11 +15,10 @@
 #endif
 
 #include "include/PlayerController.h"
-#include "include/EnemyAI.h"
 
 #define WIDTH	800 
 #define HEIGHT	600
-#define FPS		300
+#define FPS		600
 
 using namespace Advres::RSE;
 
@@ -60,11 +59,11 @@ public:
 		std::cout << "CSInvoke.Str(): " << (char*) import((int*) &str1) << std::endl;*/
 
 		// Configure input
-		Input::AddAction<AxisBind>("moveUp",	  { Key::S, Key::W });
-		Input::AddAction<AxisBind>("moveLeft",    { Key::D, Key::A });
-		Input::AddAction<AxisBind>("changeLayer", { Key::ARROW_UP,Key::ARROW_DOWN });
-		Input::AddAction<KeyBind>("tile_picker",  { {Key::TAB} });
-		Input::AddAction<KeyBind>("toggleGrid",   { {Key::G} });
+		Input::AddAction<AxisBind>("moveUp",	  { KeyCode::S, KeyCode::W });
+		Input::AddAction<AxisBind>("moveLeft",    { KeyCode::D, KeyCode::A });
+		Input::AddAction<AxisBind>("changeLayer", { KeyCode::ARROW_UP,KeyCode::ARROW_DOWN });
+		Input::AddAction<KeyBind>("tile_picker",  { {KeyCode::TAB} });
+		Input::AddAction<KeyBind>("toggleGrid",   { {KeyCode::G} });
 
 		textureResources["dunTileset"] = Resources::Load<Texture2D>("Base.rse/Environment/Levels/tileset2.png");
 
@@ -129,7 +128,8 @@ public:
 		camObj->tag = "kamera";
 		
 		// Behaviour code
-		controller = player->AddComponent<PlayerController>();
+		auto* script_comp = player->AddComponent<NativeBehaviourComponent>();
+		controller = script_comp->Bind<PlayerController>();
 		controller->camera = camera;
 		controller->tilemap = tmap;
 		controller->tileset = tile_picker;
@@ -138,11 +138,11 @@ public:
 
 		// Collider
 		auto player_collider = player->AddComponent<BoxCollider2D>("player", Transform(), Vector2f(32, 32));
-		player_collider->trigger = true;
-		player_collider->SetBehaviourObject(controller);
-		player_collider->OnCollide = &Behaviour::BoxCollider2D_OnCollide;
-		player_collider->OnEnter =	&Behaviour::BoxCollider2D_OnEnter;
-		player_collider->OnExit	=	&Behaviour::BoxCollider2D_OnExit;
+		//player_collider->trigger = true;
+		//player_collider->SetBehaviourObject(controller);
+		//player_collider->OnCollide = &Behaviour::BoxCollider2D_OnCollide;
+		//player_collider->OnEnter =	&Behaviour::BoxCollider2D_OnEnter;
+		//player_collider->OnExit	=	&Behaviour::BoxCollider2D_OnExit;
 
 		//enemy->tag = "Cultist";
 		//enemy->AddComponent<TransformComponent>(Transform(Vector2f(100, 200)));
@@ -163,7 +163,7 @@ public:
 		static TransformComponent* player_trans = player->GetComponent<TransformComponent>();
 		static float cam_speed = 4.0f;
 		cam_trans->position = Vector2f::Lerp(cam_trans->position, player_trans->position, deltaTime * cam_speed);
-		if (Input::IsKeyDown(Key::E))
+		if (Input::IsKeyDown(KeyCode::E))
 		{
 			fmt::println("Serialization started.");
 			Serializer::SerializeScene("actormgr.rym", entityManager.get());

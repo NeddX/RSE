@@ -47,63 +47,22 @@ namespace Advres::RSE
 		}
 		void Update(float deltaTime) override
 		{
-			for (const auto& tc : m_TileColliders)
+			for (const auto& tile_collider : m_TileColliders)
 			{
-				for (const auto& c : RSECore::colliders)
+				for (const auto& obj_collider : RSECore::colliders)
 				{
-					SDL_Rect r = tc.SDL();
-					Vector2f parent_velocity = c->parent->GetComponent<TransformComponent>()->velocity;
-					Vector2f& parent_pos = c->parent->GetComponent<TransformComponent>()->position;
-					Vector2f origin = { c->colliderRect.x + c->colliderRect.w + 1, c->colliderRect.y };
+					SDL_Rect r = tile_collider.SDL();
+					Vector2f& obj_velocity = obj_collider->parent->GetComponent<TransformComponent>()->velocity;
+					Vector2f& parent_pos = obj_collider->parent->GetComponent<TransformComponent>()->position;
+					Vector2f origin = { obj_collider->colliderRect.x + obj_collider->colliderRect.w + 1, obj_collider->colliderRect.y };
 					Vector2f cn_point;
 					Vector2f cn_normal;
 					float cn_fraction = 0.0f;
 					Vector2f offset = { (cn_normal.x < 0) ? -16 : 0, (cn_normal.y < 0) ? -16 : 0 };
-					//if (Collision::SweptAABB(c->colliderRect, tc, parent_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
-					//{
-					//	fmt::println("HIT!");
-					//	//parent_velocity = { 0, 0 };
-					//}
-					/*if (Collision::RayVsRect(origin, parent_velocity * deltaTime, tc.SDL(), cn_point, cn_normal, cn_fraction))
+					/*if (Collision::SweptAABB(obj_collider->colliderRect, tile_collider, obj_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
 					{
-						fmt::println("hit!");
-					}*/
-					/*if (Collision::AABB(&r, &c->colliderRect))
-					{
-						auto t = c->parent->GetComponent<TransformComponent>();
-						Vector2f& pos = t->position;
-						Vector2f norm = Collision::GetCollisionNormal(r, c->colliderRect);
-						if (std::abs(norm.x) > std::abs(norm.y)) // X axis
-						{
-							if (norm.x > 0) // Right
-							{
-								int pixels = r.x + r.w - c->colliderRect.x;
-								pos.x += pixels;
-								//t->velocity.x = 0.01f;
-							}
-							else // Left
-							{
-								int pixels = c->colliderRect.x + c->colliderRect.w - r.x;
-								pos.x -= pixels;
-								//t->velocity.x = -0.01f;
-							}
-						}
-						else // Y axis
-						{
-							// vertical
-							if (norm.y > 0) // Down
-							{
-								int pixels = r.y + r.h - c->colliderRect.y;
-								pos.y += pixels;
-								//t->velocity.y = 0.01f;
-							}
-							else // Up
-							{
-								int pixels = c->colliderRect.y + c->colliderRect.h - r.y;
-								pos.y -= pixels;
-								//t->velocity.y = -0.01f;
-							}
-						}
+						float remaining = 1.0f - cn_fraction;
+						obj_velocity += cn_normal * Vector2f::Abs(obj_velocity) * remaining;
 					}*/
 				}
 			}

@@ -5,10 +5,7 @@
 # Add source to this project's executable.
 add_executable (TestGame 
 	"src/main.cpp" 
-	"src/include/EnemyAI.h"
 	"src/include/PlayerController.h"
-	"src/include/Projectile.h"
-	"src/include/Wall.h"
 )
 
 target_link_libraries(TestGame RSE)

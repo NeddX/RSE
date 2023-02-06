@@ -67,6 +67,18 @@ namespace Advres::RSE
 				contactNormal.x = (distance.x < 0) ? 1.0f : -1.0f;
 			else // Or else it is on the Y axis
 				contactNormal.y = (distance.y < 0) ? 1.0f : -1.0f;
+			/*
+			if (distance.x < 0)
+				contactNormal.x = 1.0f;
+			else
+				contactNormal.x = -1.0f;
+
+			if (distance.y < 0)
+				contactNormal.y = 1.0f;
+			else
+				contactNormal.y = -1.0f;*/
+
+			return true;
 
 			return true;
 		}
@@ -81,7 +93,7 @@ namespace Advres::RSE
 			Rect expanded_rect = { b2.x - (b1.w / 2), b2.y - (b1.h / 2), b1.w + b2.w, b1.h + b2.h };
 			RSECore::DrawDebugRect(expanded_rect);
 			Vector2f ray_origin = { b1.x + b1.w / 2, b1.y + b1.h / 2 };
-			Vector2f ray_dest = velocity * (elapsedTime) + ray_origin;
+			Vector2f ray_dest = velocity * elapsedTime + ray_origin;
 			RSECore::DrawDebugLine({ ray_origin, ray_dest });
 			if (RayVsRect(ray_origin, ray_dest, expanded_rect, contactPoint, contactNormal, contactFraction))
 			{

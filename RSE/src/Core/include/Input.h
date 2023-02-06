@@ -11,7 +11,7 @@ namespace Advres::RSE
 	// Forward declerations
 	//class Vector2f;
 
-	enum class Key : uint32_t
+	enum class KeyCode : uint32_t
 	{
 		NUM_0		= SDLK_0,
 		NUM_1		= SDLK_1,
@@ -84,12 +84,12 @@ namespace Advres::RSE
 
 	struct KeyBind
 	{
-		std::vector<Key> keys;
+		std::vector<KeyCode> keys;
 	};
 
 	struct AxisBind
 	{
-		Key pos, neg;
+		KeyCode pos, neg;
 	};
 
 	class Input
@@ -197,7 +197,7 @@ namespace Advres::RSE
 			if (keys[(uint32_t) ab->neg]) axis += -1;
 			return axis;
 		}
-		static inline bool IsKeyDown(Key key)
+		static inline bool IsKeyDown(KeyCode key)
 		{
 			return keys[(uint32_t) key];
 		}

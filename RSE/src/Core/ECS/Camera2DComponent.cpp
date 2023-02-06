@@ -43,7 +43,7 @@ namespace Advres::RSE
 
 #ifdef _DEBUG
         // Debug: Disable camera and draw the borders of the  camera
-        if (Input::IsKeyDown(Key::B) && time * 1000 >= 300)
+        if (Input::IsKeyDown(KeyCode::B) && time * 1000 >= 300)
         {
             if (!d)
             {

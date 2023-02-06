@@ -238,6 +238,26 @@ namespace Advres::RSE
 		}
 
 	public:
+		static inline float DotProd(const Vector2f& vecA, const Vector2f& vecB)
+		{
+			return (vecA.x * vecB.x) + (vecA.y * vecB.y);
+		}
+		static inline float AngleBetween(const Vector2f& vecA, const Vector2f& vecB)
+		{
+			float vec_a_length = Length(vecA);
+			float vec_b_length = Length(vecB);
+
+			float dot_product = DotProd(vecA, vecB);
+
+			float cosine = dot_product / (vec_a_length * vec_b_length);
+			return std::cosf(cosine);
+		}
+		static inline float Length(const Vector2f& vec)
+		{
+			// Length() and DistanceTo() are the exact same thing except Length() counts
+			// the magnitude of the vector from the root origin (0, 0)
+			return std::sqrt(std::abs(vec.x * vec.x) + std::abs(vec.y * vec.y));
+		}
 		static inline float DistanceTo(const Vector2f& vecA, const Vector2f& vecB)
 		{
 			float dx = std::abs(vecB.x - vecA.x);
@@ -523,6 +543,10 @@ namespace Advres::RSE
 		}
 
 	public:
+		static inline int DotProd(const Vector2& vecA, const Vector2& vecB)
+		{
+			return (vecA.x * vecB.x) + (vecA.y * vecB.y);
+		}
 		static inline float DistanceTo(const Vector2& vecA, const Vector2& vecB)
 		{
 			float dx = Mathf::Abs(vecB.x - vecA.x);
