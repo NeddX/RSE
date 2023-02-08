@@ -7,12 +7,12 @@ C_NC='\033[0m'
 
 logln ()
 {
-	printf "${C_BLU} [!]: $1 ${C_NC}\n"
+	printf "${C_BLU} [!] :: $1 ${C_NC}\n"
 }
 
 logerr ()
 {
-	printf "${C_RED} [!ERR]: $1${C_NC}\n"
+	printf "${C_RED} [!ERR] :: $1${C_NC}\n"
 }
 
 logln "Initializing..."
