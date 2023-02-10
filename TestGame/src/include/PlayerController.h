@@ -72,7 +72,7 @@ public:
 		cp->SetRenderRect({ 0, 0, 16, 16 }, { 0, 0, 32, 32 });
 		//cp->SetRenderRect(Vector2f(), Vector2f(16, 16), Vector2f(32, 32));
 
-		std::cout << "Player Behvaiour Script initialized!" << std::endl;
+		std::cout << "Player Behvaiour Script initialized!" << std::endl;	
 	}
 
 	Vector2f lastMousePos;
@@ -194,16 +194,12 @@ public:
 		Vector2f cn_point;
 		Vector2f cn_normal;
 		float cn_fraction;
+		std::
 		if (Collision::SweptAABB(player_collider, test, player_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
 		{
 			float remaining = 1.0f - cn_fraction;
-			player_transform->position.x += player_velocity.x * cn_fraction;
-			player_transform->position.y += player_velocity.y * cn_fraction;
-			player_velocity.x *= remaining;
-			player_velocity.y *= remaining;
-			if (std::abs(cn_normal.x) > 0.0001f) player_velocity.x = -player_velocity.x;
-			if (std::abs(cn_normal.y) > 0.0001f) player_velocity.y = -player_velocity.y;
-			//player_velocity += cn_normal * Vector2f::Abs(player_velocity) * remaining;
+			player_velocity += cn_normal * Vector2f::Abs(player_velocity) * remaining;
+			// On non virtualized envrionments this should run faster.
 		}
 		else
 		{

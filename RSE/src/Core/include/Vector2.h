@@ -250,7 +250,7 @@ namespace Advres::RSE
 			float dot_product = DotProd(vecA, vecB);
 
 			float cosine = dot_product / (vec_a_length * vec_b_length);
-			return std::cosf(cosine);
+			return std::cos(cosine);
 		}
 		static inline float Length(const Vector2f& vec)
 		{

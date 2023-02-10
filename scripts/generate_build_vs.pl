@@ -4,7 +4,6 @@ require "./dsfx.pl";
 
 dsfx::logln("Visual Studio 2022 build file generation started.");
 
-system("cd ../");
 my $exit_code = system("cmake", "-G", "\"Visual Studio 17\" ../ -B ../");
 
 if ($exit_code == 0) {
