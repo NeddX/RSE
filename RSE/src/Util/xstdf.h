@@ -39,6 +39,18 @@ namespace xstdf
 				return 0;
 			}
 		}
+		static void SetWorkingDirectory(const std::string& newPath) noexcept
+		{
+#ifdef _WIN32
+			SetCurrentDirectory(newPath.c_str());
+#else
+			std::cout << newPath.c_str() << std::endl;
+			if (chdir(newPath.c_str()) == -1) 
+			{
+				std::cerr << "CHDIR FAILED" << std::endl;
+			}
+#endif
+		}
 	};
 
 	struct crypto
@@ -55,6 +67,16 @@ namespace xstdf
 			}
 			return hash;
 		}
+		static uint32_t DJB2Hash(const std::string& str)
+		{
+		    uint32_t hash = 5381;
+			for (size_t i = 0; i < str.length(); i++) 
+			{
+				hash = ((hash << 5) + hash) + str[i];
+			}
+			return hash;
+		}
+								
 	};
 }
 

@@ -2,6 +2,8 @@
 #define GEOMETRY_H
 
 #include <SDL.h>
+#include "Vector2.h"
+
 
 namespace Advres::RSE
 {
@@ -55,6 +57,14 @@ namespace Advres::RSE
 
 	public:
 		Point(int x, int y) : x(x), y(y)
+		{
+
+		}
+		Point(Vector2 vec) : x(vec.x), y(vec.y)
+		{
+
+		}
+		Point(Vector2f vec) : x((int) vec.x), y((int) vec.y)
 		{
 
 		}

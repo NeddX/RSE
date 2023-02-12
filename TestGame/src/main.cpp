@@ -7,11 +7,11 @@
 #include <sdafx.h>
 
 #ifdef _WIN32
-#include "windows.h"
-#define symLoad GetProcAddress
+	#include "windows.h"
+	#define symLoad GetProcAddress
 #else
-#include "dlfcn.h"
-#define symLoad dlsym
+	#include "dlfcn.h"
+	#define symLoad dlsym
 #endif
 
 #include "include/PlayerController.h"
@@ -64,7 +64,7 @@ public:
 		Input::AddAction<AxisBind>("changeLayer", { KeyCode::ARROW_UP,KeyCode::ARROW_DOWN });
 		Input::AddAction<KeyBind>("tile_picker",  { {KeyCode::TAB} });
 		Input::AddAction<KeyBind>("toggleGrid",   { {KeyCode::G} });
-
+		
 		textureResources["dunTileset"] = Resources::Load<Texture2D>("Base.rse/Environment/Levels/tileset2.png");
 
 		TilemapComponent* tmap;
@@ -195,7 +195,7 @@ public:
 };
 
 int main(int argc, char* argv[])
-{
+{	
 	Test* test = new Test();
 	try
 	{
@@ -208,12 +208,8 @@ int main(int argc, char* argv[])
 	}
 	catch (const RException& ex)
 	{
-		// WIN32 EXCL
-		//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		//SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
 		fmt::println("{}", ex.Message());
 		return ex.ErrorCode();
-		//etConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	}
 	return 0;
 }

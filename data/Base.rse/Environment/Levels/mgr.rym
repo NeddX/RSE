@@ -6,7 +6,7 @@ Actors:
       - TilemapComponent:
           m_Texture:
             TextureResource:
-              ResourceID: 15414341527098161982
+              ResourceID: 3170358660
           m_GridSize:
             Vector2f:
               x: 16

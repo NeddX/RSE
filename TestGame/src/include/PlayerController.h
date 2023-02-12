@@ -90,7 +90,6 @@ public:
 
 		// scrap the rest for now
 		//return;
-
 		auto now = std::chrono::steady_clock::now();
 		float elapsed = (float) std::chrono::duration_cast<std::chrono::milliseconds>(now - sizeTp).count();
 		float axis = Input::GetActionAxis("changeLayer");
@@ -191,15 +190,11 @@ public:
 		static Vector2f& player_velocity = GetComponent<TransformComponent>()->velocity;
 
 		// Collision testing
-		Vector2f cn_point;
-		Vector2f cn_normal;
-		float cn_fraction;
-		std::
-		if (Collision::SweptAABB(player_collider, test, player_velocity, cn_point, cn_normal, cn_fraction, deltaTime))
-		{
-			float remaining = 1.0f - cn_fraction;
-			player_velocity += cn_normal * Vector2f::Abs(player_velocity) * remaining;
-			// On non virtualized envrionments this should run faster.
+		Collision::SweptAABBHitResult hit_result;
+		if (Collision::SweptAABB(player_collider, test, player_velocity, deltaTime, hit_result))
+		{	
+			float remaining = 1.0f - hit_result.contactFraction;
+			player_velocity += hit_result.contactNormal * Vector2f::Abs(player_velocity) * remaining;
 		}
 		else
 		{

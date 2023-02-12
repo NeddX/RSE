@@ -25,7 +25,6 @@ namespace Advres::RSE
 
 	RSECore::~RSECore()
 	{
-		RSECore::IsInView();
 		//delete entityManager;
 
 		SDL_DestroyWindow(sdlWindow);

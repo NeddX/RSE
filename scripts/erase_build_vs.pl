@@ -14,12 +14,15 @@ my @files_to_erase = (
 	"../RSE.sln",
 	"../ZERO_CHECK.vcxproj",
 	"../ZERO_CHECK.vcxproj.filters",
+	"../ZERO_CHECK.vcxproj.user",
 	"../ALL_BUILD.vcxproj",
 	"../ALL_BUILD.vcxproj.filters",
+	"../ALL_BUILD.vcxproj.user",
 	"../cmake_install.cmake",
 	"../CMakeCache.txt",
 	"../INSTALL.vcxproj",
 	"../INSTALL.vcxproj.filters",
+	"../INSTALL.vcxproj.user",
 	"../RSE/INSTALL.vcxproj",
 	"../RSE/INSTALL.vcxproj.filters"
 );

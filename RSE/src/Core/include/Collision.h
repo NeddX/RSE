@@ -20,6 +20,17 @@ namespace Advres::RSE
 	class Collision
 	{
 	public:
+		struct SweptAABBHitResult
+		{
+			Vector2f	contactNormal;
+			Vector2f	contactPoint;
+			Vector2f	rayOrigin;
+			Vector2f	rayDest;
+			float		contactFraction;
+			Rect		expandedRect;
+		};
+
+	public:
 		static inline bool AABB(const SDL_Rect* rectA, const SDL_Rect* rectB)
 		{
 			return
@@ -36,8 +47,12 @@ namespace Advres::RSE
 			SDL_Rect rectB = { (int) ac2Pos->x, (int) ac2Pos->y, (int) col2->colliderRect.w, (int) col2->colliderRect.h };
 			return AABB(&rectA, &rectB);
 		}
+		static inline bool PointVsRect(const Point point, const Rect rect)
+		{
+			return point.x >= rect.x && point.x <= rect.x + rect.w && rect.y >= rect.y && point.y <= rect.y + rect.h;
+		}
 		// TODO: Take Vecs as Consts!
-		static inline bool RayVsRect(Vector2f& rayOrigin, Vector2f& rayDest, const Rect& target,
+		static  bool RayVsRect(Vector2f& rayOrigin, Vector2f& rayDest, const Rect& target,
 			Vector2f& contactPoint, Vector2f& contactNormal, float& contactFraction)
 		{
 			Vector2f distance = rayDest - rayOrigin;
@@ -82,22 +97,23 @@ namespace Advres::RSE
 
 			return true;
 		}
-		static inline bool SweptAABB(const Rect& b1, const Rect& b2, Vector2f& velocity, Vector2f& contactPoint, Vector2f& contactNormal, float& contactFraction, float& elapsedTime)
+		static inline bool SweptAABB(const Rect& b1, const Rect& b2, Vector2f& velocity, float& elapsedTime, SweptAABBHitResult& hitResult)
 		{
 			// TODO: Optimize!
 			if (velocity == 0)
-			{
 				return false;
-			}
 
 			Rect expanded_rect = { b2.x - (b1.w / 2), b2.y - (b1.h / 2), b1.w + b2.w, b1.h + b2.h };
 			RSECore::DrawDebugRect(expanded_rect);
 			Vector2f ray_origin = { b1.x + b1.w / 2, b1.y + b1.h / 2 };
 			Vector2f ray_dest = velocity * elapsedTime + ray_origin;
 			RSECore::DrawDebugLine({ ray_origin, ray_dest });
-			if (RayVsRect(ray_origin, ray_dest, expanded_rect, contactPoint, contactNormal, contactFraction))
+			hitResult.rayOrigin = ray_origin;
+			hitResult.rayDest = ray_dest;
+			hitResult.expandedRect = expanded_rect;
+			if (RayVsRect(ray_origin, ray_dest, expanded_rect, hitResult.contactPoint, hitResult.contactNormal, hitResult.contactFraction))
 			{
-				if (contactFraction <= 1.0f)
+				if (hitResult.contactFraction <= 1.0f)
 					return true;
 			}
 
