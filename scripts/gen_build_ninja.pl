@@ -59,7 +59,7 @@ if (!-e "../$os-build-ninja") {
 	} else {
 		my $exit_code = system("cmake -G \"Ninja\" ../ -B ../$os-build-ninja");
 		if ($exit_code != 0) {
-			dsfx::lerrln("CMake build generation for Ninja failed! Aborting...");
+			dsfx::lerrln("CMake build generation for Ninja failed! a Aborting...");
 			remove_tree("../$os-build-ninja");
 			exit -1;
 		}
