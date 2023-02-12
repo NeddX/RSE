@@ -193,8 +193,9 @@ public:
 		Collision::SweptAABBHitResult hit_result;
 		if (Collision::SweptAABB(player_collider, test, player_velocity, deltaTime, hit_result))
 		{	
-			float remaining = 1.0f - hit_result.contactFraction;
-			player_velocity += hit_result.contactNormal * Vector2f::Abs(player_velocity) * remaining;
+			
+			//float remaining = 1.0f - hit_result.contactFraction;
+			//player_velocity += hit_result.contactNormal * Vector2f::Abs(player_velocity) * remaining;
 		}
 		else
 		{

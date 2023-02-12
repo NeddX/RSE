@@ -14,6 +14,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Include sub-projects.
 add_subdirectory ("RSE")
 add_subdirectory ("TestGame")
+add_subdirectory ("Platformer")
 #add_subdirectory ("RCLRW")
 
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT TestGame)

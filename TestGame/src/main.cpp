@@ -1,10 +1,6 @@
-#include <iostream>
-#include <memory>
 #include <RSE.h>
-#include <fstream>
-#include <string>
-
 #include <sdafx.h>
+#include <boost/filesystem.hpp>
 
 #ifdef _WIN32
 	#include "windows.h"
@@ -18,7 +14,7 @@
 
 #define WIDTH	800 
 #define HEIGHT	600
-#define FPS		600
+#define FPS		800
 
 using namespace Advres::RSE;
 
@@ -64,7 +60,8 @@ public:
 		Input::AddAction<AxisBind>("changeLayer", { KeyCode::ARROW_UP,KeyCode::ARROW_DOWN });
 		Input::AddAction<KeyBind>("tile_picker",  { {KeyCode::TAB} });
 		Input::AddAction<KeyBind>("toggleGrid",   { {KeyCode::G} });
-		
+		Input::AddAction<KeyBind>("quit",		  { {KeyCode::ESCAPE }}); 
+
 		textureResources["dunTileset"] = Resources::Load<Texture2D>("Base.rse/Environment/Levels/tileset2.png");
 
 		TilemapComponent* tmap;
@@ -155,6 +152,9 @@ public:
 
 	void Update(float deltaTime) override
 	{
+		if (Input::IsActionActive("quit")) 
+			Dispose();
+
 		std::string fmt = fmt::format("FPS: {} Frames: {} DeltaTime: {}", GetFrameRate(), GetFrameCount(), deltaTime);
 		SetWindowTitle(fmt::format("FPS: {} Frames: {} Delta: {}", GetFrameRate(), GetFrameCount(), deltaTime).c_str());
 
@@ -195,7 +195,11 @@ public:
 };
 
 int main(int argc, char* argv[])
-{	
+{		
+	boost::filesystem::path path = argv[0];
+	boost::filesystem::path dir_path = path.parent_path();
+	boost::filesystem::current_path(dir_path);
+
 	Test* test = new Test();
 	try
 	{

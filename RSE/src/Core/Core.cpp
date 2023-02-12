@@ -182,7 +182,7 @@ namespace Advres::RSE
 			// doesnt matter
 			entityManager->Render(delta_time);
 			//UIManager->Render(delta_time);
-#ifdef _DEBUG
+#ifdef RSE_DEBUG
 			for (const auto& r : m_DebugRects)
 			{
 				SDL_SetRenderDrawColor(sdlRenderer, 161, 52, 235, 0);
@@ -212,6 +212,7 @@ namespace Advres::RSE
 			// Calculate the framerate
 			m_Fps = (int)(1.0f / delta_time);
 		}
+		this->~RSECore();
 	}
 
 	void RSECore::EventHandler()

@@ -69,7 +69,7 @@ namespace Advres::RSE
 		}
 		void Render(float deltaTime) override
 		{
-#ifdef _DEBUG
+#ifdef RSE_DEBUG
 			for (const auto& r : m_TileColliders)
 			{
 				SDL_Rect sr = r.SDL();

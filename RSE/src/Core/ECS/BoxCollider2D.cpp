@@ -85,7 +85,7 @@ namespace Advres::RSE
 
 	void BoxCollider2D::Render(float deltaTime)
 	{
-#ifdef _DEBUG
+#ifdef RSE_DEBUG
 		RSECore::DrawRect(colliderRect, colour.r, colour.g, colour.b, colour.a);
 #endif
 	}

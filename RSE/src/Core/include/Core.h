@@ -13,7 +13,7 @@
 #include "../ECS/include/Camera2DComponent.h"
 
 #ifdef RCLRW_H
-#include "../../RCLRW/src/include/RCLRW.h"
+	#include "../../RCLRW/src/include/RCLRW.h"
 #endif
 
 namespace Advres::RSE
@@ -49,8 +49,8 @@ namespace Advres::RSE
 
 	public:
 		static 			SDL_Rect	GetRectRelativeToCamera(SDL_Rect rect)				noexcept;
-		static 			Vector2f		GetVectorRelativeToCamera(Vector2f vec)				noexcept;
-		static			Vector2f		GetMousePositionInWorld()							noexcept;
+		static 			Vector2f	GetVectorRelativeToCamera(Vector2f vec)				noexcept;
+		static			Vector2f	GetMousePositionInWorld()							noexcept;
 		static			void		SetActiveCamera(const Camera2DComponent* camera)	noexcept { m_MainCamera = camera; }
 		static inline	bool		Active()											noexcept { return (m_MainCamera) ? true : false; }
 	};
@@ -149,7 +149,8 @@ namespace Advres::RSE
 		constexpr			inline	const char*					GetWindowTitle()					const				noexcept	{ return m_WindowTitle; }
 							inline	void						SetWindowTitle(const char* title)						noexcept	{ m_WindowTitle = title; SDL_SetWindowTitle(sdlWindow, title); }
 		constexpr			inline	bool						GetRunning()						const				noexcept	{ return m_Running; }
-
+		constexpr			inline  void						Dispose()												noexcept	{ m_Running = false; }
+ 
 	public:
 		static inline void DrawTexture(const Texture2D* texture, SDL_Rect* const srcR, SDL_Rect* const destR, int opacity = 255,
 			float angle = 0.0f, SDL_Point* centrePoint = nullptr, SDL_RendererFlip flip = SDL_FLIP_NONE)

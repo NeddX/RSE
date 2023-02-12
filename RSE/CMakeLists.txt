@@ -37,6 +37,18 @@
 	"include/RSE.h"
 )
 
+# Set opengl preference
+set(OpenGL_GL_PREFERENCE "GLVND")
+
+# Setup few macros
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	target_compile_definitions(RSE PUBLIC RSE_DEBUG)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+	target_compile_definitions(RSE PRIVATE RSE_RELEASE)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Shipping")
+	target_compile_definitions(RSE PRIVATE RSE_SHIPPING)
+endif()
+
 set(EXTERNAL_LIBRARIES ${PROJECT_SOURCE_DIR}/external/lib/)
 
 # SDL

@@ -1,0 +1,3 @@
+- Implement collision resolution and collision system
+- When Adding an Entity from the Constructor of the Engine Instance causes Seg fault.
+Most likley the Entity Manager is not initialized.

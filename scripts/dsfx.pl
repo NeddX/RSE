@@ -17,17 +17,13 @@ sub logln {
 	my $str = shift;
 	print $dsfx::ansi::colours{'cyan'}, "[~] :: $str\n", $dsfx::ansi::colours{'rst'};
 }
-sub log {
-	my $str = shift;
-	print $dsfx::ansi::colours{'cyan'}, "[~] :: $str", $dsfx::ansi::colours{'rst'};
-}
 sub lerrln {
 	my $str = shift;
 	print $dsfx::ansi::colours{'red'}, "[!] :: $str\n", $dsfx::ansi::colours{'rst'};
 }
-sub lerr {
+sub warn {
 	my $str = shift;
-	print $dsfx::ansi::colours{'red'}, "[!] :: $str", $dsfx::ansi::colours{'rst'};
+	print $dsfx::ansi::colours{'yellow'}, "[?] :: $str\n", $dsfx::ansi::colours{'rst'};
 }
 
 package dsfx::util;
