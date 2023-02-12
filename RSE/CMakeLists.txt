@@ -76,11 +76,8 @@ set(YAML_CPP_LIBRARIES ${PROJECT_BINARY_DIR}/yaml-cpp)
 target_link_libraries(RSE yaml-cpp)
 
 # boost filesystem
-add_subdirectory(${EXTERNAL_LIBRARIES}/boost/filesystem ${PROJECT_BINARY_DIR}/boost/filesystem)
-include_directories(${EXTERNAL_LIBRARIES}/boost/filesystem/include)
-set(BOOST_FILESYSTEM_DIRS ${EXTERNAL_LIBRARIES}/boost/filesystem/include)
-set(BOOST_FILESYSTEM_LIBRARIES ${PROJECT_BINARY_DIR}/boost/filesystem)
-target_link_libraries(RSE BoostFilesystem)
+find_package(Boost REQUIRED COMPONENTS filesystem)
+target_link_libraries(RSE Boost::filesystem)
 
 # Define so that GLEW will know that we're using STATIC version of it's library
 target_compile_definitions(RSE PRIVATE GLEW_STATIC)
@@ -101,10 +98,10 @@ include_directories(${PROJECT_SOURCE_DIR}/RSE/src/Core/include)
 include_directories(${PROJECT_SOURCE_DIR}/RSE/src/Math/include)
 
 target_include_directories(RSE PUBLIC include/)
-target_include_directories(RSE PUBLIC ${SDL_INCLUDE_DIRS})
-target_include_directories(RSE PUBLIC ${SDL_IMAGE_INCLUDE_DIRS})
+target_include_directories(RSE PRIVATE ${SDL_INCLUDE_DIRS})
+target_include_directories(RSE PRIVATE ${SDL_IMAGE_INCLUDE_DIRS})
 target_include_directories(RSE PUBLIC ${FMT_INCLUDE_DIRS})
-target_include_directories(RSE PUBLIC ${YAML_CPP_INCLUDE_DIRS})
+target_include_directories(RSE PRIVATE ${YAML_CPP_INCLUDE_DIRS})
 #target_include_directories(RSE PUBLIC ${GLEW_INCLUDE_DIRS})
 target_include_directories(RSE PUBLIC ${BOOST_FILESYSTEM_DIRS})
 target_include_directories(RSE PUBLIC ${PROJECT_SOURCE_DIR}/RSE/pch/)

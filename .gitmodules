@@ -15,6 +15,3 @@
 [submodule "external/lib/yaml-cpp"]
 	path = external/lib/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp.git
-[submodule "external/lib/boost/filesystem"]
-	path = external/lib/boost/filesystem
-	url = https://github.com/boostorg/filesystem.git
