@@ -45,22 +45,23 @@ if ($os eq "mswin32") {
 }
 dsfx::logln("Found compiler: $cxx_compiler");
 
-if (!-e "../$os-build-ninja") {
+if (!-e "../builds/$os-ninja") {
 	dsfx::logln("Ninja build files are not present. Generating ninja build files...");
-	mkdir("../$os-build-ninja");
+	mkdir("../builds");
+	mkdir("../builds/$os-ninja");
 	if ($cxx_compiler eq "cl") {	
-		my $exit_code = system("$vs_dev_env && cmake -G \"Ninja\" ../ -B ../$os-build-ninja");
+		my $exit_code = system("$vs_dev_env && cmake -G \"Ninja\" ../ -B ../builds/$os-ninja");
 		if ($exit_code != 0) {
 			dsfx::lerrln("CMake build generation for Ninja failed! Aborting...");
-			remove_tree("../$os-build-ninja");
+			remove_tree("../builds/$os-ninja");
 			exit -1;
 		}
 		dsfx::logln("Ninja build file generation finished.");
 	} else {
-		my $exit_code = system("cmake -G \"Ninja\" ../ -B ../$os-build-ninja");
+		my $exit_code = system("cmake -G \"Ninja\" ../ -B ../builds/$os-ninja");
 		if ($exit_code != 0) {
 			dsfx::lerrln("CMake build generation for Ninja failed! a Aborting...");
-			remove_tree("../$os-build-ninja");
+			remove_tree("../builds/$os-ninja");
 			exit -1;
 		}
 		dsfx::logln("Ninja build file generation finished.");
@@ -69,21 +70,24 @@ if (!-e "../$os-build-ninja") {
 	# Create symbolic links
 	if ($os eq "mswin32") {
 		# Windwos symlinks don't work with clangd
-		copy("../$os-build-ninja/compile_commands.json", "../");
+		copy("../builds/$os-ninja/compile_commands.json", "../");
 	} else {
-		# Make symlink for unix like devices
+		my $exit_code = system("ln -s ../builds/$os-ninja/compile_commands.json ../");
+		if ($exit_code != 0) {
+			dsfx::lerrln("Symbolic link creation for 'compile_commands.json' failed!");
+		}
 	}
 }
 
 dsfx::logln("Building project...");
 if ($os eq "mswin32") { 
-	my $exit_code = system("$vs_dev_env && cd .. && cmake --build $os-build-ninja/");
+	my $exit_code = system("$vs_dev_env && cd .. && cmake --build builds/$os-ninja/");
 	if ($exit_code != 0) {
 		dsfx::lerrln("Build failed! Aborting...");
 		exit -1;
 	}
 } else {
-	my $exit_code = system("cmake --build ../$os-build-ninja");
+	my $exit_code = system("cmake --build ../builds/$os-ninja");
 	if ($exit_code != 0) {
 		dsfx::lerrln("Build failed! Aborting...");
 		exit -1;

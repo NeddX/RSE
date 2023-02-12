@@ -52,8 +52,7 @@ build/
 CMakeFiles/
 fmt/
 compile_commands.json
-*-build-*/
-*-build/
+builds/
 
 # AJJSDzzzzz
 *.cmake
