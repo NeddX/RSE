@@ -37,18 +37,20 @@
 	"include/RSE.h"
 )
 
+set(EXTERNAL_LIBRARIES ${PROJECT_SOURCE_DIR}/external/lib/)
+
 # SDL
-add_subdirectory(${PROJECT_SOURCE_DIR}/external/lib/SDL ${PROJECT_BINARY_DIR}/SDL)
-include_directories(${PROJECT_SOURCE_DIR}/external/lib/SDL/include)
-set(SDL_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/external/lib/SDL/include)
+add_subdirectory(${EXTERNAL_LIBRARIES}/SDL ${PROJECT_BINARY_DIR}/SDL)
+include_directories(${EXTERNAL_LIBRARIES}/SDL/include)
+set(SDL_INCLUDE_DIRS ${EXTERNAL_LIBRARIES}/SDL/include)
 set(SDL_LIBRARIES ${PROJECT_BINARY_DIR}/SDL)
 target_link_libraries(RSE SDL2)
 target_link_libraries(RSE SDL2main)
 
 # SDL_image
-add_subdirectory(${PROJECT_SOURCE_DIR}/external/lib/SDL_image ${PROJECT_BINARY_DIR}/SDL_image)
-include_directories(${PROJECT_SOURCE_DIR}/external/lib/SDL_image)
-set(SDL_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/external/lib/SDL_image)
+add_subdirectory(${EXTERNAL_LIBRARIES}/SDL_image ${PROJECT_BINARY_DIR}/SDL_image)
+include_directories(${EXTERNAL_LIBRARIES}/SDL_image)
+set(SDL_INCLUDE_DIRS ${EXTERNAL_LIBRARIES}/SDL_image)
 set(SDL_LIBRARIES ${PROJECT_BINARY_DIR}/SDL_image)
 target_link_libraries(RSE SDL2_image)
 
@@ -60,18 +62,25 @@ target_link_libraries(RSE SDL2_image)
 #target_link_libraries(RSE ${GLEW_LIBRARIES})
 
 # fmt
-add_subdirectory(${PROJECT_SOURCE_DIR}/external/lib/fmt ${PROJECT_BINARY_DIR}/fmt)
-include_directories(${PROJECT_SOURCE_DIR}/external/lib/fmt/include)
-set(FMT_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/external/lib/fmt/include)
+add_subdirectory(${EXTERNAL_LIBRARIES}/fmt ${PROJECT_BINARY_DIR}/fmt)
+include_directories(${EXTERNAL_LIBRARIES}/fmt/include)
+set(FMT_INCLUDE_DIRS ${EXTERNAL_LIBRARIES}/fmt/include)
 set(FMT_LIBRARIES ${PROJECT_BINARY_DIR}/fmt)
 target_link_libraries(RSE fmt)
 
 # yaml-cpp
-add_subdirectory(${PROJECT_SOURCE_DIR}/external/lib/yaml-cpp ${PROJECT_BINARY_DIR}/yaml-cpp)
-include_directories(${PROJECT_SOURCE_DIR}/external/lib/yaml-cpp/include)
-set(YAML_CPP_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/external/lib/yaml-cpp/include)
+add_subdirectory(${EXTERNAL_LIBRARIES}/yaml-cpp ${PROJECT_BINARY_DIR}/yaml-cpp)
+include_directories(${EXTERNAL_LIBRARIES}/yaml-cpp/include)
+set(YAML_CPP_INCLUDE_DIRS ${EXTERNAL_LIBRARIES}/yaml-cpp/include)
 set(YAML_CPP_LIBRARIES ${PROJECT_BINARY_DIR}/yaml-cpp)
 target_link_libraries(RSE yaml-cpp)
+
+# boost filesystem
+add_subdirectory(${EXTERNAL_LIBRARIES}/boost/filesystem ${PROJECT_BINARY_DIR}/boost/filesystem)
+include_directories(${EXTERNAL_LIBRARIES}/boost/filesystem/include)
+set(BOOST_FILESYSTEM_DIRS ${EXTERNAL_LIBRARIES}/boost/filesystem/include)
+set(BOOST_FILESYSTEM_LIBRARIES ${PROJECT_BINARY_DIR}/boost/filesystem)
+target_link_libraries(RSE BoostFilesystem)
 
 # Define so that GLEW will know that we're using STATIC version of it's library
 target_compile_definitions(RSE PRIVATE GLEW_STATIC)
@@ -97,4 +106,5 @@ target_include_directories(RSE PUBLIC ${SDL_IMAGE_INCLUDE_DIRS})
 target_include_directories(RSE PUBLIC ${FMT_INCLUDE_DIRS})
 target_include_directories(RSE PUBLIC ${YAML_CPP_INCLUDE_DIRS})
 #target_include_directories(RSE PUBLIC ${GLEW_INCLUDE_DIRS})
+target_include_directories(RSE PUBLIC ${BOOST_FILESYSTEM_DIRS})
 target_include_directories(RSE PUBLIC ${PROJECT_SOURCE_DIR}/RSE/pch/)
