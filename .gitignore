@@ -51,6 +51,9 @@ linux-build/
 build/
 CMakeFiles/
 fmt/
+compile_commands.json
+*-build-*/
+*-build/
 
 # AJJSDzzzzz
 *.cmake
