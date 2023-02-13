@@ -7,7 +7,7 @@ use File::Copy;
 use File::Copy::Recursive qw(dircopy);
 
 $os = dsfx::util::get_os();
-$config = "Debug";
+$config = "debug";
 $cxx_compiler = "none";
 $nuller = "null";
 $vs_dev_env = "cmd /C \"C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/Tools/VsDevCmd.bat\"";
@@ -51,7 +51,7 @@ dsfx::logln("Found compiler: $cxx_compiler");
 if (scalar(@ARGV) > 0) {
 	for (my $i = 0; $i < scalar(@ARGV); ++$i) {
 		if (lc @ARGV[$i] eq "--config") {
-			$config = @ARGV[++$i];
+			$config = lc @ARGV[++$i];
 		}
 	}	
 } else {

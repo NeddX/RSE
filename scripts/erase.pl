@@ -24,7 +24,8 @@ my @files_to_erase = (
 	"../INSTALL.vcxproj.filters",
 	"../INSTALL.vcxproj.user",
 	"../RSE/INSTALL.vcxproj",
-	"../RSE/INSTALL.vcxproj.filters"
+	"../RSE/INSTALL.vcxproj.filters",
+	"../RSE/compile_commands.json"
 );
 
 my @dirs_to_erase = (
@@ -36,7 +37,9 @@ my @dirs_to_erase = (
 	"../CMakeFiles",
 	"../build",
 	"../linux-build",
-	"../out"
+	"../out",
+	"../builds",
+	"../CMakeFiles"
 );
 
 foreach my $f (@files_to_erase) {
