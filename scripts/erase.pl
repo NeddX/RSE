@@ -7,7 +7,7 @@ use File::Path qw(remove_tree);
 
 $cwd = cwd;
 
-dsfx::logln("Erasing Visual Studio build files except the projects...");
+dsfx::logln("Erasing all build files except the projects...");
 dsfx::logln("Current working directory: '$cwd'");
 
 my @files_to_erase = (
@@ -25,7 +25,7 @@ my @files_to_erase = (
 	"../INSTALL.vcxproj.user",
 	"../RSE/INSTALL.vcxproj",
 	"../RSE/INSTALL.vcxproj.filters",
-	"../RSE/compile_commands.json"
+	"../compile_commands.json"
 );
 
 my @dirs_to_erase = (

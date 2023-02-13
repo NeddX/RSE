@@ -29,9 +29,22 @@ sub warn {
 package dsfx::util;
 use Cwd qw(cwd);
 use English qw' -no_match_vars ';
+use Config;
 
 sub get_os {
 	return (lc "$OSNAME");
+}
+sub get_arch {
+	my $arch = $Config{archname};
+	my $ret = "unknown";
+	if ($arch =~ /x86_64/) {
+		$ret = "x64";
+	} elsif ($arch =~ /i386|i586|i686/) {
+		$ret = "x86";
+	} else {
+		$ret = "$arch";
+	}
+	return $ret;
 }
 sub get_cwd {
 	return ($CWD);

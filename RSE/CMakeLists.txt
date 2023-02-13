@@ -42,9 +42,9 @@ set(OpenGL_GL_PREFERENCE "GLVND")
 
 # Setup few macros
 string(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_LOWER)
-if(TOLOWER CMAKE_BUILD_TYPE_LOWER STREQUAL "debug")
+if(CMAKE_BUILD_TYPE_LOWER STREQUAL "debug")
 	target_compile_definitions(RSE PUBLIC RSE_DEBUG)
-elseif(TOLOWER CMAKE_BUILD_TYPE_LOWER STREQUAL "release")
+elseif(CMAKE_BUILD_TYPE_LOWER STREQUAL "release")
 	target_compile_definitions(RSE PRIVATE RSE_RELEASE)
 elseif(CMAKE_BUILD_TYPE_LOWER STREQUAL "shipping")
 	target_compile_definitions(RSE PRIVATE RSE_SHIPPING)
