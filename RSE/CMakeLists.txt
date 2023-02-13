@@ -37,6 +37,9 @@
 	"include/RSE.h"
 )
 
+# CHECK_CPU_ARCHITECTURE_X86
+# CHECK_CPU_ARCHITECTURE_X64
+
 # Set opengl preference
 set(OpenGL_GL_PREFERENCE "GLVND")
 
@@ -89,6 +92,7 @@ set(YAML_CPP_LIBRARIES ${PROJECT_BINARY_DIR}/yaml-cpp)
 target_link_libraries(RSE yaml-cpp)
 
 # boost filesystem
+cmake_policy(SET CMP0074 NEW)
 find_package(Boost REQUIRED COMPONENTS filesystem)
 target_link_libraries(RSE Boost::filesystem)
 

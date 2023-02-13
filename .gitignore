@@ -53,6 +53,7 @@ CMakeFiles/
 fmt/
 compile_commands.json
 builds/
+.ignore/
 
 # AJJSDzzzzz
 *.cmake

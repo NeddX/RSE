@@ -66,7 +66,7 @@ if (!-e lc "../builds/$os-$config-$arch") {
 	dsfx::logln("Ninja build files are not present. Generating ninja build files...");
 	mkdir("../builds");
 	if ($cxx_compiler eq "cl") {	
-		my $exit_code = system("$vs_dev_env && cmake -G \"Ninja\" ../ -B " . lc "../builds/$os-$config-$arch" . "-DCMAKE_BUILD_TYPE=$config -DCMAKE_BUILD_ARCH=$arch");
+		my $exit_code = system("$vs_dev_env && cmake -G \"Ninja\" ../ -B ../builds/$os-$config-$arch -DCMAKE_BUILD_TYPE=$config -DCMAKE_BUILD_ARCH=$arch");
 		if ($exit_code != 0) {
 			dsfx::lerrln("CMake build generation for Ninja failed! Aborting...");
 			remove_tree("../builds/$os-$config-$arch");
